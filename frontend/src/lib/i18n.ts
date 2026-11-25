@@ -1,5 +1,28 @@
 export type Lang = "fr" | "en";
 
+const CPV_LABELS: Record<string, { fr: string; en: string }> = {
+  "72000000": { fr: "Services IT, conseil & support", en: "IT services, consulting & support" },
+  "721": { fr: "Conseil matériel informatique", en: "Hardware consultancy" },
+  "722": { fr: "Programmation & conseil logiciels", en: "Software programming & consulting" },
+  "723": { fr: "Services de données & cloud", en: "Data & cloud services" },
+  "724": { fr: "Services Internet", en: "Internet services" },
+  "725": { fr: "Services informatiques", en: "Computer-related services" },
+  "726": { fr: "Appui informatique & conseil", en: "Computer support & consulting" },
+  "72": { fr: "Services informatiques (IT)", en: "IT services" },
+  "48": { fr: "Logiciels & systèmes d'information", en: "Software & information systems" },
+};
+
+export function getCpvLabel(code: string, lang: Lang): string {
+  const clean = String(code || "").replace(/\D/g, "");
+  if (!clean) return "";
+  if (CPV_LABELS[clean]) return CPV_LABELS[clean][lang];
+  for (const len of [3, 2]) {
+    const prefix = clean.slice(0, len);
+    if (CPV_LABELS[prefix]) return CPV_LABELS[prefix][lang];
+  }
+  return "";
+}
+
 export const UI_TEXT = {
   fr: {
     appTitle: "TRADISTER SASU — Veille Marchés Publics France & UE",

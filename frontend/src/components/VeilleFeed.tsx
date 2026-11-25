@@ -10,7 +10,7 @@ import {
   SlidersHorizontal,
 } from "lucide-react";
 import { apiFetch, type CompanyProfile, type TenderNotice } from "@/lib/api";
-import { UI_TEXT, type Lang } from "@/lib/i18n";
+import { getCpvLabel, UI_TEXT, type Lang } from "@/lib/i18n";
 import { GoNoGoCard } from "./GoNoGoCard";
 
 interface Props {
@@ -365,6 +365,24 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
                   onChange={(e) => setCpvInput(e.target.value)}
                   className="mt-1 w-full rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
                 />
+                <div className="mt-1.5 flex flex-wrap gap-1.5">
+                  {cpvInput
+                    .split(",")
+                    .map((s) => s.trim())
+                    .filter(Boolean)
+                    .map((code) => {
+                      const lbl = getCpvLabel(code, lang);
+                      return (
+                        <span
+                          key={code}
+                          className="rounded border border-slate-200 bg-slate-50 px-2 py-0.5 text-[11px] text-slate-700"
+                        >
+                          <strong>{code}</strong>
+                          {lbl ? ` — ${lbl}` : ""}
+                        </span>
+                      );
+                    })}
+                </div>
               </div>
               <div>
                 <label className="block text-xs font-medium text-slate-600">{t.kwLabel}</label>

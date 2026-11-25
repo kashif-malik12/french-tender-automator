@@ -12,7 +12,7 @@ import {
   Star,
 } from "lucide-react";
 import type { TenderNotice } from "@/lib/api";
-import { UI_TEXT, type Lang } from "@/lib/i18n";
+import { getCpvLabel, UI_TEXT, type Lang } from "@/lib/i18n";
 
 interface Props {
   lang: Lang;
@@ -86,11 +86,18 @@ export function GoNoGoCard({ lang, tender, onStatusChange, onCreateWorkspace }: 
               </span>
             )}
 
-            {tender.cpv_codes?.slice(0, 2).map((cpv) => (
-              <span key={cpv} className="rounded bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] text-slate-600">
-                CPV {cpv}
-              </span>
-            ))}
+            {tender.cpv_codes?.slice(0, 2).map((cpv) => {
+              const lbl = getCpvLabel(cpv, lang);
+              return (
+                <span
+                  key={cpv}
+                  title={lbl}
+                  className="rounded bg-slate-50 px-1.5 py-0.5 font-mono text-[11px] text-slate-600"
+                >
+                  CPV {cpv}{lbl ? ` • ${lbl}` : ""}
+                </span>
+              );
+            })}
 
             {isSeen && (
               <span className="rounded bg-slate-200 px-2 py-0.5 text-[11px] font-semibold text-slate-700">

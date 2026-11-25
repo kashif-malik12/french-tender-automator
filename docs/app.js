@@ -206,6 +206,29 @@
   const TRIAGE_KEY = "tradister_ao_triage_v2";
   const PAGE_SIZE = 50;
 
+  const CPV_LABELS = {
+    "72000000": { fr: "Services IT, conseil & support", en: "IT services, consulting & support" },
+    "721": { fr: "Conseil en matériel informatique", en: "Hardware consultancy" },
+    "722": { fr: "Programmation & conseil logiciels", en: "Software programming & consulting" },
+    "723": { fr: "Services de données & cloud", en: "Data & cloud services" },
+    "724": { fr: "Services Internet", en: "Internet services" },
+    "725": { fr: "Services informatiques", en: "Computer-related services" },
+    "726": { fr: "Appui informatique & conseil", en: "Computer support & consulting" },
+    "72": { fr: "Services informatiques (IT)", en: "IT services" },
+    "48": { fr: "Logiciels & systèmes d'information", en: "Software & information systems" },
+  };
+
+  function getCpvLabel(code) {
+    const clean = String(code || "").replace(/\D/g, "");
+    if (!clean) return "";
+    if (CPV_LABELS[clean]) return CPV_LABELS[clean][lang];
+    for (const len of [3, 2]) {
+      const prefix = clean.slice(0, len);
+      if (CPV_LABELS[prefix]) return CPV_LABELS[prefix][lang];
+    }
+    return "";
+  }
+
   let lang = loadLang();
   let profile = loadProfile();
   let triageState = loadTriageState();
@@ -510,9 +533,21 @@
     document.getElementById("prof-naf").value = profile.naf_code || "";
     document.getElementById("prof-depts").value = (profile.target_departments || []).join(", ");
     document.getElementById("prof-cpvs").value = (profile.target_cpv_codes || []).join(", ");
+    renderCpvLegend(profile.target_cpv_codes || []);
     document.getElementById("prof-keywords").value = (profile.target_keywords || []).join(", ");
     document.getElementById("prof-min-amt").value = profile.min_target_amount ?? 10000;
     document.getElementById("prof-max-amt").value = profile.max_target_amount ?? 500000;
+  }
+
+  function renderCpvLegend(codes) {
+    const el = document.getElementById("cpv-legend");
+    if (!el) return;
+    el.innerHTML = (codes || [])
+      .map((c) => {
+        const lbl = getCpvLabel(c);
+        return `<span class="cpv-chip"><strong>${escapeHtml(c)}</strong>${lbl ? ` — ${escapeHtml(lbl)}` : ""}</span>`;
+      })
+      .join("");
   }
 
   function renderCard(t) {
@@ -544,7 +579,10 @@
               </span>
               <span class="pill pill-gray">${escapeHtml(t.id)}</span>
               ${isFr && t.department ? `<span class="pill pill-blue">Dept. ${escapeHtml(t.department)}</span>` : ""}
-              ${(t.cpv_codes || []).slice(0, 2).map((c) => `<span class="pill pill-gray">CPV ${escapeHtml(c)}</span>`).join("")}
+              ${(t.cpv_codes || []).slice(0, 2).map((c) => {
+                const lbl = getCpvLabel(c);
+                return `<span class="pill pill-gray" title="${escapeHtml(lbl)}">CPV ${escapeHtml(c)}${lbl ? ` • ${escapeHtml(lbl)}` : ""}</span>`;
+              }).join("")}
               ${seen ? `<span class="pill pill-gray">👁️ ${dict.seenBadge}</span>` : ""}
             </div>
             <h3 class="tender-title">${escapeHtml(t.title)}</h3>
@@ -950,6 +988,11 @@
       renderTenders();
     });
     document.getElementById("refresh-boamp-btn").addEventListener("click", refreshBoampLive);
+
+    document.getElementById("prof-cpvs").addEventListener("input", (e) => {
+      const codes = e.target.value.split(",").map((s) => s.trim()).filter(Boolean);
+      renderCpvLegend(codes);
+    });
 
     document.getElementById("profile-form").addEventListener("submit", (e) => {
       e.preventDefault();

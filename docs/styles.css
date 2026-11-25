@@ -607,6 +607,26 @@ body {
   padding: 8px 10px;
   font-size: 0.85rem;
 }
+
+.cpv-legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.cpv-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  background: #f1f5f9;
+  border: 1px solid var(--border);
+  color: #334155;
+  border-radius: 7px;
+  padding: 3px 8px;
+  font-size: 0.72rem;
+  font-weight: 500;
+}
 .form-actions {
   margin-top: 14px;
   display: flex;
