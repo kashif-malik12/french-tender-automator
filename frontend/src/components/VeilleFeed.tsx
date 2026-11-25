@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import {
   Building2,
+  CheckCheck,
   Globe2,
   RefreshCw,
   Save,
@@ -18,6 +19,7 @@ interface Props {
 }
 
 type RegionFilter = "ALL" | "FR" | "EU";
+type TriageFilter = "UNSEEN" | "FAVORITES" | "SEEN" | "ALL";
 
 export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
   const t = UI_TEXT[lang];
@@ -27,6 +29,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
   const [deptsInput, setDeptsInput] = useState("");
   const [cpvInput, setCpvInput] = useState("");
   const [kwInput, setKwInput] = useState("");
+  const [triageFilter, setTriageFilter] = useState<TriageFilter>("UNSEEN");
   const [regionFilter, setRegionFilter] = useState<RegionFilter>("ALL");
   const [minScoreFilter, setMinScoreFilter] = useState<number>(50);
   const [showFilters, setShowFilters] = useState(false);
@@ -36,7 +39,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
 
   async function loadAll(overrideRegion?: RegionFilter, overrideMinScore?: number) {
     const activeRegion = overrideRegion ?? regionFilter;
-    const params = new URLSearchParams({ limit: "150", only_relevant: "true", only_open: "true" });
+    const params = new URLSearchParams({ limit: "200", only_relevant: "true", only_open: "true" });
     if (activeRegion !== "ALL") {
       params.set("region", activeRegion);
     }
@@ -134,9 +137,38 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
     }
   }
 
-  const franceTenders = tenders.filter((item) => item.region === "FR");
-  const euTenders = tenders.filter((item) => item.region === "EU");
-  const urgentCount = tenders.filter(
+  const unseenPool = tenders.filter((item) => item.status === "new");
+  const favPool = tenders.filter(
+    (item) => item.status === "shortlisted" || item.status === "in_progress"
+  );
+  const seenPool = tenders.filter(
+    (item) => item.status === "seen" || item.status === "rejected"
+  );
+
+  const visibleTenders =
+    triageFilter === "UNSEEN"
+      ? unseenPool
+      : triageFilter === "FAVORITES"
+        ? favPool
+        : triageFilter === "SEEN"
+          ? seenPool
+          : tenders;
+
+  async function handleMarkVisibleSeen() {
+    const ids = unseenPool.map((item) => item.id);
+    if (!ids.length) return;
+    await apiFetch("/tenders/mark-seen", {
+      method: "POST",
+      body: JSON.stringify({ tender_ids: ids }),
+    });
+    setTenders((prev) =>
+      prev.map((item) => (item.status === "new" ? { ...item, status: "seen" } : item))
+    );
+  }
+
+  const franceTenders = visibleTenders.filter((item) => item.region === "FR");
+  const euTenders = visibleTenders.filter((item) => item.region === "EU");
+  const urgentCount = visibleTenders.filter(
     (item) =>
       item.days_remaining !== null &&
       item.days_remaining !== undefined &&
@@ -144,8 +176,11 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
       item.days_remaining <= 14
   ).length;
   const avgScore =
-    tenders.length > 0
-      ? Math.round(tenders.reduce((acc, item) => acc + (item.go_no_go_score ?? 0), 0) / tenders.length)
+    visibleTenders.length > 0
+      ? Math.round(
+          visibleTenders.reduce((acc, item) => acc + (item.go_no_go_score ?? 0), 0) /
+            visibleTenders.length
+        )
       : 0;
 
   return (
@@ -345,11 +380,11 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         )}
       </div>
 
-      {/* KPI Strip + Region Filter */}
+      {/* KPI Strip */}
       <div className="grid gap-3 sm:grid-cols-4">
         <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="text-xs text-slate-500">{t.kpiRelevant}</div>
-          <div className="mt-1 text-2xl font-bold text-slate-900">{tenders.length}</div>
+          <div className="mt-1 text-2xl font-bold text-slate-900">{visibleTenders.length}</div>
         </div>
         <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-4 shadow-sm">
           <div className="text-xs text-blue-700">{t.kpiFr}</div>
@@ -367,6 +402,54 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         </div>
       </div>
 
+      {/* Triage / Screening Tabs (Unseen / Favorites / Seen / All) */}
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <div className="flex flex-wrap items-center gap-2">
+          {(
+            [
+              { id: "UNSEEN", label: `🆕 ${t.triageUnseen}`, count: unseenPool.length },
+              { id: "FAVORITES", label: `⭐ ${t.triageFavorites}`, count: favPool.length },
+              { id: "SEEN", label: `👁️ ${t.triageSeen}`, count: seenPool.length },
+              { id: "ALL", label: `📋 ${t.triageAll}`, count: tenders.length },
+            ] as const
+          ).map((tab) => (
+            <button
+              key={tab.id}
+              type="button"
+              onClick={() => setTriageFilter(tab.id)}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition ${
+                triageFilter === tab.id
+                  ? tab.id === "FAVORITES"
+                    ? "bg-amber-600 text-white"
+                    : "bg-slate-900 text-white"
+                  : "border border-slate-200 bg-white text-slate-700 hover:bg-slate-50"
+              }`}
+            >
+              <span>{tab.label}</span>
+              <span
+                className={`rounded-full px-1.5 py-0.5 text-[10px] ${
+                  triageFilter === tab.id ? "bg-white/20 text-white" : "bg-slate-100 text-slate-600"
+                }`}
+              >
+                {tab.count}
+              </span>
+            </button>
+          ))}
+        </div>
+
+        {triageFilter === "UNSEEN" && unseenPool.length > 0 && (
+          <button
+            type="button"
+            onClick={handleMarkVisibleSeen}
+            className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
+          >
+            <CheckCheck className="h-3.5 w-3.5" />
+            {t.markVisibleSeen}
+          </button>
+        )}
+      </div>
+
+      {/* Region Filter */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
           {(
@@ -392,9 +475,9 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         </div>
       </div>
 
-      {tenders.length === 0 ? (
+      {visibleTenders.length === 0 ? (
         <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
-          {t.emptyTenders}
+          {triageFilter === "UNSEEN" && tenders.length > 0 ? t.emptyUnseen : t.emptyTenders}
         </div>
       ) : (
         <div className="space-y-8">

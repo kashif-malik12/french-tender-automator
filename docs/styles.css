@@ -298,6 +298,109 @@ body {
   border-color: var(--primary);
 }
 
+/* Triage / Favorites & Seen bar */
+.triage-bar {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+
+.triage-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.triage-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  border: 1px solid var(--border);
+  background: #fff;
+  color: var(--text);
+  border-radius: 9px;
+  padding: 7px 12px;
+  font-size: 0.8rem;
+  font-weight: 700;
+  cursor: pointer;
+}
+
+.triage-btn.active {
+  background: #0f172a;
+  color: #fff;
+  border-color: #0f172a;
+}
+
+.triage-btn.fav.active {
+  background: #d97706;
+  border-color: #d97706;
+  color: #fff;
+}
+
+.triage-count {
+  display: inline-block;
+  border-radius: 999px;
+  padding: 1px 7px;
+  font-size: 0.7rem;
+  background: rgba(15, 23, 42, 0.08);
+}
+
+.triage-btn.active .triage-count {
+  background: rgba(255, 255, 255, 0.22);
+}
+
+.tender-card.is-favorite {
+  border-color: #fcd34d;
+  box-shadow: 0 2px 6px rgba(217, 119, 6, 0.08);
+}
+
+.tender-card.is-seen {
+  opacity: 0.88;
+}
+
+.tender-actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 6px;
+}
+
+.btn-fav {
+  background: #fffbeb;
+  color: #92400e;
+  border-color: #fde68a;
+}
+
+.btn-fav.active {
+  background: #f59e0b;
+  color: #fff;
+  border-color: #d97706;
+}
+
+.btn-seen {
+  background: #f8fafc;
+  color: #334155;
+  border-color: #cbd5e1;
+}
+
+.btn-seen.active {
+  background: #e2e8f0;
+  color: #1e293b;
+}
+
+.screen-select {
+  border: 1px solid #fde68a;
+  background: #fffbeb;
+  color: #92400e;
+  border-radius: 8px;
+  padding: 6px 8px;
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
 .filter-inputs {
   display: flex;
   flex-wrap: wrap;

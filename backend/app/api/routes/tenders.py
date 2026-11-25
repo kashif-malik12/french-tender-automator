@@ -10,6 +10,7 @@ from app.auth import require_auth
 from app.database import get_db
 from app.models.db_models import CompanyProfile, TenderNotice
 from app.schemas import (
+    BulkMarkSeenRequest,
     CompanyProfileSchema,
     SyncTendersRequest,
     TenderNoticeOut,
@@ -24,7 +25,7 @@ from app.worker import (
 
 router = APIRouter(tags=["tenders"], dependencies=[Depends(require_auth)])
 
-ALLOWED_STATUSES = {"new", "shortlisted", "in_progress", "archived", "rejected"}
+ALLOWED_STATUSES = {"new", "shortlisted", "in_progress", "seen", "archived", "rejected"}
 
 
 def _profile_to_schema(profile: CompanyProfile) -> CompanyProfileSchema:
@@ -197,6 +198,29 @@ def trigger_boamp_sync(
             status_code=502,
             detail=f"Échec de synchronisation FR/UE : {exc}",
         ) from exc
+
+
+@router.post("/tenders/mark-seen")
+def bulk_mark_tenders_seen(
+    payload: BulkMarkSeenRequest,
+    db: Session = Depends(get_db),
+) -> dict:
+    if not payload.tender_ids:
+        return {"updated": 0}
+    notices = list(
+        db.execute(
+            select(TenderNotice).where(
+                TenderNotice.id.in_(payload.tender_ids),
+                TenderNotice.status == "new",
+            )
+        )
+        .scalars()
+        .all()
+    )
+    for n in notices:
+        n.status = "seen"
+    db.commit()
+    return {"updated": len(notices)}
 
 
 @router.patch("/tenders/{tender_id}", response_model=TenderNoticeOut)

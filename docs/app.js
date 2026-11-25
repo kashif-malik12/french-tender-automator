@@ -45,10 +45,15 @@
       vatLabel: "TVA",
       refreshBoampBtn: "↻ Actualiser BOAMP (Direct)",
       refreshingBoamp: "Interrogation BOAMP...",
-      kpiTotal: "Marchés pertinents",
+      kpiTotal: "Marchés affichés",
       kpiFr: "France (BOAMP + TED)",
       kpiEu: "Union Européenne (TED)",
       kpiAvg: "Adéquation moy. / Urgents",
+      triageUnseen: "🆕 À trier",
+      triageFavorites: "⭐ Favoris",
+      triageSeen: "👁️ Déjà vus",
+      triageAll: "📋 Tous",
+      markVisibleSeen: "✓ Tout marquer vu (page)",
       regionAll: "France puis UE",
       regionFr: "France",
       regionEu: "UE",
@@ -81,7 +86,9 @@
       targetAmount: "Montant cible",
       suitability: "Adéquation",
       viewNotice: "Voir avis",
-      emptyFiltered: "Aucun appel d'offres pertinent ne correspond à ces filtres.",
+      emptyFiltered: "Aucun appel d'offres dans cette vue.",
+      emptyUnseenHint:
+        "Tous les marchés correspondants ont déjà été triés ! Consultez ⭐ Favoris ou 👁️ Déjà vus, ou actualisez BOAMP.",
       frSectionTitle: "1. Appels d'offres pertinents en France",
       frSectionSub: "Triés par adéquation TRADISTER SASU puis échéance",
       euSectionTitle: "2. Appels d'offres pertinents en Union Européenne",
@@ -91,6 +98,15 @@
       profileSavedMsg: "Critères TRADISTER SASU enregistrés et pertinence recalculée.",
       profileResetMsg: "Profil vérifié TRADISTER SASU restauré.",
       daysPrefix: "J-",
+      favBtn: "☆ Favori",
+      favActiveBtn: "★ Favori",
+      markSeenBtn: "✓ Marquer vu",
+      unseeBtn: "↺ Remettre à trier",
+      seenBadge: "Déjà vu",
+      screenToReview: "À screener",
+      screenGo: "GO — À préparer",
+      screenInProgress: "En préparation",
+      screenNoGo: "No-Go",
     },
     en: {
       pageTitle: "TRADISTER SASU — FR & EU Public Tenders Watch (PWA)",
@@ -109,10 +125,15 @@
       vatLabel: "VAT",
       refreshBoampBtn: "↻ Refresh BOAMP (Live)",
       refreshingBoamp: "Querying BOAMP...",
-      kpiTotal: "Relevant tenders",
+      kpiTotal: "Shown tenders",
       kpiFr: "France (BOAMP + TED)",
       kpiEu: "European Union (TED)",
       kpiAvg: "Avg. Fit / Urgent",
+      triageUnseen: "🆕 Unseen",
+      triageFavorites: "⭐ Favorites",
+      triageSeen: "👁️ Seen",
+      triageAll: "📋 All",
+      markVisibleSeen: "✓ Mark visible seen",
       regionAll: "France then EU",
       regionFr: "France",
       regionEu: "EU",
@@ -145,7 +166,9 @@
       targetAmount: "Target value",
       suitability: "Fit Score",
       viewNotice: "View notice",
-      emptyFiltered: "No relevant tenders match these filters.",
+      emptyFiltered: "No tenders in this view.",
+      emptyUnseenHint:
+        "All matching tenders have already been screened! Check ⭐ Favorites or 👁️ Seen, or refresh BOAMP.",
       frSectionTitle: "1. Relevant Tenders in France",
       frSectionSub: "Sorted by TRADISTER SASU fit score then deadline",
       euSectionTitle: "2. Relevant Tenders in the European Union",
@@ -155,17 +178,31 @@
       profileSavedMsg: "TRADISTER SASU criteria saved and suitability recalculated.",
       profileResetMsg: "Verified TRADISTER SASU profile restored.",
       daysPrefix: "D-",
+      favBtn: "☆ Favorite",
+      favActiveBtn: "★ Favorite",
+      markSeenBtn: "✓ Mark seen",
+      unseeBtn: "↺ Move to Unseen",
+      seenBadge: "Seen",
+      screenToReview: "To screen",
+      screenGo: "GO — Prepare bid",
+      screenInProgress: "In progress",
+      screenNoGo: "No-Go",
     },
   };
 
   const STORAGE_KEY = "tradister_ao_profile_v1";
   const LANG_KEY = "tradister_ao_lang_v1";
+  const TRIAGE_KEY = "tradister_ao_triage_v1";
+
   let lang = loadLang();
   let profile = loadProfile();
+  let triageState = loadTriageState();
   let allTenders = [];
+  let triageFilter = "UNSEEN"; // UNSEEN | FAVORITES | SEEN | ALL
   let regionFilter = "ALL";
   let minScore = 50;
   let searchQuery = "";
+  let currentVisibleIds = [];
   let deferredInstallPrompt = null;
 
   function loadLang() {
@@ -189,6 +226,73 @@
     try {
       localStorage.setItem(STORAGE_KEY, JSON.stringify(next));
     } catch {}
+  }
+
+  function loadTriageState() {
+    try {
+      const raw = localStorage.getItem(TRIAGE_KEY);
+      if (raw) {
+        const parsed = JSON.parse(raw);
+        return {
+          favorites: parsed.favorites || {},
+          seen: parsed.seen || {},
+          verdicts: parsed.verdicts || {},
+        };
+      }
+    } catch {}
+    return { favorites: {}, seen: {}, verdicts: {} };
+  }
+
+  function saveTriageState() {
+    try {
+      localStorage.setItem(TRIAGE_KEY, JSON.stringify(triageState));
+    } catch {}
+  }
+
+  function isFavorite(id) {
+    return Boolean(triageState.favorites[id]);
+  }
+
+  function isSeen(id) {
+    return Boolean(triageState.seen[id]);
+  }
+
+  function toggleFavorite(id) {
+    if (triageState.favorites[id]) {
+      delete triageState.favorites[id];
+    } else {
+      triageState.favorites[id] = true;
+      triageState.seen[id] = true;
+      if (!triageState.verdicts[id]) {
+        triageState.verdicts[id] = "to_review";
+      }
+    }
+    saveTriageState();
+    renderTenders();
+  }
+
+  function toggleSeen(id, forceVal) {
+    const next = forceVal !== undefined ? forceVal : !triageState.seen[id];
+    if (next) {
+      triageState.seen[id] = true;
+    } else {
+      delete triageState.seen[id];
+    }
+    saveTriageState();
+    renderTenders();
+  }
+
+  function setVerdict(id, verdict) {
+    triageState.verdicts[id] = verdict;
+    saveTriageState();
+  }
+
+  function markVisibleAsSeen() {
+    for (const id of currentVisibleIds) {
+      triageState.seen[id] = true;
+    }
+    saveTriageState();
+    renderTenders();
   }
 
   function escapeHtml(str) {
@@ -409,9 +513,12 @@
     const jBadge = t.days_remaining != null ? ` (${dict.daysPrefix}${t.days_remaining})` : "";
     const urgent = t.days_remaining != null && t.days_remaining <= 10;
     const euLabel = lang === "en" ? "EU" : "UE";
+    const fav = isFavorite(t.id);
+    const seen = isSeen(t.id);
+    const verdict = triageState.verdicts[t.id] || "to_review";
 
     return `
-      <article class="tender-card">
+      <article class="tender-card ${fav ? "is-favorite" : ""} ${seen && !fav ? "is-seen" : ""}">
         <div class="tender-top">
           <div class="tender-main">
             <div class="tender-badges">
@@ -421,6 +528,7 @@
               <span class="pill pill-gray">${escapeHtml(t.id)}</span>
               ${isFr && t.department ? `<span class="pill pill-blue">Dept. ${escapeHtml(t.department)}</span>` : ""}
               ${(t.cpv_codes || []).slice(0, 2).map((c) => `<span class="pill pill-gray">CPV ${escapeHtml(c)}</span>`).join("")}
+              ${seen ? `<span class="pill pill-gray">👁️ ${dict.seenBadge}</span>` : ""}
             </div>
             <h3 class="tender-title">${escapeHtml(t.title)}</h3>
             <p class="tender-buyer">${dict.buyer} : <strong>${escapeHtml(t.buyer_name || dict.unspecified)}</strong></p>
@@ -444,7 +552,23 @@
           </ul>` : ""}
         <div class="tender-footer">
           <span class="attribution">${escapeHtml(t.attribution || "")}</span>
-          ${t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm">${dict.viewNotice} ${escapeHtml(t.source)} ↗</a>` : ""}
+          <div class="tender-actions">
+            ${fav ? `
+              <select class="screen-select" data-verdict-id="${escapeHtml(t.id)}" aria-label="Screening verdict">
+                <option value="to_review" ${verdict === "to_review" ? "selected" : ""}>${dict.screenToReview}</option>
+                <option value="go" ${verdict === "go" ? "selected" : ""}>${dict.screenGo}</option>
+                <option value="in_progress" ${verdict === "in_progress" ? "selected" : ""}>${dict.screenInProgress}</option>
+                <option value="no_go" ${verdict === "no_go" ? "selected" : ""}>${dict.screenNoGo}</option>
+              </select>
+            ` : ""}
+            <button type="button" class="btn btn-sm btn-fav ${fav ? "active" : ""}" data-fav-id="${escapeHtml(t.id)}">
+              ${fav ? dict.favActiveBtn : dict.favBtn}
+            </button>
+            <button type="button" class="btn btn-sm btn-seen ${seen ? "active" : ""}" data-seen-id="${escapeHtml(t.id)}">
+              ${seen ? dict.unseeBtn : dict.markSeenBtn}
+            </button>
+            ${t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm" data-open-id="${escapeHtml(t.id)}">${dict.viewNotice} ${escapeHtml(t.source)} ↗</a>` : ""}
+          </div>
         </div>
       </article>
     `;
@@ -476,9 +600,34 @@
         return (a.deadline_date || "9999").localeCompare(b.deadline_date || "9999");
       });
 
-    const fr = evaluated.filter((t) => t.region === "FR");
-    const eu = evaluated.filter((t) => t.region === "EU");
-    const visible = regionFilter === "FR" ? fr : regionFilter === "EU" ? eu : evaluated;
+    const unseenPool = evaluated.filter((t) => !isSeen(t.id));
+    const favPool = evaluated.filter((t) => isFavorite(t.id));
+    const seenPool = evaluated.filter((t) => isSeen(t.id));
+
+    document.getElementById("cnt-unseen").textContent = String(unseenPool.length);
+    document.getElementById("cnt-fav").textContent = String(favPool.length);
+    document.getElementById("cnt-seen").textContent = String(seenPool.length);
+    document.getElementById("cnt-all").textContent = String(evaluated.length);
+
+    const triaged =
+      triageFilter === "UNSEEN"
+        ? unseenPool
+        : triageFilter === "FAVORITES"
+          ? favPool
+          : triageFilter === "SEEN"
+            ? seenPool
+            : evaluated;
+
+    const fr = triaged.filter((t) => t.region === "FR");
+    const eu = triaged.filter((t) => t.region === "EU");
+    const visible = regionFilter === "FR" ? fr : regionFilter === "EU" ? eu : triaged;
+    currentVisibleIds = visible.map((t) => t.id);
+
+    const markAllBtn = document.getElementById("mark-visible-seen-btn");
+    if (markAllBtn) {
+      markAllBtn.classList.toggle("hidden", triageFilter !== "UNSEEN" || visible.length === 0);
+    }
+
     const urgentCount = visible.filter((t) => t.days_remaining != null && t.days_remaining <= 14).length;
     const avg = visible.length ? Math.round(visible.reduce((acc, x) => acc + x.suitability_score, 0) / visible.length) : 0;
 
@@ -489,7 +638,8 @@
 
     const container = document.getElementById("tenders-container");
     if (!visible.length) {
-      container.innerHTML = `<div class="empty-box">${dict.emptyFiltered}</div>`;
+      const msg = triageFilter === "UNSEEN" && evaluated.length > 0 ? dict.emptyUnseenHint : dict.emptyFiltered;
+      container.innerHTML = `<div class="empty-box">${msg}</div>`;
       return;
     }
 
@@ -663,6 +813,42 @@
     document.querySelectorAll("[data-tab]").forEach((btn) => {
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
     });
+
+    document.querySelectorAll(".triage-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        triageFilter = btn.dataset.triage || "UNSEEN";
+        document.querySelectorAll(".triage-btn").forEach((b) => b.classList.toggle("active", b === btn));
+        renderTenders();
+      });
+    });
+
+    document.getElementById("mark-visible-seen-btn").addEventListener("click", markVisibleAsSeen);
+
+    const tendersContainer = document.getElementById("tenders-container");
+    tendersContainer.addEventListener("click", (e) => {
+      const favBtn = e.target.closest("[data-fav-id]");
+      if (favBtn) {
+        toggleFavorite(favBtn.getAttribute("data-fav-id"));
+        return;
+      }
+      const seenBtn = e.target.closest("[data-seen-id]");
+      if (seenBtn) {
+        toggleSeen(seenBtn.getAttribute("data-seen-id"));
+        return;
+      }
+      const openLink = e.target.closest("[data-open-id]");
+      if (openLink) {
+        toggleSeen(openLink.getAttribute("data-open-id"), true);
+      }
+    });
+
+    tendersContainer.addEventListener("change", (e) => {
+      const sel = e.target.closest("[data-verdict-id]");
+      if (sel) {
+        setVerdict(sel.getAttribute("data-verdict-id"), sel.value);
+      }
+    });
+
     document.querySelectorAll(".region-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         regionFilter = btn.dataset.region;

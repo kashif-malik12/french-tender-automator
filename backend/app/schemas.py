@@ -72,6 +72,10 @@ class TenderStatusUpdate(BaseModel):
     status: str
 
 
+class BulkMarkSeenRequest(BaseModel):
+    tender_ids: list[int] = Field(default_factory=list)
+
+
 class SyncTendersRequest(BaseModel):
     limit: int = Field(default=30, ge=1, le=100)
     eu_limit: int = Field(default=25, ge=0, le=100)

@@ -98,6 +98,31 @@
         </div>
       </div>
 
+      <!-- Triage / Favorites & Seen Bar -->
+      <div class="triage-bar">
+        <div class="triage-tabs">
+          <button type="button" class="triage-btn active" data-triage="UNSEEN">
+            <span data-i18n="triageUnseen">🆕 À trier</span>
+            <span class="triage-count" id="cnt-unseen">0</span>
+          </button>
+          <button type="button" class="triage-btn fav" data-triage="FAVORITES">
+            <span data-i18n="triageFavorites">⭐ Favoris</span>
+            <span class="triage-count" id="cnt-fav">0</span>
+          </button>
+          <button type="button" class="triage-btn" data-triage="SEEN">
+            <span data-i18n="triageSeen">👁️ Déjà vus</span>
+            <span class="triage-count" id="cnt-seen">0</span>
+          </button>
+          <button type="button" class="triage-btn" data-triage="ALL">
+            <span data-i18n="triageAll">📋 Tous</span>
+            <span class="triage-count" id="cnt-all">0</span>
+          </button>
+        </div>
+        <button id="mark-visible-seen-btn" type="button" class="btn btn-secondary btn-sm" data-i18n="markVisibleSeen">
+          ✓ Tout marquer vu (page)
+        </button>
+      </div>
+
       <!-- Controls -->
       <div class="controls-bar">
         <div class="region-tabs">
