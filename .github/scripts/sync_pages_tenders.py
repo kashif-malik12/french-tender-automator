@@ -204,7 +204,7 @@ def pick_lang(val: Any) -> str:
     return ""
 
 
-def fetch_boamp(limit: int = 45) -> list[dict[str, Any]]:
+def fetch_boamp(limit: int = 200) -> list[dict[str, Any]]:
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
     where = (
         f"nature='APPEL_OFFRE' AND datelimitereponse >= date'{today}' AND ("
@@ -214,12 +214,25 @@ def fetch_boamp(limit: int = 45) -> list[dict[str, Any]]:
         "search(objet, 'support informatique') OR search(objet, 'helpdesk') OR search(objet, 'maintenance applicative')"
         ")"
     )
-    params = urllib.parse.urlencode({"where": where, "limit": limit, "order_by": "dateparution desc"})
-    with urllib.request.urlopen(f"{BOAMP_URL}?{params}", timeout=25) as r:
-        data = json.loads(r.read())
+    results: list[dict[str, Any]] = []
+    offset = 0
+    while len(results) < limit:
+        batch = min(100, limit - len(results))
+        params = urllib.parse.urlencode(
+            {"where": where, "limit": batch, "offset": offset, "order_by": "dateparution desc"}
+        )
+        with urllib.request.urlopen(f"{BOAMP_URL}?{params}", timeout=25) as r:
+            data = json.loads(r.read())
+        rows = data.get("results", [])
+        if not rows:
+            break
+        results.extend(rows)
+        if len(rows) < batch:
+            break
+        offset += len(rows)
 
     out: list[dict[str, Any]] = []
-    for rec in data.get("results", []):
+    for rec in results:
         bid = str(rec.get("idweb") or "").strip()
         if not bid:
             continue
@@ -476,15 +489,15 @@ def score_and_filter(tenders: list[dict[str, Any]]) -> list[dict[str, Any]]:
 def main() -> None:
     raw: list[dict[str, Any]] = []
     try:
-        raw.extend(fetch_boamp(limit=50))
+        raw.extend(fetch_boamp(limit=250))
     except Exception as exc:
         print("BOAMP fetch warning:", exc)
     try:
-        raw.extend(fetch_ted("FRA", limit=15))
+        raw.extend(fetch_ted("FRA", limit=50))
     except Exception as exc:
         print("TED FRA fetch warning:", exc)
     try:
-        raw.extend(fetch_ted("EU", limit=35))
+        raw.extend(fetch_ted("EU", limit=100))
     except Exception as exc:
         print("TED EU fetch warning:", exc)
 

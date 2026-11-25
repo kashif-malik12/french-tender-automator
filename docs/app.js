@@ -788,7 +788,7 @@
         `nature='APPEL_OFFRE' AND datelimitereponse >= date'${today}' AND (` +
         `search(descripteur_libelle, 'Informatique') OR search(descripteur_libelle, 'Logiciel') OR ` +
         `search(objet, 'infogérance') OR search(objet, 'cloud') OR search(objet, 'cybersécurité') OR search(objet, 'maintenance applicative'))`;
-      const url = `https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records?limit=50&order_by=dateparution%20desc&where=${encodeURIComponent(where)}`;
+      const url = `https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records?limit=100&order_by=dateparution%20desc&where=${encodeURIComponent(where)}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`BOAMP HTTP ${res.status}`);
       const payload = await res.json();
