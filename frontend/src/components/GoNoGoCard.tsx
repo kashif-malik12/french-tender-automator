@@ -198,11 +198,6 @@ export function GoNoGoCard({ lang, tender, onStatusChange, onCreateWorkspace }: 
               href={tender.boamp_url}
               target="_blank"
               rel="noreferrer"
-              onClick={() => {
-                if (tender.status === "new") {
-                  onStatusChange(tender.id, "seen");
-                }
-              }}
               className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50"
             >
               <ExternalLink className="h-3.5 w-3.5" />

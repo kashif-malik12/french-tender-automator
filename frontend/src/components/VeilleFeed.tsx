@@ -20,6 +20,7 @@ interface Props {
 
 type RegionFilter = "ALL" | "FR" | "EU";
 type TriageFilter = "UNSEEN" | "FAVORITES" | "SEEN" | "ALL";
+const PAGE_SIZE = 50;
 
 export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
   const t = UI_TEXT[lang];
@@ -32,6 +33,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
   const [triageFilter, setTriageFilter] = useState<TriageFilter>("UNSEEN");
   const [regionFilter, setRegionFilter] = useState<RegionFilter>("ALL");
   const [minScoreFilter, setMinScoreFilter] = useState<number>(50);
+  const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilters, setShowFilters] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [savingProfile, setSavingProfile] = useState(false);
@@ -39,7 +41,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
 
   async function loadAll(overrideRegion?: RegionFilter, overrideMinScore?: number) {
     const activeRegion = overrideRegion ?? regionFilter;
-    const params = new URLSearchParams({ limit: "200", only_relevant: "true", only_open: "true" });
+    const params = new URLSearchParams({ limit: "300", only_relevant: "true", only_open: "true" });
     if (activeRegion !== "ALL") {
       params.set("region", activeRegion);
     }
@@ -68,6 +70,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
 
   async function handleRegionChange(next: RegionFilter) {
     setRegionFilter(next);
+    setCurrentPage(1);
     await loadAll(next, minScoreFilter);
   }
 
@@ -88,6 +91,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         }),
       });
       setProfile(updated);
+      setCurrentPage(1);
       await loadAll(regionFilter, minScoreFilter);
       setMessage(t.profileSaved);
     } catch (err) {
@@ -112,6 +116,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         method: "POST",
         body: JSON.stringify({ limit: 40, eu_limit: 30, include_eu: true, async_mode: false }),
       });
+      setCurrentPage(1);
       await loadAll(regionFilter, minScoreFilter);
       setMessage(
         lang === "en"
@@ -137,13 +142,12 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
     }
   }
 
+  // Unseen = "new"; Favorites = "shortlisted" | "in_progress"; Seen = favorites + "seen" | "rejected"
   const unseenPool = tenders.filter((item) => item.status === "new");
   const favPool = tenders.filter(
     (item) => item.status === "shortlisted" || item.status === "in_progress"
   );
-  const seenPool = tenders.filter(
-    (item) => item.status === "seen" || item.status === "rejected"
-  );
+  const seenPool = tenders.filter((item) => item.status !== "new");
 
   const visibleTenders =
     triageFilter === "UNSEEN"
@@ -154,20 +158,32 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
           ? seenPool
           : tenders;
 
-  async function handleMarkVisibleSeen() {
-    const ids = unseenPool.map((item) => item.id);
+  const totalPages = Math.max(1, Math.ceil(visibleTenders.length / PAGE_SIZE));
+  const safePage = Math.min(currentPage, totalPages);
+  const pageItems = visibleTenders.slice(
+    (safePage - 1) * PAGE_SIZE,
+    safePage * PAGE_SIZE
+  );
+
+  async function handleMarkPageSeen() {
+    const ids = pageItems
+      .filter((item) => item.status === "new")
+      .map((item) => item.id);
     if (!ids.length) return;
     await apiFetch("/tenders/mark-seen", {
       method: "POST",
       body: JSON.stringify({ tender_ids: ids }),
     });
+    const idSet = new Set(ids);
     setTenders((prev) =>
-      prev.map((item) => (item.status === "new" ? { ...item, status: "seen" } : item))
+      prev.map((item) => (idSet.has(item.id) ? { ...item, status: "seen" } : item))
     );
   }
 
-  const franceTenders = visibleTenders.filter((item) => item.region === "FR");
-  const euTenders = visibleTenders.filter((item) => item.region === "EU");
+  const franceTenders = pageItems.filter((item) => item.region === "FR");
+  const euTenders = pageItems.filter((item) => item.region === "EU");
+  const frTotal = visibleTenders.filter((item) => item.region === "FR").length;
+  const euTotal = visibleTenders.filter((item) => item.region === "EU").length;
   const urgentCount = visibleTenders.filter(
     (item) =>
       item.days_remaining !== null &&
@@ -182,6 +198,37 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
             visibleTenders.length
         )
       : 0;
+
+  const renderPager = () =>
+    visibleTenders.length > PAGE_SIZE ? (
+      <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-slate-200 bg-white px-4 py-2.5 text-xs text-slate-600 shadow-sm">
+        <span>
+          {t.showingLabel}{" "}
+          <strong>
+            {(safePage - 1) * PAGE_SIZE + 1}–{Math.min(visibleTenders.length, safePage * PAGE_SIZE)}
+          </strong>{" "}
+          {t.ofLabel} <strong>{visibleTenders.length}</strong> ({t.pageLabel} {safePage}/{totalPages})
+        </span>
+        <div className="flex items-center gap-2">
+          <button
+            type="button"
+            disabled={safePage <= 1}
+            onClick={() => setCurrentPage((p) => Math.max(1, p - 1))}
+            className="rounded-lg border border-slate-200 px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40"
+          >
+            {t.prev50}
+          </button>
+          <button
+            type="button"
+            disabled={safePage >= totalPages}
+            onClick={() => setCurrentPage((p) => Math.min(totalPages, p + 1))}
+            className="rounded-lg border border-slate-200 px-3 py-1.5 font-semibold text-slate-700 hover:bg-slate-50 disabled:opacity-40"
+          >
+            {t.next50}
+          </button>
+        </div>
+      </div>
+    ) : null;
 
   return (
     <div className="space-y-6">
@@ -388,11 +435,11 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         </div>
         <div className="rounded-xl border border-blue-200 bg-blue-50/50 p-4 shadow-sm">
           <div className="text-xs text-blue-700">{t.kpiFr}</div>
-          <div className="mt-1 text-2xl font-bold text-blue-900">{franceTenders.length}</div>
+          <div className="mt-1 text-2xl font-bold text-blue-900">{frTotal}</div>
         </div>
         <div className="rounded-xl border border-indigo-200 bg-indigo-50/50 p-4 shadow-sm">
           <div className="text-xs text-indigo-700">{t.kpiEu}</div>
-          <div className="mt-1 text-2xl font-bold text-indigo-900">{euTenders.length}</div>
+          <div className="mt-1 text-2xl font-bold text-indigo-900">{euTotal}</div>
         </div>
         <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
           <div className="text-xs text-slate-500">{t.kpiAvgUrgent}</div>
@@ -416,7 +463,10 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
             <button
               key={tab.id}
               type="button"
-              onClick={() => setTriageFilter(tab.id)}
+              onClick={() => {
+                setTriageFilter(tab.id);
+                setCurrentPage(1);
+              }}
               className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-bold transition ${
                 triageFilter === tab.id
                   ? tab.id === "FAVORITES"
@@ -437,10 +487,10 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
           ))}
         </div>
 
-        {triageFilter === "UNSEEN" && unseenPool.length > 0 && (
+        {triageFilter === "UNSEEN" && pageItems.length > 0 && (
           <button
             type="button"
-            onClick={handleMarkVisibleSeen}
+            onClick={handleMarkPageSeen}
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
           >
             <CheckCheck className="h-3.5 w-3.5" />
@@ -475,18 +525,19 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         </div>
       </div>
 
-      {visibleTenders.length === 0 ? (
+      {pageItems.length === 0 ? (
         <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
           {triageFilter === "UNSEEN" && tenders.length > 0 ? t.emptyUnseen : t.emptyTenders}
         </div>
       ) : (
-        <div className="space-y-8">
+        <div className="space-y-6">
+          {renderPager()}
           {(regionFilter === "ALL" || regionFilter === "FR") && franceTenders.length > 0 && (
             <section className="space-y-3">
               <div className="flex items-center justify-between border-b border-blue-200 pb-2">
                 <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-blue-900">
                   <Globe2 className="h-4 w-4 text-blue-700" />
-                  {t.frSectionTitle} ({franceTenders.length})
+                  {t.frSectionTitle} ({franceTenders.length}/{frTotal})
                 </h3>
                 <span className="text-xs text-slate-500">{t.frSectionSub}</span>
               </div>
@@ -507,7 +558,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
               <div className="flex items-center justify-between border-b border-indigo-200 pb-2">
                 <h3 className="flex items-center gap-2 text-sm font-bold uppercase tracking-wider text-indigo-900">
                   <Globe2 className="h-4 w-4 text-indigo-700" />
-                  {t.euSectionTitle} ({euTenders.length})
+                  {t.euSectionTitle} ({euTenders.length}/{euTotal})
                 </h3>
                 <span className="text-xs text-slate-500">{t.euSectionSub}</span>
               </div>
@@ -522,6 +573,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
               ))}
             </section>
           )}
+          {renderPager()}
         </div>
       )}
     </div>

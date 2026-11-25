@@ -135,7 +135,7 @@ def list_tenders(
     min_score: int | None = Query(default=None, ge=0, le=100),
     only_relevant: bool = Query(default=True),
     only_open: bool = Query(default=True),
-    limit: int = Query(default=100, ge=1, le=300),
+    limit: int = Query(default=100, ge=1, le=500),
     db: Session = Depends(get_db),
 ) -> list[TenderNoticeOut]:
     profile = get_or_create_company_profile(db)

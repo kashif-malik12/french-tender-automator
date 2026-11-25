@@ -49,11 +49,11 @@
       kpiFr: "France (BOAMP + TED)",
       kpiEu: "Union Européenne (TED)",
       kpiAvg: "Adéquation moy. / Urgents",
-      triageUnseen: "🆕 À trier",
+      triageUnseen: "🆕 À trier (Non vus)",
       triageFavorites: "⭐ Favoris",
       triageSeen: "👁️ Déjà vus",
       triageAll: "📋 Tous",
-      markVisibleSeen: "✓ Tout marquer vu (page)",
+      markVisibleSeen: "✓ Marquer la page vue",
       regionAll: "France puis UE",
       regionFr: "France",
       regionEu: "UE",
@@ -100,13 +100,18 @@
       daysPrefix: "J-",
       favBtn: "☆ Favori",
       favActiveBtn: "★ Favori",
-      markSeenBtn: "✓ Marquer vu",
-      unseeBtn: "↺ Remettre à trier",
-      seenBadge: "Déjà vu",
+      markSeenBtn: "✓ Vu",
+      unseeBtn: "↺ Remettre non vu",
+      seenBadge: "Vu",
       screenToReview: "À screener",
       screenGo: "GO — À préparer",
       screenInProgress: "En préparation",
       screenNoGo: "No-Go",
+      prev50: "← 50 précédents",
+      next50: "50 suivants →",
+      showingLabel: "Affichage",
+      ofLabel: "sur",
+      pageLabel: "Page",
     },
     en: {
       pageTitle: "TRADISTER SASU — FR & EU Public Tenders Watch (PWA)",
@@ -125,7 +130,7 @@
       vatLabel: "VAT",
       refreshBoampBtn: "↻ Refresh BOAMP (Live)",
       refreshingBoamp: "Querying BOAMP...",
-      kpiTotal: "Shown tenders",
+      kpiTotal: "Total in view",
       kpiFr: "France (BOAMP + TED)",
       kpiEu: "European Union (TED)",
       kpiAvg: "Avg. Fit / Urgent",
@@ -133,7 +138,7 @@
       triageFavorites: "⭐ Favorites",
       triageSeen: "👁️ Seen",
       triageAll: "📋 All",
-      markVisibleSeen: "✓ Mark visible seen",
+      markVisibleSeen: "✓ Mark page seen",
       regionAll: "France then EU",
       regionFr: "France",
       regionEu: "EU",
@@ -180,29 +185,36 @@
       daysPrefix: "D-",
       favBtn: "☆ Favorite",
       favActiveBtn: "★ Favorite",
-      markSeenBtn: "✓ Mark seen",
+      markSeenBtn: "✓ Seen",
       unseeBtn: "↺ Move to Unseen",
       seenBadge: "Seen",
       screenToReview: "To screen",
       screenGo: "GO — Prepare bid",
       screenInProgress: "In progress",
       screenNoGo: "No-Go",
+      prev50: "← Previous 50",
+      next50: "Next 50 →",
+      showingLabel: "Showing",
+      ofLabel: "of",
+      pageLabel: "Page",
     },
   };
 
   const STORAGE_KEY = "tradister_ao_profile_v1";
   const LANG_KEY = "tradister_ao_lang_v1";
-  const TRIAGE_KEY = "tradister_ao_triage_v1";
+  const TRIAGE_KEY = "tradister_ao_triage_v2";
+  const PAGE_SIZE = 50;
 
   let lang = loadLang();
   let profile = loadProfile();
   let triageState = loadTriageState();
   let allTenders = [];
-  let triageFilter = "UNSEEN"; // UNSEEN | FAVORITES | SEEN | ALL
+  let triageFilter = "UNSEEN"; // UNSEEN (default, all unscreened) | FAVORITES | SEEN | ALL
   let regionFilter = "ALL";
   let minScore = 50;
   let searchQuery = "";
-  let currentVisibleIds = [];
+  let currentPage = 1;
+  let currentPageIds = [];
   let deferredInstallPrompt = null;
 
   function loadLang() {
@@ -262,6 +274,7 @@
       delete triageState.favorites[id];
     } else {
       triageState.favorites[id] = true;
+      // Moving to favorites also marks as seen so it leaves the Unseen list
       triageState.seen[id] = true;
       if (!triageState.verdicts[id]) {
         triageState.verdicts[id] = "to_review";
@@ -277,6 +290,7 @@
       triageState.seen[id] = true;
     } else {
       delete triageState.seen[id];
+      delete triageState.favorites[id];
     }
     saveTriageState();
     renderTenders();
@@ -287,8 +301,8 @@
     saveTriageState();
   }
 
-  function markVisibleAsSeen() {
-    for (const id of currentVisibleIds) {
+  function markPageAsSeen() {
+    for (const id of currentPageIds) {
       triageState.seen[id] = true;
     }
     saveTriageState();
@@ -567,10 +581,29 @@
             <button type="button" class="btn btn-sm btn-seen ${seen ? "active" : ""}" data-seen-id="${escapeHtml(t.id)}">
               ${seen ? dict.unseeBtn : dict.markSeenBtn}
             </button>
-            ${t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm" data-open-id="${escapeHtml(t.id)}">${dict.viewNotice} ${escapeHtml(t.source)} ↗</a>` : ""}
+            ${t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm">${dict.viewNotice} ${escapeHtml(t.source)} ↗</a>` : ""}
           </div>
         </div>
       </article>
+    `;
+  }
+
+  function renderPagination(total, totalPages) {
+    if (total <= PAGE_SIZE) return "";
+    const dict = I18N[lang];
+    const startIdx = (currentPage - 1) * PAGE_SIZE + 1;
+    const endIdx = Math.min(total, currentPage * PAGE_SIZE);
+    return `
+      <div class="pagination-bar">
+        <span>
+          ${dict.showingLabel} <strong>${startIdx}–${endIdx}</strong> ${dict.ofLabel} <strong>${total}</strong>
+          (${dict.pageLabel} ${currentPage}/${totalPages})
+        </span>
+        <div class="pagination-actions">
+          <button type="button" class="btn btn-secondary btn-sm" data-page-nav="prev" ${currentPage <= 1 ? "disabled" : ""}>${dict.prev50}</button>
+          <button type="button" class="btn btn-secondary btn-sm" data-page-nav="next" ${currentPage >= totalPages ? "disabled" : ""}>${dict.next50}</button>
+        </div>
+      </div>
     `;
   }
 
@@ -618,50 +651,66 @@
             ? seenPool
             : evaluated;
 
-    const fr = triaged.filter((t) => t.region === "FR");
-    const eu = triaged.filter((t) => t.region === "EU");
-    const visible = regionFilter === "FR" ? fr : regionFilter === "EU" ? eu : triaged;
-    currentVisibleIds = visible.map((t) => t.id);
+    const regionScoped =
+      regionFilter === "FR"
+        ? triaged.filter((t) => t.region === "FR")
+        : regionFilter === "EU"
+          ? triaged.filter((t) => t.region === "EU")
+          : triaged;
+
+    const totalPages = Math.max(1, Math.ceil(regionScoped.length / PAGE_SIZE));
+    if (currentPage > totalPages) currentPage = totalPages;
+    if (currentPage < 1) currentPage = 1;
+
+    const pageItems = regionScoped.slice((currentPage - 1) * PAGE_SIZE, currentPage * PAGE_SIZE);
+    currentPageIds = pageItems.map((t) => t.id);
+
+    const fr = pageItems.filter((t) => t.region === "FR");
+    const eu = pageItems.filter((t) => t.region === "EU");
 
     const markAllBtn = document.getElementById("mark-visible-seen-btn");
     if (markAllBtn) {
-      markAllBtn.classList.toggle("hidden", triageFilter !== "UNSEEN" || visible.length === 0);
+      markAllBtn.classList.toggle("hidden", triageFilter !== "UNSEEN" || pageItems.length === 0);
     }
 
-    const urgentCount = visible.filter((t) => t.days_remaining != null && t.days_remaining <= 14).length;
-    const avg = visible.length ? Math.round(visible.reduce((acc, x) => acc + x.suitability_score, 0) / visible.length) : 0;
+    const frTotal = triaged.filter((t) => t.region === "FR").length;
+    const euTotal = triaged.filter((t) => t.region === "EU").length;
+    const urgentCount = regionScoped.filter((t) => t.days_remaining != null && t.days_remaining <= 14).length;
+    const avg = regionScoped.length ? Math.round(regionScoped.reduce((acc, x) => acc + x.suitability_score, 0) / regionScoped.length) : 0;
 
-    document.getElementById("kpi-total").textContent = String(visible.length);
-    document.getElementById("kpi-fr").textContent = String(fr.length);
-    document.getElementById("kpi-eu").textContent = String(eu.length);
-    document.getElementById("kpi-avg").textContent = visible.length ? `${avg}/100 • ${urgentCount}` : "—";
+    document.getElementById("kpi-total").textContent = String(regionScoped.length);
+    document.getElementById("kpi-fr").textContent = String(frTotal);
+    document.getElementById("kpi-eu").textContent = String(euTotal);
+    document.getElementById("kpi-avg").textContent = regionScoped.length ? `${avg}/100 • ${urgentCount}` : "—";
 
     const container = document.getElementById("tenders-container");
-    if (!visible.length) {
+    if (!pageItems.length) {
       const msg = triageFilter === "UNSEEN" && evaluated.length > 0 ? dict.emptyUnseenHint : dict.emptyFiltered;
       container.innerHTML = `<div class="empty-box">${msg}</div>`;
       return;
     }
 
-    let html = "";
-    if ((regionFilter === "ALL" || regionFilter === "FR") && fr.length) {
+    const pagerHtml = renderPagination(regionScoped.length, totalPages);
+    let html = pagerHtml;
+    if (fr.length) {
       html += `
         <div class="section-heading">
-          <h2>${dict.frSectionTitle} (${fr.length})</h2>
+          <h2>${dict.frSectionTitle} (${fr.length}/${frTotal})</h2>
           <span class="section-sub">${dict.frSectionSub}</span>
         </div>
         ${fr.map(renderCard).join("")}
       `;
     }
-    if ((regionFilter === "ALL" || regionFilter === "EU") && eu.length) {
+    if (eu.length) {
       html += `
         <div class="section-heading eu">
-          <h2>${dict.euSectionTitle} (${eu.length})</h2>
+          <h2>${dict.euSectionTitle} (${eu.length}/${euTotal})</h2>
           <span class="section-sub">${dict.euSectionSub}</span>
         </div>
         ${eu.map(renderCard).join("")}
       `;
     }
+    html += pagerHtml;
     container.innerHTML = html;
   }
 
@@ -701,7 +750,7 @@
         `nature='APPEL_OFFRE' AND datelimitereponse >= date'${today}' AND (` +
         `search(descripteur_libelle, 'Informatique') OR search(descripteur_libelle, 'Logiciel') OR ` +
         `search(objet, 'infogérance') OR search(objet, 'cloud') OR search(objet, 'cybersécurité') OR search(objet, 'maintenance applicative'))`;
-      const url = `https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records?limit=45&order_by=dateparution%20desc&where=${encodeURIComponent(where)}`;
+      const url = `https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records?limit=50&order_by=dateparution%20desc&where=${encodeURIComponent(where)}`;
       const res = await fetch(url);
       if (!res.ok) throw new Error(`BOAMP HTTP ${res.status}`);
       const payload = await res.json();
@@ -737,6 +786,7 @@
         if (!byId.has(t.id)) byId.set(t.id, t);
       }
       allTenders = Array.from(byId.values());
+      currentPage = 1;
       renderTenders();
       setStatus(
         lang === "en"
@@ -817,15 +867,24 @@
     document.querySelectorAll(".triage-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         triageFilter = btn.dataset.triage || "UNSEEN";
+        currentPage = 1;
         document.querySelectorAll(".triage-btn").forEach((b) => b.classList.toggle("active", b === btn));
         renderTenders();
       });
     });
 
-    document.getElementById("mark-visible-seen-btn").addEventListener("click", markVisibleAsSeen);
+    document.getElementById("mark-visible-seen-btn").addEventListener("click", markPageAsSeen);
 
     const tendersContainer = document.getElementById("tenders-container");
     tendersContainer.addEventListener("click", (e) => {
+      const navBtn = e.target.closest("[data-page-nav]");
+      if (navBtn) {
+        const dir = navBtn.getAttribute("data-page-nav");
+        currentPage = dir === "prev" ? Math.max(1, currentPage - 1) : currentPage + 1;
+        renderTenders();
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return;
+      }
       const favBtn = e.target.closest("[data-fav-id]");
       if (favBtn) {
         toggleFavorite(favBtn.getAttribute("data-fav-id"));
@@ -834,11 +893,6 @@
       const seenBtn = e.target.closest("[data-seen-id]");
       if (seenBtn) {
         toggleSeen(seenBtn.getAttribute("data-seen-id"));
-        return;
-      }
-      const openLink = e.target.closest("[data-open-id]");
-      if (openLink) {
-        toggleSeen(openLink.getAttribute("data-open-id"), true);
       }
     });
 
@@ -852,16 +906,19 @@
     document.querySelectorAll(".region-btn").forEach((btn) => {
       btn.addEventListener("click", () => {
         regionFilter = btn.dataset.region;
+        currentPage = 1;
         document.querySelectorAll(".region-btn").forEach((b) => b.classList.toggle("active", b === btn));
         renderTenders();
       });
     });
     document.getElementById("search-input").addEventListener("input", (e) => {
       searchQuery = e.target.value;
+      currentPage = 1;
       renderTenders();
     });
     document.getElementById("min-score-select").addEventListener("change", (e) => {
       minScore = Number(e.target.value);
+      currentPage = 1;
       renderTenders();
     });
     document.getElementById("refresh-boamp-btn").addEventListener("click", refreshBoampLive);
@@ -880,6 +937,7 @@
         min_target_amount: Number(document.getElementById("prof-min-amt").value) || 0,
         max_target_amount: Number(document.getElementById("prof-max-amt").value) || 500000,
       });
+      currentPage = 1;
       renderProfileHeader();
       renderTenders();
       const msg = document.getElementById("profile-msg");
@@ -889,6 +947,7 @@
 
     document.getElementById("reset-profile-btn").addEventListener("click", () => {
       saveProfile({ ...DEFAULT_PROFILE });
+      currentPage = 1;
       renderProfileHeader();
       renderTenders();
       const msg = document.getElementById("profile-msg");

@@ -1,4 +1,4 @@
-const CACHE_NAME = "tradister-pages-pwa-v3";
+const CACHE_NAME = "tradister-pages-pwa-v4";
 const SHELL_ASSETS = [
   "./",
   "./index.html",
