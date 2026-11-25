@@ -1,0 +1,178 @@
+export type Lang = "fr" | "en";
+
+export const UI_TEXT = {
+  fr: {
+    appTitle: "Marchés Publics AI — Veille & Mémoires Techniques",
+    appSubtitle:
+      "BOAMP Open Data (DILA) • Analyse DCE • RAG pgvector • Export Word (.docx)",
+    protectedAccess: "Accès protégé",
+    loginSubtitle: "Veille BOAMP, Analyse DCE & Mémoires Techniques",
+    username: "Identifiant",
+    password: "Mot de passe",
+    signIn: "Se connecter",
+    badCredentials: "Identifiants incorrects.",
+    tabVeille: "Veille BOAMP",
+    tabWorkspace: "Espace DCE & Mémoire",
+    tabKb: "Base de Connaissances",
+    logout: "Déconnexion",
+    guardrailLead: "Contrôle humain obligatoire :",
+    guardrailBody:
+      "Vérifiez systématiquement les prix du BPU/DPGF, joignez vos attestations fiscales et sociales à jour, et réalisez la signature électronique (RGS / eIDAS) ainsi que le dépôt final manuellement sur le profil acheteur (PLACE, Maximilien, AWS).",
+    veilleTitle: "Paramètres de Veille BOAMP & Profil Entreprise",
+    saveFilters: "Enregistrer filtres",
+    syncBoamp: "Synchroniser BOAMP",
+    syncingBoamp: "Interrogation BOAMP...",
+    companyLabel: "Entreprise",
+    deptsLabel: "Départements (ex: 75, 91, 92)",
+    cpvLabel: "Codes CPV (ex: 72000000)",
+    kwLabel: "Mots-clés (ex: cloud, infogérance)",
+    profileSaved: "Profil de veille enregistré.",
+    emptyTenders:
+      "Aucun avis BOAMP en base pour l'instant. Cliquez sur Synchroniser BOAMP pour lancer une veille immédiate.",
+    buyer: "Acheteur",
+    unspecified: "Non précisé",
+    deadline: "Clôture",
+    shortlist: "Retenir",
+    archive: "Archiver",
+    openDce: "Ouvrir Espace DCE",
+    activeWorkspace: "Dossier actif :",
+    noWorkspace: "Aucun dossier",
+    newTitlePlaceholder: "Titre du nouveau marché...",
+    newBuyerPlaceholder: "Acheteur public (optionnel)",
+    newWorkspaceBtn: "Nouveau dossier",
+    rcDeadlineLabel: "Date limite RC :",
+    awaitingDce: "En attente de DCE",
+    siteVisitRequired: "Visite sur site obligatoire",
+    uploadDce: "Importer DCE (.zip/.pdf/.docx/.xlsx)",
+    analyzingDce: "Analyse en cours...",
+    save: "Sauvegarder",
+    exportDocx: "Exporter .docx",
+    dceAnalyzedMsg:
+      "DCE analysé, checklist générée et sections du mémoire pré-rédigées.",
+    workspaceSavedMsg: "Modifications sauvegardées.",
+    editorHeading: "Éditeur côte à côte — Mémoire Technique",
+    emptySections:
+      "Importez un DCE ci-dessus pour extraire les critères du RC/CCTP et générer le plan du mémoire technique.",
+    emptyWorkspaceHint:
+      "Créez un dossier ci-dessus ou sélectionnez un avis depuis l'onglet Veille BOAMP.",
+    checklistTitle: "Matrice de conformité & pièces requises",
+    emptyChecklist:
+      "Importez un DCE (.zip, .pdf, .docx, .xlsx) pour générer la checklist.",
+    humanValidation: "Validation humaine",
+    flaggedTitle:
+      "Clauses financières & juridiques signalées (CCAP / BPU / DPGF)",
+    flaggedSubtitle:
+      "Garde-fou strict : aucun prix contractuel n'est généré automatiquement.",
+    emptyFlagged:
+      "Aucun fichier CCAP/BPU/DPGF détecté dans cet espace pour le moment.",
+    actionLabel: "Action :",
+    fieldsToComplete: "champ(s) [À COMPLÉTER PAR L'ÉQUIPE]",
+    regenerateRag: "Régénérer via RAG",
+    cctpRequirement: "Exigence du CCTP",
+    kbCitations: "Citations Base de Connaissances",
+    noCitations:
+      "Aucune citation trouvée. Ajoutez vos mémoires passés dans la Base de Connaissances.",
+    draftLabel: "Brouillon du Mémoire Technique (éditable)",
+    kbUploadTitle:
+      "Importer un document dans la Base de Connaissances (pgvector)",
+    kbUploadSubtitle:
+      "Stockage persistant dans le volume Docker /app/data/knowledge_base — jamais suivi par Git.",
+    kbTitlePlaceholder: "Titre (ex: Mémoire Cloud 2025)",
+    kbIndexing: "Indexation...",
+    kbIndexBtn: "Indexer le document",
+    kbSearchPlaceholder:
+      "Tester la recherche sémantique RAG (ex: continuité de service PRA/PCA)...",
+    kbSearchBtn: "Rechercher",
+    kbSimilarity: "Similarité :",
+    kbIndexedDocs: "Documents indexés",
+    kbEmptyDocs: "Aucun document indexé pour le moment.",
+    deleteBtn: "Supprimer",
+  },
+  en: {
+    appTitle: "French Tender AI — BOAMP Monitoring & Technical Proposals",
+    appSubtitle:
+      "BOAMP Open Data (DILA) • DCE Analysis • pgvector RAG • Word (.docx) Export",
+    protectedAccess: "Protected Access",
+    loginSubtitle: "BOAMP Monitoring, DCE Analysis & Technical Proposals",
+    username: "Username",
+    password: "Password",
+    signIn: "Sign in",
+    badCredentials: "Invalid credentials.",
+    tabVeille: "BOAMP Feed",
+    tabWorkspace: "DCE & Proposal",
+    tabKb: "Knowledge Base",
+    logout: "Sign out",
+    guardrailLead: "Mandatory Human Review:",
+    guardrailBody:
+      "Always verify BPU/DPGF pricing manually, attach up-to-date French tax and social certificates, and complete the eIDAS/RGS electronic signature and portal submission manually (PLACE, Maximilien, AWS).",
+    veilleTitle: "BOAMP Monitoring Filters & Company Profile",
+    saveFilters: "Save filters",
+    syncBoamp: "Sync BOAMP",
+    syncingBoamp: "Querying BOAMP...",
+    companyLabel: "Company",
+    deptsLabel: "Departments (e.g., 75, 91, 92)",
+    cpvLabel: "CPV Codes (e.g., 72000000)",
+    kwLabel: "Keywords (e.g., cloud, infogérance)",
+    profileSaved: "Monitoring profile saved.",
+    emptyTenders:
+      "No BOAMP notices stored yet. Click Sync BOAMP to fetch live tenders.",
+    buyer: "Buyer",
+    unspecified: "Not specified",
+    deadline: "Deadline",
+    shortlist: "Shortlist",
+    archive: "Archive",
+    openDce: "Open DCE Workspace",
+    activeWorkspace: "Active workspace:",
+    noWorkspace: "No workspace",
+    newTitlePlaceholder: "New tender title...",
+    newBuyerPlaceholder: "Public buyer (optional)",
+    newWorkspaceBtn: "New workspace",
+    rcDeadlineLabel: "RC Deadline:",
+    awaitingDce: "Awaiting DCE",
+    siteVisitRequired: "Mandatory site visit",
+    uploadDce: "Upload DCE (.zip/.pdf/.docx/.xlsx)",
+    analyzingDce: "Analyzing DCE...",
+    save: "Save",
+    exportDocx: "Export .docx",
+    dceAnalyzedMsg:
+      "DCE parsed, compliance checklist generated, and proposal sections drafted.",
+    workspaceSavedMsg: "Changes saved.",
+    editorHeading: "Side-by-Side Editor — Technical Proposal",
+    emptySections:
+      "Upload a DCE bundle above to extract RC/CCTP criteria and generate the proposal outline.",
+    emptyWorkspaceHint:
+      "Create a workspace above or pick a notice from the BOAMP Feed tab.",
+    checklistTitle: "Compliance Matrix & Required Documents",
+    emptyChecklist:
+      "Upload a DCE (.zip, .pdf, .docx, .xlsx) to generate the checklist.",
+    humanValidation: "Human review",
+    flaggedTitle:
+      "Flagged Financial & Legal Clauses (CCAP / BPU / DPGF)",
+    flaggedSubtitle:
+      "Strict guardrail: no binding prices are ever auto-generated.",
+    emptyFlagged:
+      "No CCAP/BPU/DPGF files detected in this workspace yet.",
+    actionLabel: "Action:",
+    fieldsToComplete: "field(s) [À COMPLÉTER PAR L'ÉQUIPE]",
+    regenerateRag: "Regenerate via RAG",
+    cctpRequirement: "CCTP Requirement",
+    kbCitations: "Knowledge Base Citations",
+    noCitations:
+      "No citations found yet. Upload past winning bids in the Knowledge Base tab.",
+    draftLabel: "Technical Proposal Draft (editable)",
+    kbUploadTitle:
+      "Upload Document to Knowledge Base (pgvector)",
+    kbUploadSubtitle:
+      "Persisted in Docker volume /app/data/knowledge_base — never tracked by Git.",
+    kbTitlePlaceholder: "Title (e.g., Cloud Bid 2025)",
+    kbIndexing: "Indexing...",
+    kbIndexBtn: "Index document",
+    kbSearchPlaceholder:
+      "Test RAG semantic search (e.g., continuité de service PRA/PCA)...",
+    kbSearchBtn: "Search",
+    kbSimilarity: "Similarity:",
+    kbIndexedDocs: "Indexed documents",
+    kbEmptyDocs: "No documents indexed yet.",
+    deleteBtn: "Delete",
+  },
+} as const;

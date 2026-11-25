@@ -2,211 +2,241 @@
 <html lang="fr">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-  <meta name="theme-color" content="#1d4ed8" />
-  <meta name="apple-mobile-web-app-capable" content="yes" />
-  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-  <meta name="apple-mobile-web-app-title" content="TRADISTER AO" />
-  <title>TRADISTER SASU — Veille Marchés Publics FR &amp; UE (PWA)</title>
-  <link rel="manifest" href="./manifest.webmanifest" />
-  <link rel="icon" type="image/png" sizes="192x192" href="./icons/icon-192.png" />
-  <link rel="apple-touch-icon" href="./apple-touch-icon.png" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>French Tender Automator — Veille BOAMP &amp; Mémoires Techniques</title>
   <link rel="stylesheet" href="./styles.css" />
 </head>
 <body>
-  <!-- Install PWA Banner -->
-  <div id="install-banner" class="install-banner hidden">
-    <div class="container install-inner">
-      <span id="install-text">
-        <strong>App mobile prête :</strong> installez <strong>TRADISTER AO</strong> sur votre téléphone.
-      </span>
-      <div class="install-actions">
-        <button id="install-btn" type="button" class="btn btn-primary btn-sm hidden">Installer</button>
-        <button id="dismiss-install" type="button" class="btn-icon" aria-label="Fermer">✕</button>
-      </div>
-    </div>
-  </div>
-
-  <header class="topbar">
+  <header>
     <div class="container nav">
-      <div class="brand-wrap">
-        <img src="./icons/icon-192.png" alt="TRADISTER" class="brand-icon" />
-        <div>
-          <div class="brand">TRADISTER SASU — Marchés Publics</div>
-          <div class="brand-sub">France (BOAMP) &amp; Union Européenne (TED)</div>
+      <a href="#" class="brand">French Tender Automator</a>
+      <div class="nav-right">
+        <nav class="nav-links">
+          <a href="#modules" data-i18n="navModules">Modules</a>
+          <a href="#architecture" data-i18n="navArch">Architecture</a>
+          <a href="#guardrails" data-i18n="navGuardrails">Contrôle Humain</a>
+          <a href="#quickstart" data-i18n="navDeploy">Déploiement</a>
+        </nav>
+        <div class="lang-switch" role="group" aria-label="Language switch">
+          <button type="button" class="lang-btn active" data-lang="fr">FR</button>
+          <button type="button" class="lang-btn" data-lang="en">EN</button>
         </div>
       </div>
-      <nav class="nav-links desktop-only">
-        <button type="button" class="nav-tab active" data-tab="tenders">Veille FR &amp; UE</button>
-        <button type="button" class="nav-tab" data-tab="profile">Profil Tradister</button>
-        <button type="button" class="nav-tab" data-tab="about">Stack &amp; VPS</button>
-      </nav>
     </div>
   </header>
 
-  <main class="container main-content">
-    <!-- TAB 1: TENDERS -->
-    <section id="tab-tenders" class="tab-panel active">
-      <div class="company-card">
-        <div class="company-header">
-          <div>
-            <div class="company-title-row">
-              <h1 id="company-name">TRADISTER SASU</h1>
-              <span class="pill pill-blue">NAF 62.02A</span>
-              <span class="pill pill-gray">SIRET 98831894500017</span>
-            </div>
-            <p class="company-meta">
-              Présidente : <strong id="company-president">Bisma Kashif</strong> •
-              TVA FR42988318945 • 11 Rue du Château d'Eau, 91130 Ris-Orangis
-            </p>
-            <p class="company-meta" id="company-target-line">
-              Cible montant : <strong>10 000 € – 500 000 €</strong> • France (priorité IDF/91) puis Union Européenne
-            </p>
-          </div>
-          <div class="company-actions">
-            <button id="refresh-boamp-btn" type="button" class="btn btn-primary btn-sm">
-              ↻ Actualiser BOAMP (Direct)
-            </button>
-          </div>
-        </div>
-        <div id="sync-status" class="status-bar hidden"></div>
-      </div>
-
-      <!-- KPIs -->
-      <div class="kpi-grid">
-        <div class="kpi-card">
-          <div class="kpi-label">Marchés pertinents</div>
-          <div class="kpi-value" id="kpi-total">0</div>
-        </div>
-        <div class="kpi-card kpi-blue">
-          <div class="kpi-label">France (BOAMP + TED)</div>
-          <div class="kpi-value" id="kpi-fr">0</div>
-        </div>
-        <div class="kpi-card kpi-indigo">
-          <div class="kpi-label">Union Européenne (TED)</div>
-          <div class="kpi-value" id="kpi-eu">0</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-label">Adéquation moy. / Urgents</div>
-          <div class="kpi-value" id="kpi-avg">—</div>
-        </div>
-      </div>
-
-      <!-- Controls -->
-      <div class="controls-bar">
-        <div class="region-tabs">
-          <button type="button" class="region-btn active" data-region="ALL">France puis UE</button>
-          <button type="button" class="region-btn" data-region="FR">France</button>
-          <button type="button" class="region-btn" data-region="EU">UE</button>
-        </div>
-        <div class="filter-inputs">
-          <input id="search-input" type="search" placeholder="Filtrer par mot-clé, acheteur, CPV, pays..." />
-          <select id="min-score-select" aria-label="Score minimum">
-            <option value="50">Score ≥ 50</option>
-            <option value="65">Score ≥ 65</option>
-            <option value="75">Score ≥ 75</option>
-            <option value="85">Score ≥ 85</option>
-          </select>
-        </div>
-      </div>
-
-      <div id="tenders-container" class="tenders-sections">
-        <div class="empty-box">Chargement des marchés pertinents France &amp; UE...</div>
+  <main class="container">
+    <section class="hero">
+      <span class="badge" data-i18n="heroBadge">Auto-hébergé • Docker Compose • GitHub Pages</span>
+      <h1 data-i18n="heroTitle">Automatisez la veille BOAMP, l'analyse DCE et le premier jet de vos Mémoires Techniques.</h1>
+      <p class="lead" data-i18n="heroLead">
+        Une plateforme open-source et conteneurisée conçue pour les PME et ESN répondant aux
+        marchés publics français. Chiffrage BPU/DPGF et signature électronique restent strictement
+        sous contrôle humain.
+      </p>
+      <div class="cta-row">
+        <a href="#quickstart" class="btn btn-primary" data-i18n="ctaDeploy">Déployer sur VPS</a>
+        <a href="#modules" class="btn btn-secondary" data-i18n="ctaExplore">Découvrir les modules</a>
       </div>
     </section>
 
-    <!-- TAB 2: PROFILE -->
-    <section id="tab-profile" class="tab-panel">
-      <div class="company-card">
-        <h2>Profil Entreprise Enregistré — TRADISTER SASU</h2>
-        <p class="company-meta">
-          Données vérifiées INSEE / RNE utilisées pour filtrer automatiquement les appels d'offres non pertinents.
-          Vos ajustements sont sauvegardés localement sur votre appareil.
-        </p>
-
-        <form id="profile-form" class="profile-form">
-          <div class="form-grid">
-            <label>
-              <span>Entreprise</span>
-              <input type="text" id="prof-name" required />
-            </label>
-            <label>
-              <span>Président(e)</span>
-              <input type="text" id="prof-president" />
-            </label>
-            <label>
-              <span>SIRET</span>
-              <input type="text" id="prof-siret" />
-            </label>
-            <label>
-              <span>Code NAF / APE</span>
-              <input type="text" id="prof-naf" />
-            </label>
-            <label>
-              <span>Départements prioritaires (France)</span>
-              <input type="text" id="prof-depts" />
-            </label>
-            <label>
-              <span>Codes CPV cibles</span>
-              <input type="text" id="prof-cpvs" />
-            </label>
-            <label class="full-span">
-              <span>Mots-clés IT / Services Managés (MSP)</span>
-              <input type="text" id="prof-keywords" />
-            </label>
-            <label>
-              <span>Montant cible min (€)</span>
-              <input type="number" id="prof-min-amt" />
-            </label>
-            <label>
-              <span>Montant cible max (€)</span>
-              <input type="number" id="prof-max-amt" />
-            </label>
-          </div>
-          <div class="form-actions">
-            <button type="submit" class="btn btn-primary btn-sm">Enregistrer &amp; Recalculer</button>
-            <button type="button" id="reset-profile-btn" class="btn btn-secondary btn-sm">Réinitialiser TRADISTER</button>
-          </div>
-        </form>
-        <div id="profile-msg" class="status-bar hidden"></div>
+    <section id="modules">
+      <h2 data-i18n="modulesHeading">4 Modules Métier</h2>
+      <div class="grid">
+        <article class="card">
+          <h3 data-i18n="modATitle">A. Veille BOAMP Automatisée</h3>
+          <p data-i18n="modADesc">
+            Interrogation planifiée de l'API Open Data DILA BOAMP v2.1 (CPV, départements, mots-clés)
+            et scoring Go/No-Go (0-100) en 3 points clés. Attribution DILA Licence Ouverte 2.0 conservée.
+          </p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="modBTitle">B. Base de Connaissances (RAG)</h3>
+          <p data-i18n="modBDesc">
+            Indexation vectorielle dans PostgreSQL + <code>pgvector</code> de vos mémoires gagnants,
+            CV, certificats ISO/RGE/MASE et trames DC1/DC2. Stockage binaire hors Git.
+          </p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="modCTitle">C. Analyseur DCE &amp; Conformité</h3>
+          <p data-i18n="modCDesc">
+            Import <code>.zip</code>, <code>.pdf</code>, <code>.docx</code>, <code>.xlsx</code>.
+            Classification automatique RC / CCTP / CCAP / BPU / DPGF, extraction des délais, visites
+            obligatoires, pondérations et matrice de conformité.
+          </p>
+        </article>
+        <article class="card">
+          <h3 data-i18n="modDTitle">D. Rédaction &amp; Export .docx</h3>
+          <p data-i18n="modDDesc">
+            Éditeur côte à côte (Exigence CCTP vs Brouillon + citations RAG) et export Word
+            <code>.docx</code> stylé avec marqueurs <code>[À COMPLÉTER PAR L'ÉQUIPE]</code>.
+          </p>
+        </article>
       </div>
     </section>
 
-    <!-- TAB 3: ABOUT / STACK -->
-    <section id="tab-about" class="tab-panel">
-      <div class="company-card">
-        <h2>Architecture Complète (GitHub Pages PWA + Backend Docker VPS)</h2>
-        <p class="company-meta">
-          Cette interface GitHub Pages est une PWA mobile connectée aux données ouvertes BOAMP (DILA) et TED Europa.
-          Le dépôt complet inclut également la stack Docker Compose (FastAPI, PostgreSQL + pgvector RAG, Celery, analyseur DCE et export Word <code>.docx</code>).
-        </p>
-        <div class="guardrail">
-          <strong>Frontière Human-in-the-Loop :</strong> Aucun chiffrage BPU/DPGF engageant, aucune signature électronique (RGS/eIDAS) et aucun dépôt automatique sur les profils acheteurs (PLACE, Maximilien, AWS) ne sont exécutés automatiquement.
+    <section id="architecture">
+      <h2 data-i18n="archHeading">Stack Technique</h2>
+      <div class="grid">
+        <div class="card">
+          <h3 data-i18n="arch1Title">Backend &amp; Workers</h3>
+          <p data-i18n="arch1Desc">Python 3.12, FastAPI, Celery + Redis, Alembic, PyMuPDF, pdfplumber, openpyxl, python-docx.</p>
         </div>
-        <pre><code>git clone https://github.com/kashif-malik12/french-tender-automator.git
+        <div class="card">
+          <h3 data-i18n="arch2Title">Données &amp; Vecteurs</h3>
+          <p data-i18n="arch2Desc">PostgreSQL 16 + extension <code>pgvector</code> (embeddings OpenAI, Gemini ou fallback local).</p>
+        </div>
+        <div class="card">
+          <h3 data-i18n="arch3Title">Frontend &amp; Reverse Proxy</h3>
+          <p data-i18n="arch3Desc">Next.js App Router (TypeScript + Tailwind CSS), authentification JWT/Basic Auth et Caddy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="guardrails">
+      <h2 data-i18n="guardHeading">Sécurité &amp; Frontière Human-in-the-Loop</h2>
+      <div class="guardrail" data-i18n="guardBox">
+        <strong>Zéro dépôt automatique, zéro signature automatisée, zéro chiffrage engageant :</strong>
+        la plateforme signale les clauses du CCAP et les onglets BPU/DPGF pour revue humaine et
+        rappelle de déposer manuellement l'offre signée (RGS / eIDAS) sur le profil acheteur
+        (PLACE, Maximilien, AWS).
+      </div>
+    </section>
+
+    <section id="quickstart">
+      <h2 data-i18n="quickHeading">Démarrage Rapide</h2>
+      <pre><code id="quickstart-code">git clone https://github.com/kashif-malik12/french-tender-automator.git
 cd french-tender-automator
 cp .env.example .env
+# Éditez .env (mots de passe, clés API, identifiants UI)
 docker compose up --build -d</code></pre>
-      </div>
     </section>
   </main>
 
-  <!-- Mobile Bottom Navigation -->
-  <nav class="mobile-bottom-nav mobile-only">
-    <button type="button" class="bottom-tab active" data-tab="tenders">
-      <span>🎯</span>
-      <span>FR &amp; UE</span>
-    </button>
-    <button type="button" class="bottom-tab" data-tab="profile">
-      <span>🏢</span>
-      <span>Tradister</span>
-    </button>
-    <button type="button" class="bottom-tab" data-tab="about">
-      <span>⚙️</span>
-      <span>Stack</span>
-    </button>
-  </nav>
+  <footer>
+    <div class="container" data-i18n="footerText">
+      French Tender Automator — Projet autonome hébergé sur GitHub Pages (aucun sous-domaine VPS requis).
+    </div>
+  </footer>
 
-  <script src="./app.js"></script>
+  <script>
+    const TRANSLATIONS = {
+      fr: {
+        title: "French Tender Automator — Veille BOAMP & Mémoires Techniques",
+        navModules: "Modules",
+        navArch: "Architecture",
+        navGuardrails: "Contrôle Humain",
+        navDeploy: "Déploiement",
+        heroBadge: "Auto-hébergé • Docker Compose • GitHub Pages",
+        heroTitle: "Automatisez la veille BOAMP, l'analyse DCE et le premier jet de vos Mémoires Techniques.",
+        heroLead:
+          "Une plateforme open-source et conteneurisée conçue pour les PME et ESN répondant aux marchés publics français. Chiffrage BPU/DPGF et signature électronique restent strictement sous contrôle humain.",
+        ctaDeploy: "Déployer sur VPS",
+        ctaExplore: "Découvrir les modules",
+        modulesHeading: "4 Modules Métier",
+        modATitle: "A. Veille BOAMP Automatisée",
+        modADesc:
+          "Interrogation planifiée de l'API Open Data DILA BOAMP v2.1 (CPV, départements, mots-clés) et scoring Go/No-Go (0-100) en 3 points clés. Attribution DILA Licence Ouverte 2.0 conservée.",
+        modBTitle: "B. Base de Connaissances (RAG)",
+        modBDesc:
+          "Indexation vectorielle dans PostgreSQL + <code>pgvector</code> de vos mémoires gagnants, CV, certificats ISO/RGE/MASE et trames DC1/DC2. Stockage binaire hors Git.",
+        modCTitle: "C. Analyseur DCE &amp; Conformité",
+        modCDesc:
+          "Import <code>.zip</code>, <code>.pdf</code>, <code>.docx</code>, <code>.xlsx</code>. Classification automatique RC / CCTP / CCAP / BPU / DPGF, extraction des délais, visites obligatoires, pondérations et matrice de conformité.",
+        modDTitle: "D. Rédaction &amp; Export .docx",
+        modDDesc:
+          "Éditeur côte à côte (Exigence CCTP vs Brouillon + citations RAG) et export Word <code>.docx</code> stylé avec marqueurs <code>[À COMPLÉTER PAR L'ÉQUIPE]</code>.",
+        archHeading: "Stack Technique",
+        arch1Title: "Backend &amp; Workers",
+        arch1Desc: "Python 3.12, FastAPI, Celery + Redis, Alembic, PyMuPDF, pdfplumber, openpyxl, python-docx.",
+        arch2Title: "Données &amp; Vecteurs",
+        arch2Desc: "PostgreSQL 16 + extension <code>pgvector</code> (embeddings OpenAI, Gemini ou fallback local).",
+        arch3Title: "Frontend &amp; Reverse Proxy",
+        arch3Desc: "Next.js App Router (TypeScript + Tailwind CSS), authentification JWT/Basic Auth et Caddy.",
+        guardHeading: "Sécurité &amp; Frontière Human-in-the-Loop",
+        guardBox:
+          "<strong>Zéro dépôt automatique, zéro signature automatisée, zéro chiffrage engageant :</strong> la plateforme signale les clauses du CCAP et les onglets BPU/DPGF pour revue humaine et rappelle de déposer manuellement l'offre signée (RGS / eIDAS) sur le profil acheteur (PLACE, Maximilien, AWS).",
+        quickHeading: "Démarrage Rapide",
+        quickCode:
+          "git clone https://github.com/kashif-malik12/french-tender-automator.git\ncd french-tender-automator\ncp .env.example .env\n# Éditez .env (mots de passe, clés API, identifiants UI)\ndocker compose up --build -d",
+        footerText:
+          "French Tender Automator — Projet autonome hébergé sur GitHub Pages (aucun sous-domaine VPS requis).",
+      },
+      en: {
+        title: "French Tender Automator — BOAMP Monitoring & Technical Proposals",
+        navModules: "Modules",
+        navArch: "Architecture",
+        navGuardrails: "Human-in-the-Loop",
+        navDeploy: "Deployment",
+        heroBadge: "Self-Hosted • Docker Compose • GitHub Pages",
+        heroTitle: "Automate BOAMP tender monitoring, DCE analysis, and first-draft Technical Proposals.",
+        heroLead:
+          "An open-source, containerized platform built for SMEs and IT consultancies bidding on French public tenders. BPU/DPGF pricing and eIDAS electronic signatures remain strictly human-in-the-loop.",
+        ctaDeploy: "Deploy on VPS",
+        ctaExplore: "Explore modules",
+        modulesHeading: "4 Core Modules",
+        modATitle: "A. Automated BOAMP Monitoring",
+        modADesc:
+          "Scheduled polling of the official DILA BOAMP Open Data v2.1 API (CPV codes, departments, keywords) with 0–100 Go/No-Go scoring and 3-bullet summaries. Preserves DILA Open Licence 2.0 attribution.",
+        modBTitle: "B. Knowledge Base (RAG)",
+        modBDesc:
+          "Vector indexing in PostgreSQL + <code>pgvector</code> for past winning bids, CVs, ISO/RGE/MASE certificates, and DC1/DC2 templates. Binary files stay in Docker volumes outside Git.",
+        modCTitle: "C. DCE Analyzer &amp; Compliance",
+        modCDesc:
+          "Upload <code>.zip</code>, <code>.pdf</code>, <code>.docx</code>, and <code>.xlsx</code> bundles. Automatically classifies RC / CCTP / CCAP / BPU / DPGF files, extracts deadlines, mandatory site visits, evaluation weights, and compliance checklists.",
+        modDTitle: "D. Drafting &amp; .docx Export",
+        modDDesc:
+          "Side-by-side editor (CCTP Requirement vs. Editable Draft + RAG citations) and formatted Word <code>.docx</code> export with <code>[À COMPLÉTER PAR L'ÉQUIPE]</code> verification markers.",
+        archHeading: "Tech Stack",
+        arch1Title: "Backend &amp; Workers",
+        arch1Desc: "Python 3.12, FastAPI, Celery + Redis, Alembic, PyMuPDF, pdfplumber, openpyxl, python-docx.",
+        arch2Title: "Data &amp; Vectors",
+        arch2Desc: "PostgreSQL 16 + <code>pgvector</code> extension (OpenAI, Gemini, or local fallback embeddings).",
+        arch3Title: "Frontend &amp; Reverse Proxy",
+        arch3Desc: "Next.js App Router (TypeScript + Tailwind CSS), JWT/Basic Auth protection, and Caddy.",
+        guardHeading: "Security &amp; Human-in-the-Loop Boundary",
+        guardBox:
+          "<strong>No automated portal submission, no automated signing, no binding pricing:</strong> the platform flags CCAP legal clauses and BPU/DPGF pricing tabs for human review and reminds teams to sign (RGS / eIDAS) and submit manually on buyer portals (PLACE, Maximilien, AWS).",
+        quickHeading: "Quick Start",
+        quickCode:
+          "git clone https://github.com/kashif-malik12/french-tender-automator.git\ncd french-tender-automator\ncp .env.example .env\n# Edit .env (passwords, API keys, UI credentials)\ndocker compose up --build -d",
+        footerText:
+          "French Tender Automator — Standalone project hosted on GitHub Pages (no VPS subdomain required).",
+      },
+    };
+
+    function applyLanguage(lang) {
+      const dict = TRANSLATIONS[lang] || TRANSLATIONS.fr;
+      document.documentElement.lang = lang;
+      document.title = dict.title;
+      document.querySelectorAll("[data-i18n]").forEach((el) => {
+        const key = el.getAttribute("data-i18n");
+        if (dict[key]) {
+          el.innerHTML = dict[key];
+        }
+      });
+      const codeEl = document.getElementById("quickstart-code");
+      if (codeEl) codeEl.textContent = dict.quickCode;
+      document.querySelectorAll(".lang-btn").forEach((btn) => {
+        btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
+      });
+      try {
+        localStorage.setItem("fta_site_lang", lang);
+      } catch {}
+    }
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        applyLanguage(btn.getAttribute("data-lang") || "fr");
+      });
+    });
+
+    try {
+      const saved = localStorage.getItem("fta_site_lang");
+      if (saved === "en" || saved === "fr") {
+        applyLanguage(saved);
+      }
+    } catch {}
+  </script>
 </body>
 </html>

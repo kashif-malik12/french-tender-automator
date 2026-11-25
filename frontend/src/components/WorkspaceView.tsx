@@ -7,15 +7,22 @@ import {
   apiFetch,
   type TenderWorkspace,
 } from "@/lib/api";
+import { UI_TEXT, type Lang } from "@/lib/i18n";
 import { ComplianceChecklist } from "./ComplianceChecklist";
 import { SectionEditor } from "./SectionEditor";
 
 interface Props {
+  lang: Lang;
   activeWorkspaceId: number | null;
   onSelectWorkspace: (id: number) => void;
 }
 
-export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
+export function WorkspaceView({
+  lang,
+  activeWorkspaceId,
+  onSelectWorkspace,
+}: Props) {
+  const t = UI_TEXT[lang];
   const [workspaces, setWorkspaces] = useState<TenderWorkspace[]>([]);
   const [current, setCurrent] = useState<TenderWorkspace | null>(null);
   const [newTitle, setNewTitle] = useState("");
@@ -65,9 +72,9 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
         { method: "POST", body: form }
       );
       setCurrent(updated);
-      setStatusMsg("DCE analysé, checklist générée et sections du mémoire pré-rédigées.");
+      setStatusMsg(t.dceAnalyzedMsg);
     } catch (err) {
-      setStatusMsg(`Erreur analyse DCE : ${String(err)}`);
+      setStatusMsg(String(err));
     } finally {
       setUploading(false);
       e.target.value = "";
@@ -106,7 +113,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
         }),
       });
       setCurrent(updated);
-      setStatusMsg("Modifications sauvegardées.");
+      setStatusMsg(t.workspaceSavedMsg);
     } finally {
       setSaving(false);
     }
@@ -140,19 +147,18 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
 
   return (
     <div className="space-y-6">
-      {/* Workspace selector & quick creator */}
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
         <div className="flex flex-wrap items-center justify-between gap-4">
           <div className="flex items-center gap-3">
             <label className="text-xs font-semibold uppercase tracking-wider text-slate-500">
-              Dossier actif :
+              {t.activeWorkspace}
             </label>
             <select
               value={current?.id || ""}
               onChange={(e) => onSelectWorkspace(Number(e.target.value))}
               className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm font-medium"
             >
-              {workspaces.length === 0 && <option value="">Aucun dossier</option>}
+              {workspaces.length === 0 && <option value="">{t.noWorkspace}</option>}
               {workspaces.map((ws) => (
                 <option key={ws.id} value={ws.id}>
                   #{ws.id} — {ws.title}
@@ -164,14 +170,14 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
           <form onSubmit={handleCreateWorkspace} className="flex flex-wrap items-center gap-2">
             <input
               type="text"
-              placeholder="Titre du nouveau marché..."
+              placeholder={t.newTitlePlaceholder}
               value={newTitle}
               onChange={(e) => setNewTitle(e.target.value)}
               className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs"
             />
             <input
               type="text"
-              placeholder="Acheteur public (optionnel)"
+              placeholder={t.newBuyerPlaceholder}
               value={newBuyer}
               onChange={(e) => setNewBuyer(e.target.value)}
               className="rounded-lg border border-slate-300 px-3 py-1.5 text-xs"
@@ -181,7 +187,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
               className="inline-flex items-center gap-1 rounded-lg bg-slate-900 px-3 py-1.5 text-xs font-semibold text-white hover:bg-slate-800"
             >
               <Plus className="h-3.5 w-3.5" />
-              Nouveau dossier
+              {t.newWorkspaceBtn}
             </button>
           </form>
         </div>
@@ -189,19 +195,18 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
 
       {current ? (
         <>
-          {/* DCE upload & extracted RC metadata */}
           <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
             <div className="flex flex-wrap items-start justify-between gap-4">
               <div>
                 <h2 className="text-lg font-bold text-slate-900">{current.title}</h2>
                 <p className="text-xs text-slate-500">
-                  Acheteur : {current.buyer_name || "Non précisé"} • Date limite RC :{" "}
+                  {t.buyer} : {current.buyer_name || t.unspecified} • {t.rcDeadlineLabel}{" "}
                   <strong className="text-slate-800">
-                    {current.submission_deadline || "En attente de DCE"}
+                    {current.submission_deadline || t.awaitingDce}
                   </strong>
                   {current.site_visit_required && (
                     <span className="ml-2 rounded bg-rose-100 px-2 py-0.5 font-semibold text-rose-800">
-                      Visite sur site obligatoire
+                      {t.siteVisitRequired}
                     </span>
                   )}
                 </p>
@@ -210,7 +215,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
               <div className="flex flex-wrap items-center gap-2">
                 <label className="inline-flex cursor-pointer items-center gap-1.5 rounded-lg border border-blue-200 bg-blue-50 px-3 py-1.5 text-xs font-semibold text-blue-800 hover:bg-blue-100">
                   <FileUp className="h-3.5 w-3.5" />
-                  {uploading ? "Analyse en cours..." : "Importer DCE (.zip/.pdf/.docx/.xlsx)"}
+                  {uploading ? t.analyzingDce : t.uploadDce}
                   <input
                     type="file"
                     multiple
@@ -227,7 +232,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
                   className="inline-flex items-center gap-1.5 rounded-lg border border-slate-300 px-3 py-1.5 text-xs font-semibold text-slate-700 hover:bg-slate-50"
                 >
                   <Save className="h-3.5 w-3.5" />
-                  Sauvegarder
+                  {t.save}
                 </button>
 
                 <button
@@ -236,7 +241,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
                   className="inline-flex items-center gap-1.5 rounded-lg bg-emerald-700 px-3.5 py-1.5 text-xs font-semibold text-white hover:bg-emerald-800"
                 >
                   <Download className="h-3.5 w-3.5" />
-                  Exporter .docx
+                  {t.exportDocx}
                 </button>
               </div>
             </div>
@@ -275,6 +280,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
           </div>
 
           <ComplianceChecklist
+            lang={lang}
             checklist={current.compliance_checklist}
             flaggedFinancialLegal={current.flagged_financial_legal}
             onToggleItem={handleToggleChecklist}
@@ -282,16 +288,17 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
 
           <div className="space-y-4">
             <h3 className="text-base font-semibold text-slate-900">
-              Éditeur côte à côte — Mémoire Technique ({current.memoire_sections.length} sections)
+              {t.editorHeading} ({current.memoire_sections.length})
             </h3>
             {current.memoire_sections.length === 0 ? (
               <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
-                Importez un DCE ci-dessus pour extraire les critères du RC/CCTP et générer le plan du mémoire technique.
+                {t.emptySections}
               </div>
             ) : (
               current.memoire_sections.map((sec) => (
                 <SectionEditor
                   key={sec.id}
+                  lang={lang}
                   section={sec}
                   regenerating={regeneratingId === sec.id}
                   onChangeDraft={handleChangeDraft}
@@ -303,8 +310,7 @@ export function WorkspaceView({ activeWorkspaceId, onSelectWorkspace }: Props) {
         </>
       ) : (
         <div className="rounded-xl border border-dashed border-slate-300 bg-white p-8 text-center text-sm text-slate-500">
-          Créez un dossier ci-dessus ou sélectionnez un avis depuis l&apos;onglet{" "}
-          <strong>Veille BOAMP</strong>.
+          {t.emptyWorkspaceHint}
         </div>
       )}
     </div>

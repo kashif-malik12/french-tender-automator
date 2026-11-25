@@ -2,8 +2,10 @@
 
 import { AlertTriangle, CheckSquare, Square } from "lucide-react";
 import type { ChecklistItem } from "@/lib/api";
+import { UI_TEXT, type Lang } from "@/lib/i18n";
 
 interface Props {
+  lang: Lang;
   checklist: ChecklistItem[];
   flaggedFinancialLegal: Array<{
     file: string;
@@ -16,21 +18,19 @@ interface Props {
 }
 
 export function ComplianceChecklist({
+  lang,
   checklist,
   flaggedFinancialLegal,
   onToggleItem,
 }: Props) {
+  const t = UI_TEXT[lang];
   return (
     <div className="grid gap-4 lg:grid-cols-2">
       <div className="rounded-xl border border-slate-200 bg-white p-4 shadow-sm">
-        <h4 className="text-sm font-semibold text-slate-900">
-          Matrice de conformité & pièces requises
-        </h4>
+        <h4 className="text-sm font-semibold text-slate-900">{t.checklistTitle}</h4>
         <div className="mt-3 space-y-2">
           {checklist.length === 0 ? (
-            <p className="text-xs text-slate-500">
-              Importez un DCE (.zip, .pdf, .docx, .xlsx) pour générer la checklist.
-            </p>
+            <p className="text-xs text-slate-500">{t.emptyChecklist}</p>
           ) : (
             checklist.map((item) => (
               <button
@@ -58,7 +58,7 @@ export function ComplianceChecklist({
                     </span>
                     {item.human_review_required && (
                       <span className="rounded bg-amber-100 px-1.5 py-0.5 text-[10px] font-semibold text-amber-800">
-                        Validation humaine
+                        {t.humanValidation}
                       </span>
                     )}
                   </div>
@@ -75,18 +75,12 @@ export function ComplianceChecklist({
       <div className="rounded-xl border border-amber-200 bg-amber-50/60 p-4 shadow-sm">
         <div className="flex items-center gap-2 text-amber-900">
           <AlertTriangle className="h-4 w-4" />
-          <h4 className="text-sm font-semibold">
-            Clauses financières & juridiques signalées (CCAP / BPU / DPGF)
-          </h4>
+          <h4 className="text-sm font-semibold">{t.flaggedTitle}</h4>
         </div>
-        <p className="mt-1 text-xs text-amber-800">
-          Garde-fou strict : aucun prix contractuel n&apos;est généré automatiquement.
-        </p>
+        <p className="mt-1 text-xs text-amber-800">{t.flaggedSubtitle}</p>
         <div className="mt-3 space-y-2">
           {flaggedFinancialLegal.length === 0 ? (
-            <p className="text-xs text-amber-700">
-              Aucun fichier CCAP/BPU/DPGF détecté dans cet espace pour le moment.
-            </p>
+            <p className="text-xs text-amber-700">{t.emptyFlagged}</p>
           ) : (
             flaggedFinancialLegal.map((flag, idx) => (
               <div
@@ -100,7 +94,9 @@ export function ComplianceChecklist({
                   </span>
                 </div>
                 <p className="mt-1 text-slate-700">{flag.summary}</p>
-                <p className="mt-1 font-medium text-amber-900">Action : {flag.action}</p>
+                <p className="mt-1 font-medium text-amber-900">
+                  {t.actionLabel} {flag.action}
+                </p>
               </div>
             ))
           )}

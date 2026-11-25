@@ -2,8 +2,10 @@
 
 import { RefreshCw, BookOpen } from "lucide-react";
 import type { MemoireSection } from "@/lib/api";
+import { UI_TEXT, type Lang } from "@/lib/i18n";
 
 interface Props {
+  lang: Lang;
   section: MemoireSection;
   regenerating: boolean;
   onChangeDraft: (sectionId: string, nextDraft: string) => void;
@@ -11,11 +13,13 @@ interface Props {
 }
 
 export function SectionEditor({
+  lang,
   section,
   regenerating,
   onChangeDraft,
   onRegenerate,
 }: Props) {
+  const t = UI_TEXT[lang];
   const placeholderCount = (
     section.draft_markdown.match(/\[À COMPLÉTER PAR L'ÉQUIPE/g) || []
   ).length;
@@ -32,7 +36,7 @@ export function SectionEditor({
         <div className="flex items-center gap-2">
           {placeholderCount > 0 && (
             <span className="rounded-full bg-rose-100 px-2.5 py-0.5 text-[11px] font-semibold text-rose-800">
-              {placeholderCount} champ(s) [À COMPLÉTER PAR L&apos;ÉQUIPE]
+              {placeholderCount} {t.fieldsToComplete}
             </span>
           )}
           <button
@@ -42,17 +46,16 @@ export function SectionEditor({
             className="inline-flex items-center gap-1.5 rounded-lg border border-slate-200 px-3 py-1.5 text-xs font-medium text-slate-700 hover:bg-slate-50 disabled:opacity-50"
           >
             <RefreshCw className={`h-3.5 w-3.5 ${regenerating ? "animate-spin" : ""}`} />
-            Régénérer via RAG
+            {t.regenerateRag}
           </button>
         </div>
       </div>
 
       <div className="mt-4 grid gap-4 lg:grid-cols-12">
-        {/* Left: CCTP requirement + RAG citations */}
         <div className="space-y-3 lg:col-span-5">
           <div className="rounded-lg border border-blue-100 bg-blue-50/70 p-3">
             <div className="text-[11px] font-semibold uppercase tracking-wider text-blue-800">
-              Exigence du CCTP
+              {t.cctpRequirement}
             </div>
             <p className="mt-1 whitespace-pre-wrap text-xs text-slate-800">
               {section.cctp_requirement}
@@ -62,13 +65,11 @@ export function SectionEditor({
           <div className="rounded-lg border border-slate-200 bg-slate-50 p-3">
             <div className="flex items-center gap-1.5 text-[11px] font-semibold uppercase tracking-wider text-slate-700">
               <BookOpen className="h-3.5 w-3.5" />
-              Citations Base de Connaissances ({section.citations?.length || 0})
+              {t.kbCitations} ({section.citations?.length || 0})
             </div>
             <div className="mt-2 space-y-2">
-              {(!section.citations || section.citations.length === 0) ? (
-                <p className="text-xs text-slate-500">
-                  Aucune citation trouvée. Ajoutez vos mémoires passés dans la Base de Connaissances.
-                </p>
+              {!section.citations || section.citations.length === 0 ? (
+                <p className="text-xs text-slate-500">{t.noCitations}</p>
               ) : (
                 section.citations.map((cit, i) => (
                   <div key={i} className="rounded border border-slate-200 bg-white p-2 text-xs">
@@ -88,10 +89,9 @@ export function SectionEditor({
           </div>
         </div>
 
-        {/* Right: Editable French draft */}
         <div className="lg:col-span-7">
           <label className="mb-1 block text-[11px] font-semibold uppercase tracking-wider text-slate-600">
-            Brouillon du Mémoire Technique (éditable)
+            {t.draftLabel}
           </label>
           <textarea
             value={section.draft_markdown}

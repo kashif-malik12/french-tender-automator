@@ -16,13 +16,54 @@ import {
   type TenderNotice,
   type TenderWorkspace,
 } from "@/lib/api";
+import { UI_TEXT, type Lang } from "@/lib/i18n";
 import { KnowledgeBaseView } from "@/components/KnowledgeBaseView";
 import { VeilleFeed } from "@/components/VeilleFeed";
 import { WorkspaceView } from "@/components/WorkspaceView";
 
 type Tab = "veille" | "workspace" | "kb";
 
+function LangToggle({
+  lang,
+  onChange,
+}: {
+  lang: Lang;
+  onChange: (next: Lang) => void;
+}) {
+  return (
+    <div
+      className="inline-flex overflow-hidden rounded-lg border border-slate-200 bg-slate-100 text-xs font-bold"
+      role="group"
+      aria-label="Language switch"
+    >
+      <button
+        type="button"
+        onClick={() => onChange("fr")}
+        className={`px-2.5 py-1 transition ${
+          lang === "fr"
+            ? "bg-blue-700 text-white"
+            : "text-slate-600 hover:text-slate-900"
+        }`}
+      >
+        FR
+      </button>
+      <button
+        type="button"
+        onClick={() => onChange("en")}
+        className={`px-2.5 py-1 transition ${
+          lang === "en"
+            ? "bg-blue-700 text-white"
+            : "text-slate-600 hover:text-slate-900"
+        }`}
+      >
+        EN
+      </button>
+    </div>
+  );
+}
+
 export default function HomePage() {
+  const [lang, setLang] = useState<Lang>("fr");
   const [authenticated, setAuthenticated] = useState(false);
   const [username, setUsername] = useState("admin");
   const [password, setPassword] = useState("");
@@ -30,11 +71,22 @@ export default function HomePage() {
   const [activeTab, setActiveTab] = useState<Tab>("veille");
   const [activeWorkspaceId, setActiveWorkspaceId] = useState<number | null>(null);
 
+  const t = UI_TEXT[lang];
+
   useEffect(() => {
     if (getStoredToken()) {
       setAuthenticated(true);
     }
+    const savedLang = localStorage.getItem("fta_lang");
+    if (savedLang === "en" || savedLang === "fr") {
+      setLang(savedLang);
+    }
   }, []);
+
+  function handleChangeLang(next: Lang) {
+    setLang(next);
+    localStorage.setItem("fta_lang", next);
+  }
 
   async function handleLogin(e: React.FormEvent) {
     e.preventDefault();
@@ -48,7 +100,7 @@ export default function HomePage() {
       setAuthenticated(true);
       setPassword("");
     } catch {
-      setLoginError("Identifiants incorrects.");
+      setLoginError(t.badCredentials);
     }
   }
 
@@ -78,27 +130,27 @@ export default function HomePage() {
           onSubmit={handleLogin}
           className="w-full max-w-md rounded-2xl border border-slate-700 bg-white p-8 shadow-xl"
         >
-          <div className="flex items-center gap-2 text-blue-700">
-            <Lock className="h-5 w-5" />
-            <span className="text-xs font-bold uppercase tracking-wider">
-              Accès protégé
-            </span>
+          <div className="flex items-center justify-between gap-2">
+            <div className="flex items-center gap-2 text-blue-700">
+              <Lock className="h-5 w-5" />
+              <span className="text-xs font-bold uppercase tracking-wider">
+                {t.protectedAccess}
+              </span>
+            </div>
+            <LangToggle lang={lang} onChange={handleChangeLang} />
           </div>
           <h1 className="mt-2 text-2xl font-bold text-slate-900">
             Marchés Publics AI
           </h1>
-          <p className="mt-1 text-sm text-slate-500">
-            Veille BOAMP, Analyse DCE & Mémoires Techniques
-          </p>
+          <p className="mt-1 text-sm text-slate-500">{t.loginSubtitle}</p>
 
-            <div className="mt-6 space-y-4">
+          <div className="mt-6 space-y-4">
             <div>
               <label className="block text-xs font-semibold text-slate-700">
-                Identifiant
+                {t.username}
               </label>
               <input
                 type="text"
-                autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -107,11 +159,10 @@ export default function HomePage() {
             </div>
             <div>
               <label className="block text-xs font-semibold text-slate-700">
-                Mot de passe
+                {t.password}
               </label>
               <input
                 type="password"
-                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -127,7 +178,7 @@ export default function HomePage() {
               type="submit"
               className="w-full rounded-lg bg-blue-700 py-2.5 text-sm font-semibold text-white hover:bg-blue-800"
             >
-              Se connecter
+              {t.signIn}
             </button>
           </div>
         </form>
@@ -136,131 +187,93 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 pb-20 sm:pb-0">
-      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
+    <div className="min-h-screen bg-slate-50">
+      <header className="border-b border-slate-200 bg-white">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3">
           <div>
-            <h1 className="text-base sm:text-lg font-bold text-slate-900">
-              TRADISTER SASU — Veille Marchés Publics France & UE
-            </h1>
-            <p className="text-[11px] sm:text-xs text-slate-500">
-              BOAMP (France) • TED Europa (UE) • Analyse DCE • RAG pgvector • Export Word (.docx)
-            </p>
+            <h1 className="text-lg font-bold text-slate-900">{t.appTitle}</h1>
+            <p className="text-xs text-slate-500">{t.appSubtitle}</p>
           </div>
 
-          <div className="flex items-center gap-2">
-            <div className="hidden sm:flex items-center gap-2">
-              <button
-                type="button"
-                onClick={() => setActiveTab("veille")}
-                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                  activeTab === "veille"
-                    ? "bg-blue-700 text-white"
-                    : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                <Radar className="h-4 w-4" />
-                Veille France & UE
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("workspace")}
-                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                  activeTab === "workspace"
-                    ? "bg-blue-700 text-white"
-                    : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                <FileText className="h-4 w-4" />
-                Espace DCE & Mémoire
-              </button>
-              <button
-                type="button"
-                onClick={() => setActiveTab("kb")}
-                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                  activeTab === "kb"
-                    ? "bg-blue-700 text-white"
-                    : "text-slate-600 hover:bg-slate-100"
-                }`}
-              >
-                <Database className="h-4 w-4" />
-                Base de Connaissances
-              </button>
+          <div className="flex flex-wrap items-center gap-2">
+            <button
+              type="button"
+              onClick={() => setActiveTab("veille")}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                activeTab === "veille"
+                  ? "bg-blue-700 text-white"
+                  : "text-slate-600 hover:bg-slate-100"
+              }`}
+            >
+              <Radar className="h-4 w-4" />
+              {t.tabVeille}
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("workspace")}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                activeTab === "workspace"
+                  ? "bg-blue-700 text-white"
+                  : "text-slate-600 hover:bg-slate-100"
+              }`}
+            >
+              <FileText className="h-4 w-4" />
+              {t.tabWorkspace}
+            </button>
+            <button
+              type="button"
+              onClick={() => setActiveTab("kb")}
+              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                activeTab === "kb"
+                  ? "bg-blue-700 text-white"
+                  : "text-slate-600 hover:bg-slate-100"
+              }`}
+            >
+              <Database className="h-4 w-4" />
+              {t.tabKb}
+            </button>
+
+            <div className="ml-1">
+              <LangToggle lang={lang} onChange={handleChangeLang} />
             </div>
+
             <button
               type="button"
               onClick={handleLogout}
               className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100"
             >
               <LogOut className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">Déconnexion</span>
+              {t.logout}
             </button>
           </div>
         </div>
       </header>
 
-      {/* Human-in-the-Loop Operational Guardrail Banner */}
       <div className="border-b border-amber-200 bg-amber-50">
         <div className="mx-auto flex max-w-7xl items-center gap-2.5 px-4 py-2 text-xs text-amber-900">
           <ShieldAlert className="h-4 w-4 shrink-0 text-amber-700" />
           <span>
-            <strong>Contrôle humain obligatoire :</strong> Vérifiez systématiquement les prix du{" "}
-            <strong>BPU/DPGF</strong>, joignez vos{" "}
-            <strong>attestations fiscales et sociales à jour</strong>, et réalisez la{" "}
-            <strong>signature électronique (RGS / eIDAS)</strong> ainsi que le dépôt final
-            manuellement sur le profil acheteur (PLACE, Maximilien, AWS).
+            <strong>{t.guardrailLead}</strong> {t.guardrailBody}
           </span>
         </div>
       </div>
 
-      <main className="mx-auto max-w-7xl px-4 py-5 sm:py-6">
+      <main className="mx-auto max-w-7xl px-4 py-6">
         {activeTab === "veille" && (
-          <VeilleFeed onOpenWorkspaceForTender={handleOpenWorkspaceForTender} />
+          <VeilleFeed
+            lang={lang}
+            onOpenWorkspaceForTender={handleOpenWorkspaceForTender}
+          />
         )}
         {activeTab === "workspace" && (
           <WorkspaceView
+            lang={lang}
             activeWorkspaceId={activeWorkspaceId}
             onSelectWorkspace={setActiveWorkspaceId}
           />
         )}
-        {activeTab === "kb" && <KnowledgeBaseView />}
+        {activeTab === "kb" && <KnowledgeBaseView lang={lang} />}
       </main>
-
-      {/* Mobile PWA Bottom Navigation */}
-      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur sm:hidden">
-        <div className="grid grid-cols-3 text-center">
-          <button
-            type="button"
-            onClick={() => setActiveTab("veille")}
-            className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold ${
-              activeTab === "veille" ? "text-blue-700" : "text-slate-500"
-            }`}
-          >
-            <Radar className="h-5 w-5" />
-            Veille FR/UE
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("workspace")}
-            className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold ${
-              activeTab === "workspace" ? "text-blue-700" : "text-slate-500"
-            }`}
-          >
-            <FileText className="h-5 w-5" />
-            Espace DCE
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveTab("kb")}
-            className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold ${
-              activeTab === "kb" ? "text-blue-700" : "text-slate-500"
-            }`}
-          >
-            <Database className="h-5 w-5" />
-            Base RAG
-          </button>
-        </div>
-      </nav>
     </div>
   );
 }

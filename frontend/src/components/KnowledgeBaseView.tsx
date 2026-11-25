@@ -3,16 +3,28 @@
 import { useEffect, useState } from "react";
 import { Search, Trash2, Upload } from "lucide-react";
 import { apiFetch, type KnowledgeDocument } from "@/lib/api";
+import { UI_TEXT, type Lang } from "@/lib/i18n";
 
-const CATEGORIES = [
-  { value: "methodology", label: "Méthodologie & Mémoires gagnants" },
-  { value: "team", label: "Équipe & CV" },
-  { value: "equipment", label: "Moyens matériels & techniques" },
-  { value: "references", label: "Références & Attestations" },
-  { value: "rse_environment", label: "RSE, Environnement, ISO/RGE/MASE" },
-];
+const CATEGORY_LABELS: Record<Lang, Array<{ value: string; label: string }>> = {
+  fr: [
+    { value: "methodology", label: "Méthodologie & Mémoires gagnants" },
+    { value: "team", label: "Équipe & CV" },
+    { value: "equipment", label: "Moyens matériels & techniques" },
+    { value: "references", label: "Références & Attestations" },
+    { value: "rse_environment", label: "RSE, Environnement, ISO/RGE/MASE" },
+  ],
+  en: [
+    { value: "methodology", label: "Methodology & Winning Proposals" },
+    { value: "team", label: "Team & CVs" },
+    { value: "equipment", label: "Equipment & Technical Means" },
+    { value: "references", label: "References & Certificates" },
+    { value: "rse_environment", label: "CSR, Environment, ISO/RGE/MASE" },
+  ],
+};
 
-export function KnowledgeBaseView() {
+export function KnowledgeBaseView({ lang }: { lang: Lang }) {
+  const t = UI_TEXT[lang];
+  const categories = CATEGORY_LABELS[lang];
   const [docs, setDocs] = useState<KnowledgeDocument[]>([]);
   const [title, setTitle] = useState("");
   const [category, setCategory] = useState("methodology");
@@ -89,16 +101,12 @@ export function KnowledgeBaseView() {
         onSubmit={handleUpload}
         className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm"
       >
-        <h2 className="text-base font-semibold text-slate-900">
-          Importer un document dans la Base de Connaissances (pgvector)
-        </h2>
-        <p className="mt-1 text-xs text-slate-500">
-          Stockage persistant dans le volume Docker <code>/app/data/knowledge_base</code> — jamais suivi par Git.
-        </p>
+        <h2 className="text-base font-semibold text-slate-900">{t.kbUploadTitle}</h2>
+        <p className="mt-1 text-xs text-slate-500">{t.kbUploadSubtitle}</p>
         <div className="mt-4 grid gap-3 md:grid-cols-4">
           <input
             type="text"
-            placeholder="Titre (ex: Mémoire Cloud 2025)"
+            placeholder={t.kbTitlePlaceholder}
             value={title}
             onChange={(e) => setTitle(e.target.value)}
             className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
@@ -108,7 +116,7 @@ export function KnowledgeBaseView() {
             onChange={(e) => setCategory(e.target.value)}
             className="rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
           >
-            {CATEGORIES.map((c) => (
+            {categories.map((c) => (
               <option key={c.value} value={c.value}>
                 {c.label}
               </option>
@@ -126,7 +134,7 @@ export function KnowledgeBaseView() {
             className="inline-flex items-center justify-center gap-1.5 rounded-lg bg-blue-700 px-4 py-1.5 text-xs font-semibold text-white hover:bg-blue-800 disabled:opacity-50"
           >
             <Upload className="h-3.5 w-3.5" />
-            {uploading ? "Indexation..." : "Indexer le document"}
+            {uploading ? t.kbIndexing : t.kbIndexBtn}
           </button>
         </div>
       </form>
@@ -135,7 +143,7 @@ export function KnowledgeBaseView() {
         <form onSubmit={handleSearch} className="flex flex-wrap gap-2">
           <input
             type="text"
-            placeholder="Tester la recherche sémantique RAG (ex: continuité de service PRA/PCA)..."
+            placeholder={t.kbSearchPlaceholder}
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             className="flex-1 min-w-[240px] rounded-lg border border-slate-300 px-3 py-1.5 text-sm"
@@ -145,7 +153,7 @@ export function KnowledgeBaseView() {
             className="inline-flex items-center gap-1.5 rounded-lg bg-slate-900 px-4 py-1.5 text-xs font-semibold text-white hover:bg-slate-800"
           >
             <Search className="h-3.5 w-3.5" />
-            Rechercher
+            {t.kbSearchBtn}
           </button>
         </form>
 
@@ -157,7 +165,9 @@ export function KnowledgeBaseView() {
                   <span>
                     {h.document_title} ({h.category})
                   </span>
-                  <span className="text-blue-700">Similarité : {(h.similarity * 100).toFixed(1)}%</span>
+                  <span className="text-blue-700">
+                    {t.kbSimilarity} {(h.similarity * 100).toFixed(1)}%
+                  </span>
                 </div>
                 <p className="mt-1 text-slate-600">{h.content}</p>
               </div>
@@ -168,11 +178,11 @@ export function KnowledgeBaseView() {
 
       <div className="rounded-xl border border-slate-200 bg-white p-5 shadow-sm">
         <h3 className="text-sm font-semibold text-slate-900">
-          Documents indexés ({docs.length})
+          {t.kbIndexedDocs} ({docs.length})
         </h3>
         <div className="mt-3 divide-y divide-slate-100">
           {docs.length === 0 ? (
-            <p className="py-4 text-xs text-slate-500">Aucun document indexé pour le moment.</p>
+            <p className="py-4 text-xs text-slate-500">{t.kbEmptyDocs}</p>
           ) : (
             docs.map((d) => (
               <div key={d.id} className="flex items-center justify-between py-2.5 text-xs">
@@ -191,7 +201,7 @@ export function KnowledgeBaseView() {
                   className="inline-flex items-center gap-1 rounded px-2 py-1 text-rose-600 hover:bg-rose-50"
                 >
                   <Trash2 className="h-3.5 w-3.5" />
-                  Supprimer
+                  {t.deleteBtn}
                 </button>
               </div>
             ))
