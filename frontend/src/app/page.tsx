@@ -77,9 +77,9 @@ export default function HomePage() {
     if (getStoredToken()) {
       setAuthenticated(true);
     }
-    const savedLang = localStorage.getItem("fta_lang");
-    if (savedLang === "en" || savedLang === "fr") {
-      setLang(savedLang);
+    const saved = localStorage.getItem("fta_lang");
+    if (saved === "en" || saved === "fr") {
+      setLang(saved);
     }
   }, []);
 
@@ -140,7 +140,7 @@ export default function HomePage() {
             <LangToggle lang={lang} onChange={handleChangeLang} />
           </div>
           <h1 className="mt-2 text-2xl font-bold text-slate-900">
-            Marchés Publics AI
+            TRADISTER AO
           </h1>
           <p className="mt-1 text-sm text-slate-500">{t.loginSubtitle}</p>
 
@@ -151,6 +151,7 @@ export default function HomePage() {
               </label>
               <input
                 type="text"
+                autoComplete="username"
                 value={username}
                 onChange={(e) => setUsername(e.target.value)}
                 required
@@ -163,6 +164,7 @@ export default function HomePage() {
               </label>
               <input
                 type="password"
+                autoComplete="current-password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -187,55 +189,57 @@ export default function HomePage() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
-        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-4 px-4 py-3">
+    <div className="min-h-screen bg-slate-50 pb-20 sm:pb-0">
+      <header className="sticky top-0 z-30 border-b border-slate-200 bg-white/95 backdrop-blur">
+        <div className="mx-auto flex max-w-7xl flex-wrap items-center justify-between gap-3 px-4 py-3">
           <div>
-            <h1 className="text-lg font-bold text-slate-900">{t.appTitle}</h1>
-            <p className="text-xs text-slate-500">{t.appSubtitle}</p>
+            <h1 className="text-base sm:text-lg font-bold text-slate-900">
+              {t.appTitle}
+            </h1>
+            <p className="text-[11px] sm:text-xs text-slate-500">{t.appSubtitle}</p>
           </div>
 
-          <div className="flex flex-wrap items-center gap-2">
-            <button
-              type="button"
-              onClick={() => setActiveTab("veille")}
-              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                activeTab === "veille"
-                  ? "bg-blue-700 text-white"
-                  : "text-slate-600 hover:bg-slate-100"
-              }`}
-            >
-              <Radar className="h-4 w-4" />
-              {t.tabVeille}
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("workspace")}
-              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                activeTab === "workspace"
-                  ? "bg-blue-700 text-white"
-                  : "text-slate-600 hover:bg-slate-100"
-              }`}
-            >
-              <FileText className="h-4 w-4" />
-              {t.tabWorkspace}
-            </button>
-            <button
-              type="button"
-              onClick={() => setActiveTab("kb")}
-              className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
-                activeTab === "kb"
-                  ? "bg-blue-700 text-white"
-                  : "text-slate-600 hover:bg-slate-100"
-              }`}
-            >
-              <Database className="h-4 w-4" />
-              {t.tabKb}
-            </button>
-
-            <div className="ml-1">
-              <LangToggle lang={lang} onChange={handleChangeLang} />
+          <div className="flex items-center gap-2">
+            <div className="hidden sm:flex items-center gap-2">
+              <button
+                type="button"
+                onClick={() => setActiveTab("veille")}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                  activeTab === "veille"
+                    ? "bg-blue-700 text-white"
+                    : "text-slate-600 hover:bg-slate-100"
+                }`}
+              >
+                <Radar className="h-4 w-4" />
+                {t.tabVeille}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("workspace")}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                  activeTab === "workspace"
+                    ? "bg-blue-700 text-white"
+                    : "text-slate-600 hover:bg-slate-100"
+                }`}
+              >
+                <FileText className="h-4 w-4" />
+                {t.tabWorkspace}
+              </button>
+              <button
+                type="button"
+                onClick={() => setActiveTab("kb")}
+                className={`inline-flex items-center gap-1.5 rounded-lg px-3 py-1.5 text-xs font-semibold ${
+                  activeTab === "kb"
+                    ? "bg-blue-700 text-white"
+                    : "text-slate-600 hover:bg-slate-100"
+                }`}
+              >
+                <Database className="h-4 w-4" />
+                {t.tabKb}
+              </button>
             </div>
+
+            <LangToggle lang={lang} onChange={handleChangeLang} />
 
             <button
               type="button"
@@ -243,12 +247,13 @@ export default function HomePage() {
               className="inline-flex items-center gap-1 rounded-lg border border-slate-200 px-2.5 py-1.5 text-xs font-medium text-slate-600 hover:bg-slate-100"
             >
               <LogOut className="h-3.5 w-3.5" />
-              {t.logout}
+              <span className="hidden sm:inline">{t.logout}</span>
             </button>
           </div>
         </div>
       </header>
 
+      {/* Human-in-the-Loop Operational Guardrail Banner */}
       <div className="border-b border-amber-200 bg-amber-50">
         <div className="mx-auto flex max-w-7xl items-center gap-2.5 px-4 py-2 text-xs text-amber-900">
           <ShieldAlert className="h-4 w-4 shrink-0 text-amber-700" />
@@ -258,7 +263,7 @@ export default function HomePage() {
         </div>
       </div>
 
-      <main className="mx-auto max-w-7xl px-4 py-6">
+      <main className="mx-auto max-w-7xl px-4 py-5 sm:py-6">
         {activeTab === "veille" && (
           <VeilleFeed
             lang={lang}
@@ -274,6 +279,42 @@ export default function HomePage() {
         )}
         {activeTab === "kb" && <KnowledgeBaseView lang={lang} />}
       </main>
+
+      {/* Mobile PWA Bottom Navigation */}
+      <nav className="fixed inset-x-0 bottom-0 z-40 border-t border-slate-200 bg-white/95 backdrop-blur sm:hidden">
+        <div className="grid grid-cols-3 text-center">
+          <button
+            type="button"
+            onClick={() => setActiveTab("veille")}
+            className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold ${
+              activeTab === "veille" ? "text-blue-700" : "text-slate-500"
+            }`}
+          >
+            <Radar className="h-5 w-5" />
+            {t.mobVeille}
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("workspace")}
+            className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold ${
+              activeTab === "workspace" ? "text-blue-700" : "text-slate-500"
+            }`}
+          >
+            <FileText className="h-5 w-5" />
+            {t.mobWorkspace}
+          </button>
+          <button
+            type="button"
+            onClick={() => setActiveTab("kb")}
+            className={`flex flex-col items-center justify-center gap-1 py-2.5 text-[11px] font-semibold ${
+              activeTab === "kb" ? "text-blue-700" : "text-slate-500"
+            }`}
+          >
+            <Database className="h-5 w-5" />
+            {t.mobKb}
+          </button>
+        </div>
+      </nav>
     </div>
   );
 }

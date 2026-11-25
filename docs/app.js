@@ -27,13 +27,154 @@
     max_target_amount: 500000,
   };
 
+  const I18N = {
+    fr: {
+      pageTitle: "TRADISTER SASU — Veille Marchés Publics FR & UE (PWA)",
+      installText:
+        "<strong>App mobile prête :</strong> installez <strong>TRADISTER AO</strong> sur votre téléphone.",
+      installBtn: "Installer",
+      iosInstall:
+        "Sur iPhone/iPad : appuyez sur <strong>Partager</strong> puis <strong>Sur l'écran d'accueil</strong>.",
+      brandTitle: "TRADISTER SASU — Marchés Publics",
+      brandSub: "France (BOAMP) &amp; Union Européenne (TED)",
+      tabTenders: "Veille FR &amp; UE",
+      tabProfile: "Profil Tradister",
+      tabAbout: "Stack &amp; VPS",
+      mobTenders: "FR &amp; UE",
+      presidentLabel: "Présidente :",
+      vatLabel: "TVA",
+      refreshBoampBtn: "↻ Actualiser BOAMP (Direct)",
+      refreshingBoamp: "Interrogation BOAMP...",
+      kpiTotal: "Marchés pertinents",
+      kpiFr: "France (BOAMP + TED)",
+      kpiEu: "Union Européenne (TED)",
+      kpiAvg: "Adéquation moy. / Urgents",
+      regionAll: "France puis UE",
+      regionFr: "France",
+      regionEu: "UE",
+      searchPlaceholder: "Filtrer par mot-clé, acheteur, CPV, pays...",
+      loadingTenders: "Chargement des marchés pertinents France &amp; UE...",
+      profileTitle: "Profil Entreprise Enregistré — TRADISTER SASU",
+      profileSub:
+        "Données vérifiées INSEE / RNE utilisées pour filtrer automatiquement les appels d'offres non pertinents. Vos ajustements sont sauvegardés localement sur votre appareil.",
+      lblCompany: "Entreprise",
+      lblPresident: "Président(e)",
+      lblNaf: "Code NAF / APE",
+      lblDepts: "Départements prioritaires (France)",
+      lblCpvs: "Codes CPV cibles",
+      lblKeywords: "Mots-clés IT / Services Managés (MSP)",
+      lblMinAmt: "Montant cible min (€)",
+      lblMaxAmt: "Montant cible max (€)",
+      saveRecalcBtn: "Enregistrer &amp; Recalculer",
+      resetProfileBtn: "Réinitialiser TRADISTER",
+      aboutTitle: "Architecture Complète (GitHub Pages PWA + Backend Docker VPS)",
+      aboutDesc:
+        "Cette interface GitHub Pages est une PWA mobile connectée aux données ouvertes BOAMP (DILA) et TED Europa. Le dépôt complet inclut également la stack Docker Compose (FastAPI, PostgreSQL + pgvector RAG, Celery, analyseur DCE et export Word <code>.docx</code>).",
+      aboutGuardrail:
+        "<strong>Frontière Human-in-the-Loop :</strong> Aucun chiffrage BPU/DPGF engageant, aucune signature électronique (RGS/eIDAS) et aucun dépôt automatique sur les profils acheteurs (PLACE, Maximilien, AWS) ne sont exécutés automatiquement.",
+      amountUnpublished: "Non publié (MAPA / voir DCE)",
+      amountHt: "HT",
+      buyer: "Acheteur",
+      unspecified: "Non précisé",
+      deadline: "Date limite",
+      toVerify: "À vérifier",
+      targetAmount: "Montant cible",
+      suitability: "Adéquation",
+      viewNotice: "Voir avis",
+      emptyFiltered: "Aucun appel d'offres pertinent ne correspond à ces filtres.",
+      frSectionTitle: "1. Appels d'offres pertinents en France",
+      frSectionSub: "Triés par adéquation TRADISTER SASU puis échéance",
+      euSectionTitle: "2. Appels d'offres pertinents en Union Européenne",
+      euSectionSub: "Source TED Europa • IT / Cloud / Cybersécurité",
+      directModeHint:
+        "Mode direct : cliquez sur « Actualiser BOAMP (Direct) » pour charger les avis français en direct.",
+      profileSavedMsg: "Critères TRADISTER SASU enregistrés et pertinence recalculée.",
+      profileResetMsg: "Profil vérifié TRADISTER SASU restauré.",
+      daysPrefix: "J-",
+    },
+    en: {
+      pageTitle: "TRADISTER SASU — FR & EU Public Tenders Watch (PWA)",
+      installText:
+        "<strong>Mobile app ready:</strong> install <strong>TRADISTER AO</strong> on your phone.",
+      installBtn: "Install",
+      iosInstall:
+        "On iPhone/iPad: tap <strong>Share</strong> then <strong>Add to Home Screen</strong>.",
+      brandTitle: "TRADISTER SASU — Public Tenders",
+      brandSub: "France (BOAMP) &amp; European Union (TED)",
+      tabTenders: "FR &amp; EU Feed",
+      tabProfile: "Tradister Profile",
+      tabAbout: "Stack &amp; VPS",
+      mobTenders: "FR &amp; EU",
+      presidentLabel: "President:",
+      vatLabel: "VAT",
+      refreshBoampBtn: "↻ Refresh BOAMP (Live)",
+      refreshingBoamp: "Querying BOAMP...",
+      kpiTotal: "Relevant tenders",
+      kpiFr: "France (BOAMP + TED)",
+      kpiEu: "European Union (TED)",
+      kpiAvg: "Avg. Fit / Urgent",
+      regionAll: "France then EU",
+      regionFr: "France",
+      regionEu: "EU",
+      searchPlaceholder: "Filter by keyword, buyer, CPV, country...",
+      loadingTenders: "Loading relevant France &amp; EU tenders...",
+      profileTitle: "Registered Company Profile — TRADISTER SASU",
+      profileSub:
+        "Verified INSEE / RNE company data used to automatically filter out irrelevant tenders. Your adjustments are saved locally on your device.",
+      lblCompany: "Company",
+      lblPresident: "President",
+      lblNaf: "NAF / APE Code",
+      lblDepts: "Priority Departments (France)",
+      lblCpvs: "Target CPV Codes",
+      lblKeywords: "IT / Managed Services (MSP) Keywords",
+      lblMinAmt: "Min Target Value (€)",
+      lblMaxAmt: "Max Target Value (€)",
+      saveRecalcBtn: "Save &amp; Recalculate",
+      resetProfileBtn: "Reset TRADISTER",
+      aboutTitle: "Full Architecture (GitHub Pages PWA + Docker VPS Backend)",
+      aboutDesc:
+        "This GitHub Pages interface is a mobile-ready PWA connected to BOAMP (DILA) and TED Europa open data. The full repository also includes the Docker Compose stack (FastAPI, PostgreSQL + pgvector RAG, Celery, DCE analyzer, and Word <code>.docx</code> export).",
+      aboutGuardrail:
+        "<strong>Human-in-the-Loop Boundary:</strong> No binding BPU/DPGF pricing, no electronic signature (RGS/eIDAS), and no automated submission on buyer portals (PLACE, Maximilien, AWS) are ever executed automatically.",
+      amountUnpublished: "Unpublished (MAPA / check DCE)",
+      amountHt: "excl. VAT",
+      buyer: "Buyer",
+      unspecified: "Not specified",
+      deadline: "Deadline",
+      toVerify: "To verify",
+      targetAmount: "Target value",
+      suitability: "Fit Score",
+      viewNotice: "View notice",
+      emptyFiltered: "No relevant tenders match these filters.",
+      frSectionTitle: "1. Relevant Tenders in France",
+      frSectionSub: "Sorted by TRADISTER SASU fit score then deadline",
+      euSectionTitle: "2. Relevant Tenders in the European Union",
+      euSectionSub: "Source: TED Europa • IT / Cloud / Cybersecurity",
+      directModeHint:
+        "Direct mode: click « Refresh BOAMP (Live) » to fetch French tenders live.",
+      profileSavedMsg: "TRADISTER SASU criteria saved and suitability recalculated.",
+      profileResetMsg: "Verified TRADISTER SASU profile restored.",
+      daysPrefix: "D-",
+    },
+  };
+
   const STORAGE_KEY = "tradister_ao_profile_v1";
+  const LANG_KEY = "tradister_ao_lang_v1";
+  let lang = loadLang();
   let profile = loadProfile();
   let allTenders = [];
   let regionFilter = "ALL";
   let minScore = 50;
   let searchQuery = "";
   let deferredInstallPrompt = null;
+
+  function loadLang() {
+    try {
+      const saved = localStorage.getItem(LANG_KEY);
+      if (saved === "en" || saved === "fr") return saved;
+    } catch {}
+    return "fr";
+  }
 
   function loadProfile() {
     try {
@@ -59,8 +200,10 @@
   }
 
   function formatAmount(amt, cur = "EUR") {
-    if (amt == null || amt <= 0) return "Non publié (MAPA / voir DCE)";
-    return `${Math.round(amt).toLocaleString("fr-FR")} ${cur} HT`;
+    const dict = I18N[lang];
+    if (amt == null || amt <= 0) return dict.amountUnpublished;
+    const locale = lang === "fr" ? "fr-FR" : "en-GB";
+    return `${Math.round(amt).toLocaleString(locale)} ${cur} ${dict.amountHt}`;
   }
 
   function computeSuitability(tender) {
@@ -79,38 +222,71 @@
       return { relevant: false, score: 0, summary: [] };
     }
 
+    const isEn = lang === "en";
     let score = 30;
     const reasons = [];
     if (matched4.length || matchedKws.length) {
       score += Math.min(40, 18 + 6 * matchedKws.length + 8 * matched4.length);
       const tags = [...new Set([...matchedKws.slice(0, 3), ...matched4.slice(0, 2)])];
-      reasons.push(`Forte adéquation métier IT/MSP (${tags.join(", ")}).`);
+      reasons.push(
+        isEn
+          ? `Strong IT/MSP domain fit (${tags.join(", ")}).`
+          : `Forte adéquation métier IT/MSP (${tags.join(", ")}).`
+      );
     } else if (matched2.length) {
       score += 22;
-      reasons.push(`Adéquation CPV sectorielle (${matched2.slice(0, 3).join(", ")}).`);
+      reasons.push(
+        isEn
+          ? `Sector CPV match (${matched2.slice(0, 3).join(", ")}).`
+          : `Adéquation CPV sectorielle (${matched2.slice(0, 3).join(", ")}).`
+      );
     } else {
-      reasons.push("Correspondance IT générale — vérifier le périmètre technique.");
+      reasons.push(
+        isEn
+          ? "General IT scope match — verify technical requirements."
+          : "Correspondance IT générale — vérifier le périmètre technique."
+      );
     }
 
     const depts = new Set(profile.target_departments || []);
     if (tender.region === "FR") {
       if (tender.department && depts.has(tender.department)) {
         score += 20;
-        reasons.push(`France — Zone prioritaire (département ${tender.department}, proche Ris-Orangis 91).`);
+        reasons.push(
+          isEn
+            ? `France — Priority area (dept. ${tender.department}, near Ris-Orangis 91).`
+            : `France — Zone prioritaire (département ${tender.department}, proche Ris-Orangis 91).`
+        );
       } else {
         score += 13;
-        reasons.push(`France (département ${tender.department || "national"}) — éligible prestation nationale.`);
+        reasons.push(
+          isEn
+            ? `France (dept. ${tender.department || "national"}) — eligible national delivery.`
+            : `France (département ${tender.department || "national"}) — éligible prestation nationale.`
+        );
       }
     } else {
       if (["BEL", "LUX", "CHE", "MCO"].includes(tender.country)) {
         score += 12;
-        reasons.push(`Union Européenne francophone (${tender.country}) — forte accessibilité.`);
+        reasons.push(
+          isEn
+            ? `French-speaking EU (${tender.country}) — high accessibility.`
+            : `Union Européenne francophone (${tender.country}) — forte accessibilité.`
+        );
       } else if (["IRL", "NLD", "DEU", "ESP", "ITA", "PRT", "AUT", "DNK", "SWE", "FIN"].includes(tender.country)) {
         score += 7;
-        reasons.push(`Union Européenne (${tender.country}) — marché transfrontalier IT/cloud.`);
+        reasons.push(
+          isEn
+            ? `European Union (${tender.country}) — cross-border IT/cloud contract.`
+            : `Union Européenne (${tender.country}) — marché transfrontalier IT/cloud.`
+        );
       } else {
         score += 4;
-        reasons.push(`Union Européenne (${tender.country}) — vérifier exigences linguistiques.`);
+        reasons.push(
+          isEn
+            ? `European Union (${tender.country}) — verify language requirements.`
+            : `Union Européenne (${tender.country}) — vérifier exigences linguistiques.`
+        );
       }
     }
 
@@ -118,21 +294,28 @@
     const maxAmt = Number(profile.max_target_amount || 500000);
     const amt = tender.estimated_amount;
     const cur = tender.currency || "EUR";
-    let amtNote = "Montant non publié (vérifier seuil MAPA / BPU)";
+    const locale = isEn ? "en-GB" : "fr-FR";
+    let amtNote = isEn
+      ? "Value unpublished (check MAPA / BPU)"
+      : "Montant non publié (vérifier seuil MAPA / BPU)";
     if (typeof amt === "number" && amt > 0) {
-      const fmt = `${Math.round(amt).toLocaleString("fr-FR")} ${cur}`;
+      const fmt = `${Math.round(amt).toLocaleString(locale)} ${cur}`;
       if (amt >= minAmt && amt <= maxAmt) {
         score += 10;
-        amtNote = `Montant cible optimal (${fmt})`;
+        amtNote = isEn ? `Optimal target value (${fmt})` : `Montant cible optimal (${fmt})`;
       } else if (amt < minAmt) {
         score += 3;
-        amtNote = `Petit marché (${fmt})`;
+        amtNote = isEn ? `Small contract (${fmt})` : `Petit marché (${fmt})`;
       } else if (amt <= maxAmt * 4) {
         score += 4;
-        amtNote = `Montant élevé (${fmt} — lotissement/GME à vérifier)`;
+        amtNote = isEn
+          ? `High value (${fmt} — check lots/consortium)`
+          : `Montant élevé (${fmt} — lotissement/GME à vérifier)`;
       } else {
         score -= 8;
-        amtNote = `Marché d'envergure (${fmt} — groupement/sous-traitance recommandé)`;
+        amtNote = isEn
+          ? `Large contract (${fmt} — consortium/subcontracting advised)`
+          : `Marché d'envergure (${fmt} — groupement/sous-traitance recommandé)`;
       }
     } else {
       score += 4;
@@ -144,13 +327,25 @@
       if (daysLeft < 0) return { relevant: false, score: 0, summary: [] };
       if (daysLeft >= 10) {
         score += 8;
-        reasons.push(`${amtNote} • Délai confortable (J-${daysLeft}).`);
+        reasons.push(
+          isEn
+            ? `${amtNote} • Comfortable timeline (D-${daysLeft}).`
+            : `${amtNote} • Délai confortable (J-${daysLeft}).`
+        );
       } else {
         score += 2;
-        reasons.push(`${amtNote} • Délai court (J-${daysLeft}).`);
+        reasons.push(
+          isEn
+            ? `${amtNote} • Tight deadline (D-${daysLeft}).`
+            : `${amtNote} • Délai court (J-${daysLeft}).`
+        );
       }
     } else {
-      reasons.push(`${amtNote} • Date limite à confirmer.`);
+      reasons.push(
+        isEn
+          ? `${amtNote} • Deadline to be confirmed.`
+          : `${amtNote} • Date limite à confirmer.`
+      );
     }
 
     return {
@@ -161,11 +356,35 @@
     };
   }
 
+  function applyTranslations() {
+    const dict = I18N[lang] || I18N.fr;
+    document.documentElement.lang = lang;
+    document.title = dict.pageTitle;
+    document.querySelectorAll("[data-i18n]").forEach((el) => {
+      const key = el.getAttribute("data-i18n");
+      if (dict[key]) {
+        el.innerHTML = dict[key];
+      }
+    });
+    const searchEl = document.getElementById("search-input");
+    if (searchEl) searchEl.placeholder = dict.searchPlaceholder;
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.classList.toggle("active", btn.dataset.lang === lang);
+    });
+    renderProfileHeader();
+    renderTenders();
+  }
+
   function renderProfileHeader() {
+    const locale = lang === "fr" ? "fr-FR" : "en-GB";
     document.getElementById("company-name").textContent = profile.name;
     document.getElementById("company-president").textContent = profile.president || "Bisma Kashif";
+    const minStr = Number(profile.min_target_amount || 0).toLocaleString(locale);
+    const maxStr = Number(profile.max_target_amount || 500000).toLocaleString(locale);
     document.getElementById("company-target-line").innerHTML =
-      `Cible montant : <strong>${Number(profile.min_target_amount || 0).toLocaleString("fr-FR")} € – ${Number(profile.max_target_amount || 500000).toLocaleString("fr-FR")} €</strong> • France (priorité IDF/91) puis Union Européenne`;
+      lang === "en"
+        ? `Target value: <strong>${minStr} € – ${maxStr} €</strong> • France (IDF/91 priority) then European Union`
+        : `Cible montant : <strong>${minStr} € – ${maxStr} €</strong> • France (priorité IDF/91) puis Union Européenne`;
 
     document.getElementById("prof-name").value = profile.name || "";
     document.getElementById("prof-president").value = profile.president || "";
@@ -179,12 +398,17 @@
   }
 
   function renderCard(t) {
+    const dict = I18N[lang];
+    const locale = lang === "fr" ? "fr-FR" : "en-GB";
     const score = t.suitability_score ?? 0;
     const scoreClass = score >= 75 ? "score-high" : score >= 55 ? "score-mid" : "score-low";
     const isFr = t.region === "FR";
-    const dlText = t.deadline_date ? new Date(t.deadline_date).toLocaleDateString("fr-FR") : "À vérifier";
-    const jBadge = t.days_remaining != null ? ` (J-${t.days_remaining})` : "";
+    const dlText = t.deadline_date
+      ? new Date(t.deadline_date).toLocaleDateString(locale)
+      : dict.toVerify;
+    const jBadge = t.days_remaining != null ? ` (${dict.daysPrefix}${t.days_remaining})` : "";
     const urgent = t.days_remaining != null && t.days_remaining <= 10;
+    const euLabel = lang === "en" ? "EU" : "UE";
 
     return `
       <article class="tender-card">
@@ -192,25 +416,25 @@
           <div class="tender-main">
             <div class="tender-badges">
               <span class="pill ${isFr ? "pill-blue" : "pill-indigo"}">
-                ${isFr ? "🇫🇷 France" : `🇪🇺 UE (${escapeHtml(t.country)})`} • ${escapeHtml(t.source)}
+                ${isFr ? "🇫🇷 France" : `🇪🇺 ${euLabel} (${escapeHtml(t.country)})`} • ${escapeHtml(t.source)}
               </span>
               <span class="pill pill-gray">${escapeHtml(t.id)}</span>
               ${isFr && t.department ? `<span class="pill pill-blue">Dept. ${escapeHtml(t.department)}</span>` : ""}
               ${(t.cpv_codes || []).slice(0, 2).map((c) => `<span class="pill pill-gray">CPV ${escapeHtml(c)}</span>`).join("")}
             </div>
             <h3 class="tender-title">${escapeHtml(t.title)}</h3>
-            <p class="tender-buyer">Acheteur : <strong>${escapeHtml(t.buyer_name || "Non précisé")}</strong></p>
+            <p class="tender-buyer">${dict.buyer} : <strong>${escapeHtml(t.buyer_name || dict.unspecified)}</strong></p>
             <div class="tender-metrics">
               <span class="metric-chip ${urgent ? "urgent" : ""}">
-                📅 Date limite : <strong>${escapeHtml(dlText)}${escapeHtml(jBadge)}</strong>
+                📅 ${dict.deadline} : <strong>${escapeHtml(dlText)}${escapeHtml(jBadge)}</strong>
               </span>
               <span class="metric-chip amount">
-                💶 Montant cible : <strong>${escapeHtml(formatAmount(t.estimated_amount, t.currency))}</strong>
+                💶 ${dict.targetAmount} : <strong>${escapeHtml(formatAmount(t.estimated_amount, t.currency))}</strong>
               </span>
             </div>
           </div>
           <div class="score-box ${scoreClass}">
-            <div class="score-label">Adéquation</div>
+            <div class="score-label">${dict.suitability}</div>
             <div class="score-num">${score}/100</div>
           </div>
         </div>
@@ -220,13 +444,14 @@
           </ul>` : ""}
         <div class="tender-footer">
           <span class="attribution">${escapeHtml(t.attribution || "")}</span>
-          ${t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm">Voir avis ${escapeHtml(t.source)} ↗</a>` : ""}
+          ${t.url ? `<a href="${escapeHtml(t.url)}" target="_blank" rel="noreferrer" class="btn btn-secondary btn-sm">${dict.viewNotice} ${escapeHtml(t.source)} ↗</a>` : ""}
         </div>
       </article>
     `;
   }
 
   function renderTenders() {
+    const dict = I18N[lang];
     const q = searchQuery.trim().toLowerCase();
     const evaluated = allTenders
       .map((t) => {
@@ -264,7 +489,7 @@
 
     const container = document.getElementById("tenders-container");
     if (!visible.length) {
-      container.innerHTML = `<div class="empty-box">Aucun appel d'offres pertinent ne correspond à ces filtres.</div>`;
+      container.innerHTML = `<div class="empty-box">${dict.emptyFiltered}</div>`;
       return;
     }
 
@@ -272,8 +497,8 @@
     if ((regionFilter === "ALL" || regionFilter === "FR") && fr.length) {
       html += `
         <div class="section-heading">
-          <h2>1. Appels d'offres pertinents en France (${fr.length})</h2>
-          <span class="section-sub">Triés par adéquation TRADISTER SASU puis échéance</span>
+          <h2>${dict.frSectionTitle} (${fr.length})</h2>
+          <span class="section-sub">${dict.frSectionSub}</span>
         </div>
         ${fr.map(renderCard).join("")}
       `;
@@ -281,8 +506,8 @@
     if ((regionFilter === "ALL" || regionFilter === "EU") && eu.length) {
       html += `
         <div class="section-heading eu">
-          <h2>2. Appels d'offres pertinents en Union Européenne (${eu.length})</h2>
-          <span class="section-sub">Source TED Europa • IT / Cloud / Cybersécurité</span>
+          <h2>${dict.euSectionTitle} (${eu.length})</h2>
+          <span class="section-sub">${dict.euSectionSub}</span>
         </div>
         ${eu.map(renderCard).join("")}
       `;
@@ -297,10 +522,15 @@
       const data = await res.json();
       allTenders = data.tenders || [];
       if (data.generated_at) {
-        setStatus(`Données FR + UE synchronisées le ${new Date(data.generated_at).toLocaleString("fr-FR")}.`);
+        const dt = new Date(data.generated_at).toLocaleString(lang === "fr" ? "fr-FR" : "en-GB");
+        setStatus(
+          lang === "en"
+            ? `FR + EU data synchronized on ${dt}.`
+            : `Données FR + UE synchronisées le ${dt}.`
+        );
       }
-    } catch (err) {
-      setStatus("Mode direct : cliquez sur « Actualiser BOAMP (Direct) » pour charger les avis français en direct.");
+    } catch {
+      setStatus(I18N[lang].directModeHint);
     }
     renderTenders();
   }
@@ -314,7 +544,7 @@
   async function refreshBoampLive() {
     const btn = document.getElementById("refresh-boamp-btn");
     btn.disabled = true;
-    btn.textContent = "Interrogation BOAMP...";
+    btn.textContent = I18N[lang].refreshingBoamp;
     try {
       const today = new Date().toISOString().slice(0, 10);
       const where =
@@ -358,12 +588,16 @@
       }
       allTenders = Array.from(byId.values());
       renderTenders();
-      setStatus(`Actualisation BOAMP en direct terminée (${freshFr.length} avis français récupérés).`);
+      setStatus(
+        lang === "en"
+          ? `Live BOAMP refresh complete (${freshFr.length} French notices fetched).`
+          : `Actualisation BOAMP en direct terminée (${freshFr.length} avis français récupérés).`
+      );
     } catch (err) {
-      setStatus(`Erreur BOAMP : ${String(err)}`);
+      setStatus(`BOAMP: ${String(err)}`);
     } finally {
       btn.disabled = false;
-      btn.textContent = "↻ Actualiser BOAMP (Direct)";
+      btn.innerHTML = I18N[lang].refreshBoampBtn;
     }
   }
 
@@ -387,7 +621,7 @@
     const installText = document.getElementById("install-text");
 
     if (isIos && isSafari) {
-      installText.innerHTML = `Sur iPhone/iPad : appuyez sur <strong>Partager</strong> puis <strong>Sur l'écran d'accueil</strong>.`;
+      installText.innerHTML = I18N[lang].iosInstall;
       banner.classList.remove("hidden");
     }
 
@@ -412,9 +646,19 @@
   }
 
   document.addEventListener("DOMContentLoaded", () => {
-    renderProfileHeader();
+    applyTranslations();
     setupPwa();
     loadInitialData();
+
+    document.querySelectorAll(".lang-btn").forEach((btn) => {
+      btn.addEventListener("click", () => {
+        lang = btn.dataset.lang === "en" ? "en" : "fr";
+        try {
+          localStorage.setItem(LANG_KEY, lang);
+        } catch {}
+        applyTranslations();
+      });
+    });
 
     document.querySelectorAll("[data-tab]").forEach((btn) => {
       btn.addEventListener("click", () => switchTab(btn.dataset.tab));
@@ -453,7 +697,7 @@
       renderProfileHeader();
       renderTenders();
       const msg = document.getElementById("profile-msg");
-      msg.textContent = "Critères TRADISTER SASU enregistrés et pertinence recalculée.";
+      msg.textContent = I18N[lang].profileSavedMsg;
       msg.classList.remove("hidden");
     });
 
@@ -462,7 +706,7 @@
       renderProfileHeader();
       renderTenders();
       const msg = document.getElementById("profile-msg");
-      msg.textContent = "Profil vérifié TRADISTER SASU restauré.";
+      msg.textContent = I18N[lang].profileResetMsg;
       msg.classList.remove("hidden");
     });
   });
