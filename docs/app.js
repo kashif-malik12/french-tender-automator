@@ -112,6 +112,13 @@
       showingLabel: "Affichage",
       ofLabel: "sur",
       pageLabel: "Page",
+      postedLabel: "Publié",
+      sortFit: "Trier : Adéquation (FR → UE)",
+      sortPostDesc: "Trier : Date de publication (récent)",
+      sortPostAsc: "Trier : Date de publication (ancien)",
+      sortDeadlineAsc: "Trier : Date limite (urgente)",
+      sortAmountDesc: "Trier : Montant (élevé → bas)",
+      sortAmountAsc: "Trier : Montant (bas → élevé)",
     },
     en: {
       pageTitle: "TRADISTER SASU — FR & EU Public Tenders Watch (PWA)",
@@ -197,6 +204,13 @@
       showingLabel: "Showing",
       ofLabel: "of",
       pageLabel: "Page",
+      postedLabel: "Posted",
+      sortFit: "Sort: Fit Score (FR → EU)",
+      sortPostDesc: "Sort: Post date (newest)",
+      sortPostAsc: "Sort: Post date (oldest)",
+      sortDeadlineAsc: "Sort: Deadline date (soonest)",
+      sortAmountDesc: "Sort: Amount (high → low)",
+      sortAmountAsc: "Sort: Amount (low → high)",
     },
   };
 
@@ -211,6 +225,7 @@
   let allTenders = [];
   let triageFilter = "UNSEEN"; // UNSEEN (default, all unscreened) | FAVORITES | SEEN | ALL
   let regionFilter = "ALL";
+  let sortMode = "fit";
   let minScore = 50;
   let searchQuery = "";
   let currentPage = 1;
@@ -524,6 +539,9 @@
     const dlText = t.deadline_date
       ? new Date(t.deadline_date).toLocaleDateString(locale)
       : dict.toVerify;
+    const pubText = t.publication_date
+      ? new Date(t.publication_date).toLocaleDateString(locale)
+      : dict.toVerify;
     const jBadge = t.days_remaining != null ? ` (${dict.daysPrefix}${t.days_remaining})` : "";
     const urgent = t.days_remaining != null && t.days_remaining <= 10;
     const euLabel = lang === "en" ? "EU" : "UE";
@@ -547,6 +565,9 @@
             <h3 class="tender-title">${escapeHtml(t.title)}</h3>
             <p class="tender-buyer">${dict.buyer} : <strong>${escapeHtml(t.buyer_name || dict.unspecified)}</strong></p>
             <div class="tender-metrics">
+              <span class="metric-chip">
+                🗞️ ${dict.postedLabel} : <strong>${escapeHtml(pubText)}</strong>
+              </span>
               <span class="metric-chip ${urgent ? "urgent" : ""}">
                 📅 ${dict.deadline} : <strong>${escapeHtml(dlText)}${escapeHtml(jBadge)}</strong>
               </span>
@@ -628,6 +649,23 @@
         return hay.includes(q);
       })
       .sort((a, b) => {
+        if (sortMode === "post_desc") {
+          return (b.publication_date || "").localeCompare(a.publication_date || "");
+        }
+        if (sortMode === "post_asc") {
+          return (a.publication_date || "9999").localeCompare(b.publication_date || "9999");
+        }
+        if (sortMode === "deadline_asc") {
+          return (a.deadline_date || "9999").localeCompare(b.deadline_date || "9999");
+        }
+        if (sortMode === "amount_desc") {
+          return Number(b.estimated_amount || -1) - Number(a.estimated_amount || -1);
+        }
+        if (sortMode === "amount_asc") {
+          const av = typeof a.estimated_amount === "number" && a.estimated_amount > 0 ? a.estimated_amount : Number.MAX_SAFE_INTEGER;
+          const bv = typeof b.estimated_amount === "number" && b.estimated_amount > 0 ? b.estimated_amount : Number.MAX_SAFE_INTEGER;
+          return av - bv;
+        }
         if (a.region !== b.region) return a.region === "FR" ? -1 : 1;
         if (b.suitability_score !== a.suitability_score) return b.suitability_score - a.suitability_score;
         return (a.deadline_date || "9999").localeCompare(b.deadline_date || "9999");
@@ -913,6 +951,11 @@
     });
     document.getElementById("search-input").addEventListener("input", (e) => {
       searchQuery = e.target.value;
+      currentPage = 1;
+      renderTenders();
+    });
+    document.getElementById("sort-select").addEventListener("change", (e) => {
+      sortMode = e.target.value || "fit";
       currentPage = 1;
       renderTenders();
     });

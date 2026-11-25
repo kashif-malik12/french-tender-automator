@@ -20,6 +20,7 @@ interface Props {
 
 type RegionFilter = "ALL" | "FR" | "EU";
 type TriageFilter = "UNSEEN" | "FAVORITES" | "SEEN" | "ALL";
+type SortMode = "fit" | "post_desc" | "post_asc" | "deadline_asc" | "amount_desc" | "amount_asc";
 const PAGE_SIZE = 50;
 
 export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
@@ -32,6 +33,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
   const [kwInput, setKwInput] = useState("");
   const [triageFilter, setTriageFilter] = useState<TriageFilter>("UNSEEN");
   const [regionFilter, setRegionFilter] = useState<RegionFilter>("ALL");
+  const [sortMode, setSortMode] = useState<SortMode>("fit");
   const [minScoreFilter, setMinScoreFilter] = useState<number>(50);
   const [currentPage, setCurrentPage] = useState<number>(1);
   const [showFilters, setShowFilters] = useState(false);
@@ -158,9 +160,34 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
           ? seenPool
           : tenders;
 
-  const totalPages = Math.max(1, Math.ceil(visibleTenders.length / PAGE_SIZE));
+  const sortedVisible = [...visibleTenders].sort((a, b) => {
+    if (sortMode === "post_desc") {
+      return (b.publication_date || "").localeCompare(a.publication_date || "");
+    }
+    if (sortMode === "post_asc") {
+      return (a.publication_date || "9999").localeCompare(b.publication_date || "9999");
+    }
+    if (sortMode === "deadline_asc") {
+      return (a.deadline_date || "9999").localeCompare(b.deadline_date || "9999");
+    }
+    if (sortMode === "amount_desc") {
+      return (b.estimated_amount ?? -1) - (a.estimated_amount ?? -1);
+    }
+    if (sortMode === "amount_asc") {
+      const av = a.estimated_amount && a.estimated_amount > 0 ? a.estimated_amount : Number.MAX_SAFE_INTEGER;
+      const bv = b.estimated_amount && b.estimated_amount > 0 ? b.estimated_amount : Number.MAX_SAFE_INTEGER;
+      return av - bv;
+    }
+    if (a.region !== b.region) return a.region === "FR" ? -1 : 1;
+    if ((b.go_no_go_score ?? 0) !== (a.go_no_go_score ?? 0)) {
+      return (b.go_no_go_score ?? 0) - (a.go_no_go_score ?? 0);
+    }
+    return (a.deadline_date || "9999").localeCompare(b.deadline_date || "9999");
+  });
+
+  const totalPages = Math.max(1, Math.ceil(sortedVisible.length / PAGE_SIZE));
   const safePage = Math.min(currentPage, totalPages);
-  const pageItems = visibleTenders.slice(
+  const pageItems = sortedVisible.slice(
     (safePage - 1) * PAGE_SIZE,
     safePage * PAGE_SIZE
   );
@@ -499,7 +526,7 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
         )}
       </div>
 
-      {/* Region Filter */}
+      {/* Region Filter + Sort Selector */}
       <div className="flex flex-wrap items-center justify-between gap-3">
         <div className="flex flex-wrap items-center gap-2">
           {(
@@ -523,6 +550,22 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
             </button>
           ))}
         </div>
+
+        <select
+          value={sortMode}
+          onChange={(e) => {
+            setSortMode(e.target.value as SortMode);
+            setCurrentPage(1);
+          }}
+          className="rounded-lg border border-slate-200 bg-white px-3 py-1.5 text-xs font-semibold text-slate-700"
+        >
+          <option value="fit">{t.sortFit}</option>
+          <option value="post_desc">{t.sortPostDesc}</option>
+          <option value="post_asc">{t.sortPostAsc}</option>
+          <option value="deadline_asc">{t.sortDeadlineAsc}</option>
+          <option value="amount_desc">{t.sortAmountDesc}</option>
+          <option value="amount_asc">{t.sortAmountAsc}</option>
+        </select>
       </div>
 
       {pageItems.length === 0 ? (

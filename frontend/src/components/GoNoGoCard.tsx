@@ -109,6 +109,17 @@ export function GoNoGoCard({ lang, tender, onStatusChange, onCreateWorkspace }: 
           </p>
 
           <div className="flex flex-wrap items-center gap-3 pt-1 text-xs">
+            <span className="inline-flex items-center gap-1 rounded-md bg-slate-100 px-2.5 py-1 font-medium text-slate-700">
+              🗞️ {t.postedLabel} :{" "}
+              <strong>
+                {tender.publication_date
+                  ? new Date(tender.publication_date).toLocaleDateString(
+                      lang === "fr" ? "fr-FR" : "en-GB"
+                    )
+                  : t.unspecified}
+              </strong>
+            </span>
+
             <span
               className={`inline-flex items-center gap-1 rounded-md px-2.5 py-1 font-medium ${
                 deadlineUrgent

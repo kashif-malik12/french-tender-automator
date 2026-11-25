@@ -132,6 +132,14 @@
         </div>
         <div class="filter-inputs">
           <input id="search-input" type="search" placeholder="Filtrer par mot-clé, acheteur, CPV, pays..." />
+          <select id="sort-select" aria-label="Sort tenders">
+            <option value="fit" data-i18n="sortFit">Trier : Adéquation (FR → UE)</option>
+            <option value="post_desc" data-i18n="sortPostDesc">Trier : Date de publication (récent)</option>
+            <option value="post_asc" data-i18n="sortPostAsc">Trier : Date de publication (ancien)</option>
+            <option value="deadline_asc" data-i18n="sortDeadlineAsc">Trier : Date limite (urgente)</option>
+            <option value="amount_desc" data-i18n="sortAmountDesc">Trier : Montant (élevé → bas)</option>
+            <option value="amount_asc" data-i18n="sortAmountAsc">Trier : Montant (bas → élevé)</option>
+          </select>
           <select id="min-score-select" aria-label="Score minimum">
             <option value="50">Score ≥ 50</option>
             <option value="65">Score ≥ 65</option>
