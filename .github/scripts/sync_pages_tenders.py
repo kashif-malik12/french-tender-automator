@@ -13,7 +13,6 @@ from typing import Any
 
 PROFILE: dict[str, Any] = {
     "name": "TRADISTER SASU",
-    "president": "Bisma Kashif",
     "siren": "988318945",
     "siret": "98831894500017",
     "tva_number": "FR42988318945",

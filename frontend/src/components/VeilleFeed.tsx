@@ -280,9 +280,8 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
               )}
             </div>
             <p className="text-xs text-slate-600">
-              {t.presidentLabel} <strong>{profile?.president || "Bisma Kashif"}</strong>
-              {profile?.tva_number ? ` • ${t.vatLabel} ${profile.tva_number}` : ""}
-              {profile?.address ? ` • ${profile.address}` : ""}
+              {profile?.tva_number ? `${t.vatLabel} ${profile.tva_number}` : ""}
+              {profile?.address ? `${profile?.tva_number ? " • " : ""}${profile.address}` : ""}
             </p>
             <p className="text-xs text-slate-500">
               {t.targetAmountLabel}{" "}

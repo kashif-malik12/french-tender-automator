@@ -1,7 +1,6 @@
 (() => {
   const DEFAULT_PROFILE = {
     name: "TRADISTER SASU",
-    president: "Bisma Kashif",
     siren: "988318945",
     siret: "98831894500017",
     tva_number: "FR42988318945",
@@ -511,7 +510,6 @@
   function renderProfileHeader() {
     const locale = lang === "fr" ? "fr-FR" : "en-GB";
     document.getElementById("company-name").textContent = profile.name;
-    document.getElementById("company-president").textContent = profile.president || "Bisma Kashif";
     const minStr = Number(profile.min_target_amount || 0).toLocaleString(locale);
     const maxStr = Number(profile.max_target_amount || 500000).toLocaleString(locale);
     document.getElementById("company-target-line").innerHTML =
@@ -520,7 +518,6 @@
         : `Cible montant : <strong>${minStr} € – ${maxStr} €</strong> • France (priorité IDF/91) puis Union Européenne`;
 
     document.getElementById("prof-name").value = profile.name || "";
-    document.getElementById("prof-president").value = profile.president || "";
     document.getElementById("prof-siret").value = profile.siret || "";
     document.getElementById("prof-naf").value = profile.naf_code || "";
     document.getElementById("prof-depts").value = (profile.target_departments || []).join(", ");
@@ -971,7 +968,6 @@
       saveProfile({
         ...profile,
         name: document.getElementById("prof-name").value.trim() || DEFAULT_PROFILE.name,
-        president: document.getElementById("prof-president").value.trim(),
         siret: document.getElementById("prof-siret").value.trim(),
         naf_code: document.getElementById("prof-naf").value.trim(),
         target_departments: document.getElementById("prof-depts").value.split(",").map((s) => s.trim()).filter(Boolean),
