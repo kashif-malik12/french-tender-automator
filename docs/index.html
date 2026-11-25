@@ -40,7 +40,6 @@
         <nav class="nav-links desktop-only">
           <button type="button" class="nav-tab active" data-tab="tenders" data-i18n="tabTenders">Veille FR &amp; UE</button>
           <button type="button" class="nav-tab" data-tab="profile" data-i18n="tabProfile">Profil Tradister</button>
-          <button type="button" class="nav-tab" data-tab="about" data-i18n="tabAbout">Stack &amp; VPS</button>
         </nav>
         <div class="lang-switch" role="group" aria-label="Language switch">
           <button type="button" class="lang-btn active" data-lang="fr">FR</button>
@@ -205,24 +204,6 @@
         <div id="profile-msg" class="status-bar hidden"></div>
       </div>
     </section>
-
-    <!-- TAB 3: ABOUT / STACK -->
-    <section id="tab-about" class="tab-panel">
-      <div class="company-card">
-        <h2 data-i18n="aboutTitle">Architecture Complète (GitHub Pages PWA + Backend Docker VPS)</h2>
-        <p class="company-meta" data-i18n="aboutDesc">
-          Cette interface GitHub Pages est une PWA mobile connectée aux données ouvertes BOAMP (DILA) et TED Europa.
-          Le dépôt complet inclut également la stack Docker Compose (FastAPI, PostgreSQL + pgvector RAG, Celery, analyseur DCE et export Word <code>.docx</code>).
-        </p>
-        <div class="guardrail" data-i18n="aboutGuardrail">
-          <strong>Frontière Human-in-the-Loop :</strong> Aucun chiffrage BPU/DPGF engageant, aucune signature électronique (RGS/eIDAS) et aucun dépôt automatique sur les profils acheteurs (PLACE, Maximilien, AWS) ne sont exécutés automatiquement.
-        </div>
-        <pre><code>git clone https://github.com/kashif-malik12/french-tender-automator.git
-cd french-tender-automator
-cp .env.example .env
-docker compose up --build -d</code></pre>
-      </div>
-    </section>
   </main>
 
   <!-- Mobile Bottom Navigation -->
@@ -234,10 +215,6 @@ docker compose up --build -d</code></pre>
     <button type="button" class="bottom-tab" data-tab="profile">
       <span>🏢</span>
       <span>Tradister</span>
-    </button>
-    <button type="button" class="bottom-tab" data-tab="about">
-      <span>⚙️</span>
-      <span>Stack</span>
     </button>
   </nav>
 

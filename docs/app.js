@@ -38,7 +38,6 @@
       brandSub: "France (BOAMP) &amp; Union Européenne (TED)",
       tabTenders: "Veille FR &amp; UE",
       tabProfile: "Profil Tradister",
-      tabAbout: "Stack &amp; VPS",
       mobTenders: "FR &amp; UE",
       presidentLabel: "Présidente :",
       vatLabel: "TVA",
@@ -71,11 +70,6 @@
       lblMaxAmt: "Montant cible max (€)",
       saveRecalcBtn: "Enregistrer &amp; Recalculer",
       resetProfileBtn: "Réinitialiser TRADISTER",
-      aboutTitle: "Architecture Complète (GitHub Pages PWA + Backend Docker VPS)",
-      aboutDesc:
-        "Cette interface GitHub Pages est une PWA mobile connectée aux données ouvertes BOAMP (DILA) et TED Europa. Le dépôt complet inclut également la stack Docker Compose (FastAPI, PostgreSQL + pgvector RAG, Celery, analyseur DCE et export Word <code>.docx</code>).",
-      aboutGuardrail:
-        "<strong>Frontière Human-in-the-Loop :</strong> Aucun chiffrage BPU/DPGF engageant, aucune signature électronique (RGS/eIDAS) et aucun dépôt automatique sur les profils acheteurs (PLACE, Maximilien, AWS) ne sont exécutés automatiquement.",
       amountUnpublished: "Non publié (MAPA / voir DCE)",
       amountHt: "HT",
       buyer: "Acheteur",
@@ -130,7 +124,6 @@
       brandSub: "France (BOAMP) &amp; European Union (TED)",
       tabTenders: "FR &amp; EU Feed",
       tabProfile: "Tradister Profile",
-      tabAbout: "Stack &amp; VPS",
       mobTenders: "FR &amp; EU",
       presidentLabel: "President:",
       vatLabel: "VAT",
@@ -163,11 +156,6 @@
       lblMaxAmt: "Max Target Value (€)",
       saveRecalcBtn: "Save &amp; Recalculate",
       resetProfileBtn: "Reset TRADISTER",
-      aboutTitle: "Full Architecture (GitHub Pages PWA + Docker VPS Backend)",
-      aboutDesc:
-        "This GitHub Pages interface is a mobile-ready PWA connected to BOAMP (DILA) and TED Europa open data. The full repository also includes the Docker Compose stack (FastAPI, PostgreSQL + pgvector RAG, Celery, DCE analyzer, and Word <code>.docx</code> export).",
-      aboutGuardrail:
-        "<strong>Human-in-the-Loop Boundary:</strong> No binding BPU/DPGF pricing, no electronic signature (RGS/eIDAS), and no automated submission on buyer portals (PLACE, Maximilien, AWS) are ever executed automatically.",
       amountUnpublished: "Unpublished (MAPA / check DCE)",
       amountHt: "excl. VAT",
       buyer: "Buyer",
