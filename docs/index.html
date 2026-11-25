@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>French Tender Automator — Veille BOAMP &amp; Mémoires Techniques</title>
+  <link rel="stylesheet" href="./styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">French Tender Automator</a>
+      <nav class="nav-links">
+        <a href="#modules">Modules</a>
+        <a href="#architecture">Architecture</a>
+        <a href="#guardrails">Contrôle Humain</a>
+        <a href="#quickstart">Déploiement</a>
+      </nav>
+    </div>
+  </header>
+
+  <main class="container">
+    <section class="hero">
+      <span class="badge">Auto-hébergé • Docker Compose • GitHub Pages</span>
+      <h1>Automatisez la veille BOAMP, l'analyse DCE et le premier jet de vos Mémoires Techniques.</h1>
+      <p class="lead">
+        Une plateforme open-source et conteneurisée conçue pour les PME et ESN répondant aux
+        marchés publics français. Chiffrage BPU/DPGF et signature électronique restent strictement
+        sous contrôle humain.
+      </p>
+      <div class="cta-row">
+        <a href="#quickstart" class="btn btn-primary">Déployer sur VPS</a>
+        <a href="#modules" class="btn btn-secondary">Découvrir les modules</a>
+      </div>
+    </section>
+
+    <section id="modules">
+      <h2>4 Modules Métier</h2>
+      <div class="grid">
+        <article class="card">
+          <h3>A. Veille BOAMP Automatisée</h3>
+          <p>
+            Interrogation planifiée de l'API Open Data DILA BOAMP v2.1 (CPV, départements, mots-clés)
+            et scoring Go/No-Go (0-100) en 3 points clés. Attribution DILA Licence Ouverte 2.0 conservée.
+          </p>
+        </article>
+        <article class="card">
+          <h3>B. Base de Connaissances (RAG)</h3>
+          <p>
+            Indexation vectorielle dans PostgreSQL + <code>pgvector</code> de vos mémoires gagnants,
+            CV, certificats ISO/RGE/MASE et trames DC1/DC2. Stockage binaire hors Git.
+          </p>
+        </article>
+        <article class="card">
+          <h3>C. Analyseur DCE &amp; Conformité</h3>
+          <p>
+            Import <code>.zip</code>, <code>.pdf</code>, <code>.docx</code>, <code>.xlsx</code>.
+            Classification automatique RC / CCTP / CCAP / BPU / DPGF, extraction des délais, visites
+            obligatoires, pondérations et matrice de conformité.
+          </p>
+        </article>
+        <article class="card">
+          <h3>D. Rédaction &amp; Export .docx</h3>
+          <p>
+            Éditeur côte à côte (Exigence CCTP vs Brouillon + citations RAG) et export Word
+            <code>.docx</code> stylé avec marqueurs <code>[À COMPLÉTER PAR L'ÉQUIPE]</code>.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section id="architecture">
+      <h2>Stack Technique</h2>
+      <div class="grid">
+        <div class="card">
+          <h3>Backend &amp; Workers</h3>
+          <p>Python 3.12, FastAPI, Celery + Redis, Alembic, PyMuPDF, pdfplumber, openpyxl, python-docx.</p>
+        </div>
+        <div class="card">
+          <h3>Données &amp; Vecteurs</h3>
+          <p>PostgreSQL 16 + extension <code>pgvector</code> (embeddings OpenAI, Gemini ou fallback local).</p>
+        </div>
+        <div class="card">
+          <h3>Frontend &amp; Reverse Proxy</h3>
+          <p>Next.js App Router (TypeScript + Tailwind CSS), authentification JWT/Basic Auth et Caddy.</p>
+        </div>
+      </div>
+    </section>
+
+    <section id="guardrails">
+      <h2>Sécurité &amp; Frontière Human-in-the-Loop</h2>
+      <div class="guardrail">
+        <strong>Zéro dépôt automatique, zéro signature automatisée, zéro chiffrage engageant :</strong>
+        la plateforme signale les clauses du CCAP et les onglets BPU/DPGF pour revue humaine et
+        rappelle de déposer manuellement l'offre signée (RGS / eIDAS) sur le profil acheteur
+        (PLACE, Maximilien, AWS).
+      </div>
+    </section>
+
+    <section id="quickstart">
+      <h2>Démarrage Rapide</h2>
+      <pre><code>git clone &lt;votre-repo-github&gt; french-tender-automator
+cd french-tender-automator
+cp .env.example .env
+# Éditez .env (mots de passe, clés API, identifiants UI)
+docker compose up --build -d</code></pre>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      French Tender Automator — Projet autonome hébergé sur GitHub Pages (aucun sous-domaine VPS requis).
+    </div>
+  </footer>
+</body>
+</html>

@@ -1,0 +1,30 @@
+# Standalone Caddy configuration for French Tender Automator.
+# Locally defaults to SITE_ADDRESS=:80 (HTTP on port APP_HTTP_PORT).
+# On a dedicated VPS, set SITE_ADDRESS=tenders.example.fr in .env for automatic Let's Encrypt HTTPS.
+
+{$SITE_ADDRESS::80} {
+	encode zstd gzip
+
+	header {
+		X-Content-Type-Options "nosniff"
+		X-Frame-Options "SAMEORIGIN"
+		Referrer-Policy "strict-origin-when-cross-origin"
+		-Server
+	}
+
+	# Optional edge HTTP Basic Auth (FastAPI + Next.js already enforce JWT / Basic Auth).
+	# To enable Caddy-level Basic Auth, generate a bcrypt hash with:
+	#   docker run --rm caddy:2-alpine caddy hash-password --plaintext 'your-password'
+	# and uncomment:
+	# basic_auth /* {
+	#     admin $2a$14$REPLACE_WITH_BCRYPT_HASH
+	# }
+
+	handle /api/* {
+		reverse_proxy backend:8000
+	}
+
+	handle {
+		reverse_proxy frontend:3000
+	}
+}
