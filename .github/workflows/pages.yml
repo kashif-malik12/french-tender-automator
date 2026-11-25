@@ -1,8 +1,10 @@
-name: Deploy GitHub Pages Website
+name: Deploy GitHub Pages PWA
 
 on:
   push:
     branches: ["main", "master"]
+  schedule:
+    - cron: "15 7 * * *"
   workflow_dispatch:
 
 permissions:
@@ -20,11 +22,14 @@ jobs:
     steps:
       - name: Checkout repository
         uses: actions/checkout@v4
+      - name: Sync latest France (BOAMP) & EU (TED) tenders for TRADISTER SASU
+        continue-on-error: true
+        run: python3 .github/scripts/sync_pages_tenders.py
       - name: Setup Pages
         uses: actions/configure-pages@v6
         with:
           enablement: true
-      - name: Upload static website from docs/
+      - name: Upload static PWA website from docs/
         uses: actions/upload-pages-artifact@v5
         with:
           path: docs

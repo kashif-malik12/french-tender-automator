@@ -35,17 +35,27 @@ class Settings(BaseSettings):
     jwt_secret_key: str = "change_me_to_a_random_64_char_secret_key_for_jwt_signing"
     jwt_expire_minutes: int = 720
 
-    # BOAMP Polling
+    # BOAMP & TED EU Polling
     boamp_api_url: str = "https://boamp-datadila.opendatasoft.com/api/explore/v2.1/catalog/datasets/boamp/records"
+    ted_api_url: str = "https://api.ted.europa.eu/v3/notices/search"
     boamp_cron_hour: int = 7
     boamp_cron_minute: int = 0
-    boamp_default_limit: int = 25
+    boamp_default_limit: int = 30
+    ted_default_limit: int = 25
 
-    # Default Company Profile Seed
-    default_company_name: str = "Mon Entreprise SAS"
-    default_departments: str = "75,91,92"
-    default_cpv_codes: str = "72000000,45000000"
-    default_keywords: str = "cloud,infogérance,développement,cybersécurité"
+    # Default Company Profile Seed (TRADISTER SASU)
+    default_company_name: str = "TRADISTER SASU"
+    default_company_president: str = "Bisma Kashif"
+    default_company_siren: str = "988318945"
+    default_company_siret: str = "98831894500017"
+    default_company_tva: str = "FR42988318945"
+    default_company_naf: str = "62.02A"
+    default_company_address: str = "11 Rue du Château d'Eau, App 132, 91130 Ris-Orangis, France"
+    default_departments: str = "91,75,92,93,94,77,78,95"
+    default_cpv_codes: str = "72000000,72200000,72300000,72500000,72600000,48000000"
+    default_keywords: str = "infogérance,cloud,cybersécurité,support informatique,helpdesk,maintenance applicative,TMA,MCO,développement logiciel,systèmes d'information,ITSM,managed services"
+    default_min_target_amount: int = 10000
+    default_max_target_amount: int = 500000
 
     # Persistent Data Storage
     data_dir: Path = Path("/app/data")

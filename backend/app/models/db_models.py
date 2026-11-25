@@ -2,7 +2,7 @@ from datetime import datetime, timezone
 from typing import Any
 
 from pgvector.sqlalchemy import Vector
-from sqlalchemy import Boolean, DateTime, ForeignKey, Integer, String, Text
+from sqlalchemy import Boolean, DateTime, Float, ForeignKey, Integer, String, Text
 from sqlalchemy.dialects.postgresql import JSONB
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
@@ -14,13 +14,18 @@ def utcnow() -> datetime:
 
 
 class CompanyProfile(Base):
-    """Company capabilities, certifications, and BOAMP monitoring filters."""
+    """Company capabilities, certifications, and FR/EU tender monitoring filters."""
 
     __tablename__ = "company_profiles"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     name: Mapped[str] = mapped_column(String(255), nullable=False)
+    president: Mapped[str | None] = mapped_column(String(255), nullable=True)
+    siren: Mapped[str | None] = mapped_column(String(16), nullable=True)
     siret: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    tva_number: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    naf_code: Mapped[str | None] = mapped_column(String(32), nullable=True)
+    address: Mapped[str | None] = mapped_column(String(512), nullable=True)
     description: Mapped[str] = mapped_column(Text, default="", nullable=False)
     capabilities: Mapped[list[str]] = mapped_column(JSONB, default=list, nullable=False)
     certifications: Mapped[list[str]] = mapped_column(JSONB, default=list, nullable=False)
@@ -29,18 +34,26 @@ class CompanyProfile(Base):
     target_keywords: Mapped[list[str]] = mapped_column(JSONB, default=list, nullable=False)
     procedure_types: Mapped[list[str]] = mapped_column(JSONB, default=list, nullable=False)
     min_days_remaining: Mapped[int] = mapped_column(Integer, default=5, nullable=False)
+    min_target_amount: Mapped[float | None] = mapped_column(Float, nullable=True)
+    max_target_amount: Mapped[float | None] = mapped_column(Float, nullable=True)
+    include_all_france: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    include_eu: Mapped[bool] = mapped_column(Boolean, default=True, nullable=False)
+    min_suitability_score: Mapped[int] = mapped_column(Integer, default=50, nullable=False)
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), default=utcnow, onupdate=utcnow, nullable=False
     )
 
 
 class TenderNotice(Base):
-    """Ingested BOAMP public procurement notice with AI Go/No-Go qualification."""
+    """Ingested BOAMP (France) or TED (EU) public procurement notice with suitability qualification."""
 
     __tablename__ = "tender_notices"
 
     id: Mapped[int] = mapped_column(Integer, primary_key=True, index=True)
     boamp_id: Mapped[str] = mapped_column(String(128), unique=True, index=True, nullable=False)
+    source: Mapped[str] = mapped_column(String(16), default="BOAMP", index=True, nullable=False)
+    region: Mapped[str] = mapped_column(String(8), default="FR", index=True, nullable=False)
+    country: Mapped[str] = mapped_column(String(8), default="FRA", index=True, nullable=False)
     title: Mapped[str] = mapped_column(String(512), nullable=False)
     buyer_name: Mapped[str | None] = mapped_column(String(255), nullable=True)
     department: Mapped[str | None] = mapped_column(String(16), index=True, nullable=True)
@@ -48,6 +61,8 @@ class TenderNotice(Base):
     procedure_type: Mapped[str | None] = mapped_column(String(128), nullable=True)
     publication_date: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     deadline_date: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    estimated_amount: Mapped[float | None] = mapped_column(Float, nullable=True)
+    currency: Mapped[str] = mapped_column(String(8), default="EUR", nullable=False)
     boamp_url: Mapped[str | None] = mapped_column(String(512), nullable=True)
     description: Mapped[str | None] = mapped_column(Text, nullable=True)
     raw_payload: Mapped[dict[str, Any]] = mapped_column(JSONB, default=dict, nullable=False)

@@ -1,0 +1,2536 @@
+{
+  "generated_at": "2026-11-25T08:20:07.062182+00:00",
+  "company": {
+    "name": "TRADISTER SASU",
+    "president": "Bisma Kashif",
+    "siren": "988318945",
+    "siret": "98831894500017",
+    "tva_number": "FR42988318945",
+    "naf_code": "62.02A",
+    "address": "11 Rue du Château d'Eau, App 132, 91130 Ris-Orangis, France",
+    "target_cpv_codes": [
+      "72000000",
+      "72200000",
+      "72300000",
+      "72500000",
+      "72600000",
+      "48000000"
+    ],
+    "target_departments": [
+      "91",
+      "75",
+      "92",
+      "93",
+      "94",
+      "77",
+      "78",
+      "95"
+    ],
+    "target_keywords": [
+      "infogérance",
+      "cloud",
+      "cybersécurité",
+      "support informatique",
+      "helpdesk",
+      "maintenance applicative",
+      "TMA",
+      "MCO",
+      "développement logiciel",
+      "systèmes d information",
+      "ITSM",
+      "managed services"
+    ],
+    "min_target_amount": 10000,
+    "max_target_amount": 500000,
+    "min_suitability_score": 50
+  },
+  "counts": {
+    "total": 89,
+    "france": 56,
+    "eu": 33
+  },
+  "tenders": [
+    {
+      "id": "26-113790",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations d'infogérance des systèmes d'information",
+      "buyer_name": "TRANSITIONS PRO Île-de-France",
+      "department": "75",
+      "cpv_codes": [
+        "72514000",
+        "72000000",
+        "72267000",
+        "50312300"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-25T00:00:00+00:00",
+      "deadline_date": "2027-01-04T10:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113790",
+      "description": "La présente consultation a pour objet la réalisation de prestations d'infogérance portant sur l'exploitation, la supervision, l'administration et l'évolution de l'infrastructure informatique de Transitions Pro Île-de-France, couvrant les environnements cloud et locaux.\n\nLe Référé précontractuel avant la signature du contrat ; le Référé contractuel après la signature du contrat, dans les conditions prévues à l'article R. 551-7 du CJA ; le recours de pleine juridiction en contestation de la validité du contrat dans les 2 mois suivant la date à laquelle l'acheteur a effectué les mesures de public",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 100,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance, cloud, 72000000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-40)."
+      ],
+      "days_remaining": 40
+    },
+    {
+      "id": "26-111798",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations de diagnostic phytosanitaire des arbres sur SIG pour le Domaine national de Saint-Cloud (92210) et les bords des étangs de Ville d’Avray (92410)",
+      "buyer_name": "Centre des Monuments Nationaux",
+      "department": "75",
+      "cpv_codes": [
+        "71241000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-19T00:00:00+00:00",
+      "deadline_date": "2026-12-18T12:00:00+00:00",
+      "estimated_amount": 500000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111798",
+      "description": "Le marché est un accord-cadre mono-attributaire qui donnera lieu à la conclusion de bons de commande conformément aux articles R.2162-2 à R.2162-6, et R.2162-14 du Code de la commande publique. L’accord-cadre ne comporte pas de montant minimal mais comporte un montant maximal sur la totalité du marché de 500 000 € HT.\n\nPrestations de diagnostic phytosanitaire des arbres sur SIG pour le Domaine national de Saint-Cloud (92210) et les bords des étangs de Ville d’Avray (92410).",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 92,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (cloud).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant cible optimal (500 000 EUR) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-112518",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Conception et développement d'un Serious Game et de capsules e-learning portant sur le risque CO2 et autres risques chimiques en cave de vinification",
+      "buyer_name": "CAISSE CENTRALE MSA",
+      "department": "93",
+      "cpv_codes": [
+        "72212911"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-21T00:00:00+00:00",
+      "deadline_date": "2026-12-07T10:00:00+00:00",
+      "estimated_amount": 300000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112518",
+      "description": "Conception et développement d'un Serious Game et de capsules e-learning portant sur le risque CO2 et autres risques chimiques en cave de vinification",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 90,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72212911).",
+        "France — Zone prioritaire (département 93, proche Ris-Orangis 91).",
+        "Montant cible optimal (300 000 EUR) • Délai confortable (J-12)."
+      ],
+      "days_remaining": 12
+    },
+    {
+      "id": "26-111901",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Fourniture, installation et hébergement en mode SaaS d’un Système de Gestion des Bibliothèques pour le Service Commun de la Documentation (SCD) de l’université Paris 1 Panthéon-Sorbonne",
+      "buyer_name": "Université Paris 1 Panthéon-Sorbonne",
+      "department": "75",
+      "cpv_codes": [
+        "48161000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-21T12:00:00+00:00",
+      "estimated_amount": 250000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111901",
+      "description": "Conformément à l’article R.2112-6 alinéa 1 du code de la commande publique, il s’agit d’un marché composite comprenant une partie ordinaire traitée à prix global et forfaitaire pour les prestations récurrentes et une partie à bons de commande traitée à prix unitaire pour les prestations occasionnelles.   Les prestations occasionnelles seront exécutées au fur et à mesure de la survenance des besoins et de l’émission de bons de commande, en application des dispositions de l’article R.2162-2 alinéa 2 du code de la commande publique du 1er avril 2019, et dans les conditions fixées aux articles R.2",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 90,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48161000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant cible optimal (250 000 EUR) • Délai confortable (J-26)."
+      ],
+      "days_remaining": 26
+    },
+    {
+      "id": "26-113450",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Hébergement CMS",
+      "buyer_name": "GIP MDS",
+      "department": "75",
+      "cpv_codes": [
+        "72222300",
+        "72514000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-24T00:00:00+00:00",
+      "deadline_date": "2027-01-15T15:00:00+00:00",
+      "estimated_amount": 500000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113450",
+      "description": "La procédure est un appel d'offre ouvert sous la forme d'un accord-cadre conclu avec un seul opérateur économique et exécuté par émission de bons de commande avec les montants minimum et maximum\n\nLe présent accord-cadre a pour objet la mise à disposition d'un hébergement pour les pages publiques du site internet net-entreprises.fr développé en CMS et l'exposition des formulaires d'inscription/connexion de Net-entreprises.\n\nLe présent marché est passé sous la forme d'un accord-cadre conclu avec un seul opérateur et exécuté par l'émission de bons de commande Il est conclu pour une durée de 1 an ",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 90,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72222300, 72514000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant cible optimal (500 000 EUR) • Délai confortable (J-51)."
+      ],
+      "days_remaining": 51
+    },
+    {
+      "id": "26-112479",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations de codage et d'appui à l'évaluation et à l'optimisation des processus de codage de l'information médicale de l'A.P.-H.P.",
+      "buyer_name": "Assistance Publique - Hôpitaux de Paris",
+      "department": "94",
+      "cpv_codes": [
+        "72500000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-23T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112479",
+      "description": "La consultation porte sur des prestations de codage et d'appui à l'évaluation et à l'optimisation des processus de codage de l'information médicale de l'A.P.-H.P., nécessaire aux besoins de l’AP-HP.\n\nLe présent marché est conclu sous la forme d’un accord-cadre multi-attributaire à bons de commande au sens de l’article R. 2162-2 du Code de la commande publique. Au vu des critères pondérés de jugement des offres, le Représentant du Pouvoir Adjudicateur classe les offres des soumissionnaires par ordre décroissant. Il retient les cinq (5) offres économiquement les plus avantageuses, les mieux clas",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 88,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72500000).",
+        "France — Zone prioritaire (département 94, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-28)."
+      ],
+      "days_remaining": 28
+    },
+    {
+      "id": "TED:730783-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Maintenance et Prestations complémentaires pour l'Intranet du Département du Val de marne",
+      "buyer_name": "Département du Val de Marne",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72500000",
+        "72421000",
+        "72250000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-22T15:00:00+00:00",
+      "deadline_date": "2026-12-07T15:00:00+00:00",
+      "estimated_amount": 288000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/730783-2026",
+      "description": "L'accord-cadre consiste en la mise en place d'une maintenance corrective et évolutive pour le site Intranet du Département du Val de Marne.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 87,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72500000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant cible optimal (288 000 EUR) • Délai confortable (J-12)."
+      ],
+      "days_remaining": 12
+    },
+    {
+      "id": "26-113134",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Le présent accord-cadre a pour objet la réalisation de la tierce maintenance applicative des applications GDE, HYPERSFIN, Extranet et l’application de gestion des temps et des activités (GTA) CANTICO.",
+      "buyer_name": "Ancols",
+      "department": "69",
+      "cpv_codes": [
+        "72000000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-22T00:00:00+00:00",
+      "deadline_date": "2026-12-22T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113134",
+      "description": "Les prestations attendues ainsi que les conditions d’exécution des interventions attendues sont précisées dans le cahier des clauses administratives particulières (CCAP) et dans le cahier des clauses techniques particulières (CCTP).\n\nArticle 10.2 du Règlement de consultation\n\ntierce maintenance applicative des applications GDE, HYPERSFIN, Extranet et l’application de gestion des temps et des activités (GTA) CANTICO.",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 87,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (maintenance applicative, 72000000).",
+        "France (département 69) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-27)."
+      ],
+      "days_remaining": 27
+    },
+    {
+      "id": "26-112867",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Mise en production, hébergement et infogérance des observatoires des métiers",
+      "buyer_name": "OPCO ATLAS",
+      "department": "75",
+      "cpv_codes": [
+        "50324100"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-22T00:00:00+00:00",
+      "deadline_date": "2026-12-23T10:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112867",
+      "description": "Mise en production, hébergement et infogérance des observatoires des métiers\n\n- Référé précontractuel : Conformément aux articles 1441-1 et 1441-2 du code de procédure civile et aux articles 2 à 10 de l'ordonnance n°2009-515 du 7 mai 2009 relative aux procédures de recours applicables aux contrats de la commande publique, tout opérateur économique ayant intérêt à conclure le contrat peut introduire un référé précontractuel contre tout acte de la passation jusqu'à la date de signature du marché, auprès de la juridiction judiciaire compétente. \n- Référé contractuel : Conformément aux articles 14",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 86,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-28)."
+      ],
+      "days_remaining": 28
+    },
+    {
+      "id": "26-113267",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Infogérance des postes de travail et de support de proximité des environnements utilisateurs",
+      "buyer_name": "Ville de Saint-Priest",
+      "department": "69",
+      "cpv_codes": [
+        "72253100",
+        "72610000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-24T00:00:00+00:00",
+      "deadline_date": "2027-01-06T15:00:00+00:00",
+      "estimated_amount": 300000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113267",
+      "description": "Infogérance des postes de travail et de support de proximité des environnements utilisateurs. Accord-cadre à bons de commande avec montant minimum (200 000 euro(s)  HT) et montant maximum (300 000 euro(s)  HT) pour une durée de 2 ans à compter de sa notification\n\nResponsabilité civile\n\nSe reporter au réglement de consultation\n\nValeur technique\n\nPerformance environnementale\n\nPrix des prestations\n\nConfer art. L551-1 du Code de justice administrative",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 85,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance).",
+        "France (département 69) — éligible prestation nationale.",
+        "Montant cible optimal (300 000 EUR) • Délai confortable (J-42)."
+      ],
+      "days_remaining": 42
+    },
+    {
+      "id": "26-111997",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Evolutions applicatives et maintien en conditions opérationnelles du logiciel libre « Bien VU » pour la gestion des signalements avec son framework Lutèce",
+      "buyer_name": "Etablissement Public Territorial Plaine Commune",
+      "department": "93",
+      "cpv_codes": [
+        "72212900"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-18T11:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111997",
+      "description": "Evolutions applicatives et maintien en conditions opérationnelles du logiciel libre « Bien VU » pour la gestion des signalements avec son framework Lutèce\n\nvoir documents de la consultation\n\nLe présent marché est conclu pour une durée initiale d’un an à compter de sa notification, reconductible trois fois par période successive d’un an. Il est reconduit tacitement jusqu'à son terme. La reconduction est considérée comme acceptée si aucune décision n'est prise par l’acheteur au moins trois mois avant la fin de la durée de validité du marché. Le titulaire ne peut pas refuser la reconduction",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 84,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72212900).",
+        "France — Zone prioritaire (département 93, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-112890",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "RENOUVELLEMENT DE L'ARCHITECTURE RESEAU DE GPSEA ET SERVICES ASSOCIES",
+      "buyer_name": "GRAND PARIS SUD EST AVENIR",
+      "department": "94",
+      "cpv_codes": [
+        "32420000",
+        "72700000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-22T00:00:00+00:00",
+      "deadline_date": "2026-12-22T10:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112890",
+      "description": "Se référer au règlement de la consultation\n\nRENOUVELLEMENT DE L'ARCHITECTURE RESEAU DE GPSEA ET SERVICES ASSOCIES\n\nLa consultation comporte une offre de base et une variante non obligatoire.\n\nSe référer au RC",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 84,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72700000).",
+        "France — Zone prioritaire (département 94, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-27)."
+      ],
+      "days_remaining": 27
+    },
+    {
+      "id": "26-113594",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "FOURNITURE, MISE EN OEUVRE, MAINTENANCE ET SUPPORT D'UNE SOLUTION LOGICIELLE DE PAIE POUR LE CTIFL",
+      "buyer_name": "CENTRE TECHNIQUE INTERPROFESSIONNEL DES FRUITS ET LEGUMES",
+      "department": "75",
+      "cpv_codes": [
+        "72260000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-23T00:00:00+00:00",
+      "deadline_date": "2027-01-08T14:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113594",
+      "description": "Logiciel",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 84,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72260000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-44)."
+      ],
+      "days_remaining": 44
+    },
+    {
+      "id": "26-112500",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Marché de prestations d'hébergement de maintenance annuelle et évolutive des applicatifs Label Haie",
+      "buyer_name": "Afac-Agroforesteries",
+      "department": "75",
+      "cpv_codes": [
+        "72267000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-19T00:00:00+00:00",
+      "deadline_date": "2027-01-20T17:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112500",
+      "description": "Informatique (prestations de services)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 84,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72267000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-56)."
+      ],
+      "days_remaining": 56
+    },
+    {
+      "id": "26-111995",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Fourniture d'informations légales, financières et veille stratégique sur les entreprises et filières agricoles et agroalimentaires",
+      "buyer_name": "CCMSA",
+      "department": "93",
+      "cpv_codes": [
+        "72319000",
+        "64216200",
+        "75112000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-18T10:00:00+00:00",
+      "estimated_amount": 7000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111995",
+      "description": "La présente consultation a pour objet de fournir à la CCMSA et aux caisses de MSA la centralisation des informations légales et financières sur les entreprises et en particulier sur les entreprises agricoles situées sur l'ensemble du territoire national, ainsi que de la veille stratégique sur les entreprises.\n\nDéveloppement durable : sobriété numérique\n\nValeur technique\n\nFourniture d'informations légales, financières, de veille et surveillance sur les entreprises, les filières agricoles et agroalimentaires.\n\nIntelligence économique, veille stratégique et financière sur les entreprises et filiè",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 83,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72319000).",
+        "France — Zone prioritaire (département 93, proche Ris-Orangis 91).",
+        "Petit marché (7 000 EUR) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-112692",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Fourniture, installation, paramétrage, mise en service, formation, maintenance et support d’un logiciel dédié à l’identité vigilance dans le cadre des activités de PMA",
+      "buyer_name": "CHU AMIENS PICARDIE",
+      "department": "80",
+      "cpv_codes": [
+        "48814000",
+        "48180000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-21T00:00:00+00:00",
+      "deadline_date": "2026-12-22T11:00:00+00:00",
+      "estimated_amount": 500000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112692",
+      "description": "Le présent accord-cadre, régi par le Cahier des Clauses Administratives Particulières (CCAP), a pour objet la fourniture, l’installation, le paramétrage, la mise en service, la formation, la maintenance et le support d’un logiciel dédié à l’identité vigilance dans le cadre des activités de Procréation Médicalement Assistée (PMA)\n\nLes délais et voies de recours sont indiqués à l'article 10.2 du règlement de la consultation.",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 83,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48814000, 48180000).",
+        "France (département 80) — éligible prestation nationale.",
+        "Montant cible optimal (500 000 EUR) • Délai confortable (J-27)."
+      ],
+      "days_remaining": 27
+    },
+    {
+      "id": "26-112785",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "26N0449-Hébergement des sites Internet et prestations associées",
+      "buyer_name": "METROPOLE NICE COTE D'AZUR",
+      "department": "6",
+      "cpv_codes": [
+        "72415000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-22T00:00:00+00:00",
+      "deadline_date": "2027-01-07T12:00:00+00:00",
+      "estimated_amount": 64894.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112785",
+      "description": "La présente consultation est lancée suivant la procédure :\nAppel d'offres ouvert - articles R.2124-2 1° et R.2161-2 à 5 du Code de la commande publique.\nElle a pour objet l'hébergement des sites Internet de la métropole Nice Côte d'Azur, de la Ville de Nice et du CCAS et l'ensemble des prestations connexes liées à la gestion de ces sites hébergés ainsi qu'à la gestion des noms de domaine\n\n1)\tle référé précontractuel (articles L.551-1 à L. 551- 12, et R.551-1 à R. 551-6 du code de justice administrative) peut être introduit jusqu'à la signature du contrat 2) le référé contractuel (L. 551-13 à L",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 83,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72415000).",
+        "France (département 6) — éligible prestation nationale.",
+        "Montant cible optimal (64 894 EUR) • Délai confortable (J-43)."
+      ],
+      "days_remaining": 43
+    },
+    {
+      "id": "TED:737843-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations d'infogérance pour le Théâtre National de l'Odéon",
+      "buyer_name": "Théâtre National de l'Odéon",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72500000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-26T16:00:00+00:00",
+      "deadline_date": "2026-11-25T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/737843-2026",
+      "description": "Le présent Marché a pour objet la réalisation de prestations d’infogérance du système d’information pour le compte du Théâtre National de l’Odéon.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 81,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance, 72500000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-0)."
+      ],
+      "days_remaining": 0
+    },
+    {
+      "id": "26-112304",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Mise en place d'un outil chatbot IA touristique dans le cadre des escales Sambre",
+      "buyer_name": "AGGLOMERATION MAUBEUGE VAL DE SAMBRE (AMVS)",
+      "department": "59",
+      "cpv_codes": [
+        "72200000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-19T00:00:00+00:00",
+      "deadline_date": "2026-12-18T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112304",
+      "description": "Logiciel",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 81,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72200000).",
+        "France (département 59) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-112189",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "FOURNITURE, DEPLOIEMENT, CONFIGURATION, INTEGRATION ET MAINTENANCE DES EQUIPEMENTS ET SOLUTIONS DESTINES AU SYSTEME D’INFORMATION DE LA CAGNM",
+      "buyer_name": "Communauté d'Agglomération du Grand Nord de Mayotte (976)",
+      "department": "976",
+      "cpv_codes": [
+        "30230000",
+        "30214000",
+        "32424000",
+        "72600000",
+        "32232000",
+        "30232000",
+        "92700000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-28T09:00:00+00:00",
+      "estimated_amount": 580000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112189",
+      "description": "Les descriptions techniques sont indiquées dans le Cahier des clauses Techniques Particulières (CCTP).\n\nLes besoins sont décrits dans le CCTP joint au dossier de consultation des entreprises.\n\nLes besoins sont décrits dans le CCTP joint au DCE.",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 81,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72600000).",
+        "France (département 976) — éligible prestation nationale.",
+        "Montant élevé (580 000 EUR — lotissement/GME à vérifier) • Délai confortable (J-33)."
+      ],
+      "days_remaining": 33
+    },
+    {
+      "id": "26-112408",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Réalisation, conception et maintenance de la plateforme numérique France Biobank Network",
+      "buyer_name": "INSERM",
+      "department": "75",
+      "cpv_codes": [
+        "72212460"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2027-01-18T10:00:00+00:00",
+      "estimated_amount": 3000000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112408",
+      "description": "Le marché a pour objet la réalisation de la plateforme FrBioNet. \nLes prestations attendues sont celles nécessaires à la conception, au développement, au déploiement, à l'assistance aux utilisateurs, à la maintenance applicative corrective, préventive et évolutive, ainsi qu'au maintien en bonnes conditions opérationnelles (MCO) de la plateforme numérique FrBioNet. \n\nLa plateforme vise à faciliter l'identification et la recherche de ressources biologiques et de données associées, à améliorer leur visibilité et leur interopérabilité, et à simplifier les démarches d'accès et de mise en relation e",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 80,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (maintenance applicative, MCO).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Marché d'envergure (3 000 000 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-54)."
+      ],
+      "days_remaining": 54
+    },
+    {
+      "id": "TED:729163-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Tierce Maintenance Applicative (TMA) des applications existantes ou à venir du système d’information SYRENAD-EMDIS",
+      "buyer_name": "Agence de la biomédecine",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72267000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-21T15:00:00+00:00",
+      "deadline_date": "2026-11-27T15:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/729163-2026",
+      "description": "Le présent marché a pour objet la Tierce Maintenance Applicative (TMA) des applications existantes ou à venir du système d’information SYRENAD-EMDIS. Les finalités du présent marché sont triples : • Garantir le maintien en bon état de fonctionnement de ces applications, existantes et à venir, ainsi que leurs évolutions. • Piloter des projets SI sensibles (ex : développer de nouvelles applications du SI), parfois dans un contexte international. • Accompagner l’Agence dans la mise en œuvre de ses solutions grâce à des expertises du titulaire (par exemple, optimisation de l’architecture, assistan",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 79,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (maintenance applicative, TMA).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "26-112998",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Tierce Maintenance Applicative des Intranet et des sites Internet pédagogiques",
+      "buyer_name": "RECTORAT DE L'ACADEMIE DE NANTES",
+      "department": "14",
+      "cpv_codes": [
+        "72267100"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-14T10:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112998",
+      "description": "Informatique (maintenance serveurs et réseaux)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 79,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (maintenance applicative).",
+        "France (département 14) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-19)."
+      ],
+      "days_remaining": 19
+    },
+    {
+      "id": "26-113614",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Marché de prestation infogérance des systèmes d'information du CENTRE HOSPITALIER DE SAINTE MAURE DE TOURAINE - EHPAD DE L'ILE BOUCHARD - EHPAD DE RICHELIEU",
+      "buyer_name": "37 CHRU",
+      "department": "37",
+      "cpv_codes": [
+        "72514300"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-23T00:00:00+00:00",
+      "deadline_date": "2026-12-18T17:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113614",
+      "description": "Prestations de services",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 79,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance).",
+        "France (département 37) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-113203",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Accord-cadre de services de TIC ou d'infogérance",
+      "buyer_name": "COMMUNAUTE DE COMMUNES PIEGE LAURAGAIS MALEPERE",
+      "department": "11",
+      "cpv_codes": [
+        "72610000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-28T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113203",
+      "description": "Informatique (prestations de services)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 79,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance).",
+        "France (département 11) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-33)."
+      ],
+      "days_remaining": 33
+    },
+    {
+      "id": "26-114184",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "2027 - MAP - Hébergement infogérance écosystème web",
+      "buyer_name": "AUVERGNE RHONE ALPES TOURISME",
+      "department": "69",
+      "cpv_codes": [],
+      "procedure_type": "Procédure Adaptée",
+      "publication_date": "2026-11-24T00:00:00+00:00",
+      "deadline_date": "2027-01-08T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-114184",
+      "description": "Informatique (prestations de services)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 79,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (infogérance).",
+        "France (département 69) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-44)."
+      ],
+      "days_remaining": 44
+    },
+    {
+      "id": "TED:726965-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Maintenance logiciel Business Objects, prestations de mises à jour et assistance associées pour la Métropole Aix-Marseille-Provence",
+      "buyer_name": "Métropole Aix Marseille Provence",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72267100",
+        "48612000",
+        "72212400"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-21T15:00:00+00:00",
+      "deadline_date": "2026-11-27T15:00:00+00:00",
+      "estimated_amount": 205750.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/726965-2026",
+      "description": "Le présent marché a pour objet la maintenance corrective et évolutive du parc de licences Business Objects ainsi que les prestations de mise à niveau et assistance sur l’environnement technique associé pour la Métropole Aix-Marseille-Provence.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72267100, 48612000, 72212400).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant cible optimal (205 750 EUR) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "TED:733059-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Consultation du public et des assemblées sur le projet de Sdage 2028-2033",
+      "buyer_name": "Agence de l'eau Loire-Bretagne",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "79330000",
+        "79419000",
+        "72317000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-22T15:00:00+00:00",
+      "deadline_date": "2026-12-01T15:00:00+00:00",
+      "estimated_amount": 79166.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/733059-2026",
+      "description": "L'accord-cadre a pour objet la mise en ligne et l’hébergement des questionnaires numériques ainsi que le traitement des avis exprimés par le public et les assemblées dans cadre de la consultation sur le projet du Sdage 2028-2033 (documents des enjeux sur l'eau).",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72317000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant cible optimal (79 166 EUR) • Délai court (J-6)."
+      ],
+      "days_remaining": 6
+    },
+    {
+      "id": "26-113753",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Acquisition de licences Office 365",
+      "buyer_name": "Mairie de LENS",
+      "department": "62",
+      "cpv_codes": [
+        "48200000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-24T00:00:00+00:00",
+      "deadline_date": "2026-12-11T12:30:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113753",
+      "description": "Informatique (matériel)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48200000).",
+        "France (département 62) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-16)."
+      ],
+      "days_remaining": 16
+    },
+    {
+      "id": "26-112965",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "GESTION et MAINTENANCE des SYSTEMES d'INFORMATION des COLLEGES PUBLICS de l'AVEYRON",
+      "buyer_name": "DEPARTEMENT DE L'AVEYRON",
+      "department": "12",
+      "cpv_codes": [
+        "50312000",
+        "72514300"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-22T00:00:00+00:00",
+      "deadline_date": "2026-12-21T10:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112965",
+      "description": "Accord-cadre à bons de commande sans minimum et avec maximum de 300,00€ HT mono-attributaire de services\n\nLe candidat est tenu de renseigner au sein du formulaire DC2, les informations relatives au chiffre d’affaires des 3 dernières années aux fins d’appréciation de la capacité financière. Si le candidat est objectivement dans l'impossibilité de produire, pour justifier de sa capacité financière, les informations demandées il peut prouver sa capacité par tout autre document de nature à établir sa capacité (déclaration de banques, preuve d’assurance, notamment).\n\nDéclaration indiquant les effec",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72514300).",
+        "France (département 12) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-26)."
+      ],
+      "days_remaining": 26
+    },
+    {
+      "id": "26-112970",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Acquisition et mise en oeuvre d'une solution Sirh et Paie en mode Saas",
+      "buyer_name": "Loir&Cher Logement",
+      "department": "41",
+      "cpv_codes": [
+        "72212450"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-21T10:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112970",
+      "description": "Informatique (prestations de services), Logiciel",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72212450).",
+        "France (département 41) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-26)."
+      ],
+      "days_remaining": 26
+    },
+    {
+      "id": "26-112299",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Acquisitions aériennes pour le renouvellement d’un PCRS - Plan de Corps de Rue Simplifié – Image et actualisation du référentiel de données 3D du jumeau numérique sur le département de la Vendée",
+      "buyer_name": "Géo Vendée (85)",
+      "department": "85",
+      "cpv_codes": [
+        "71354200",
+        "71354100",
+        "72310000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2027-01-04T07:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112299",
+      "description": "Acquisitions aériennes pour le renouvellement d'un PCRS - Plan de Corps de Rue Simplifié - Image et actualisation du référentiel de données 3D du jumeau numérique sur le département de la Vendée\n\n-Référé précontractuel avant la signature \n-Référé contractuel après la signature du contrat, dans les 31 jours qui suivent la publication de l’avis d’attribution du contrat, ou, à défaut d’un tel avis, dans les six mois qui suivent la date de conclusion de celui-ci \n-Soit d’un recours en contestation de la validité du contrat\n\nAcquisitions aériennes pour le renouvellement d’un PCRS - Plan de Corps de",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72310000).",
+        "France (département 85) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-39)."
+      ],
+      "days_remaining": 39
+    },
+    {
+      "id": "26-112268",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Fourniture, mise en œuvre et exploitation d'une solution de gestion des interactions écrites, de gestion de la connaissance, de self-service et de satisfaction client",
+      "buyer_name": "Centre National d'Enseignement à Distance (Cned)",
+      "department": "86",
+      "cpv_codes": [
+        "48510000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2027-01-04T17:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112268",
+      "description": "Appel d’offres ouvert en application des articles L 2124-2 et R 2161-2 à R 2161-5 du code de la commande publique\n\nFourniture, mise en œuvre et exploitation d'une solution de gestion des interactions écrites, de gestion de la connaissance, de self-service et de satisfaction client\n\nLes prestations s'exécutent principalement dans les locaux du prestataire\n\nPrix (TTC) sur la base du DQE publié\n\nQualité fonctionnelle de la solution dont : Couverture des fonctionnalités attendues (10%) / Gestion des emails (30%) / Gestion du tchat agent (15%) / Gestion du chatbot / self-service (15%) / Gestion des",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48510000).",
+        "France (département 86) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-40)."
+      ],
+      "days_remaining": 40
+    },
+    {
+      "id": "26-113350",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Fourniture de licences et de prestations MICROSOFT-.",
+      "buyer_name": "Communauté d'agglomération Grand Saint-Dizier Der et Vallées",
+      "department": "52",
+      "cpv_codes": [
+        "48920000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-24T00:00:00+00:00",
+      "deadline_date": "2027-01-06T11:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113350",
+      "description": "Se référer au DCE\n\nFourniture de licences et de prestations MICROSOFT\n\nTout document justifiant de la capacité économique et financière ainsi que des capacités techniques et professionnelles\n\nSe reporter au réglement de la consultation\n\nSe référer au CCAP",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48920000).",
+        "France (département 52) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-42)."
+      ],
+      "days_remaining": 42
+    },
+    {
+      "id": "26-111979",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Rénovation de la Gestion Technique Centralisée (GTC) des ouvrages de Foix, Saint-Béat-Lez et du paravalanche H2",
+      "buyer_name": "Direction Interdépartementale des Routes du Sud-Ouest",
+      "department": "9",
+      "cpv_codes": [
+        "72212900"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2027-01-07T11:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111979",
+      "description": "Le présent marché a pour objet la mise à jour de la Gestion Technique Centralisée (GTC) PcVue du tunnel de Saint-Béat-Lez (et du tunnel paravalanche de l'Hospitalet), le basculement de la GTC du tunnel de Foix sur PcVue ainsi que la création d'un simulateur (TO1) et des développements éventuels (TO2).\n\n• RN 20 – Tunnel de Foix dans le département de l’Ariège ;\n    • RN 20 – PC de Saint Paul de Jarrat dans le département de l’Ariège ;\n      • RN 20 – Galerie Paravalanche de L’Hospitalet-près-l’Andorre dans le département de l’Ariège\n  • RN 125 – Tunnel de Saint-Béat-Lez dans le département de l",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72212900).",
+        "France (département 9) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-43)."
+      ],
+      "days_remaining": 43
+    },
+    {
+      "id": "TED:723811-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations associées aux projets du GIP RECIA basés sur des logiciels libres (développements, intégrations, adaptations)",
+      "buyer_name": "GIP RECIA",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-20T15:00:00+00:00",
+      "deadline_date": "2026-11-27T15:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/723811-2026",
+      "description": "Prestations associées aux projets du GIP RECIA basés sur des logiciels libres (développements, intégrations, adaptations)",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 75,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72000000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "TED:716252-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Administration de PLUMH (PLateforme Unifiée de données sur les Milieux Humides)",
+      "buyer_name": "Office Français de la Biodiversité",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72600000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-11-30T15:00:00+00:00",
+      "estimated_amount": 800000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/716252-2026",
+      "description": "Il a pour objet général les prestations d’administration de la plateforme (ensemble de la gestion des utilisateurs, des droits et profils, des données géographiques et alphanumériques, des formulaires de saisie, des anomalies, de la validation et de la diffusion, du contenu éditorial) ; d’animation de la plateforme (assistance aux utilisateurs, création de guides/supports, calcul des indicateurs) ; d’intégration des données aux anciens formats (accompagnement à la transition vers PLUMH, traitements et corrections des données sous l’ancien format).",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 75,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72600000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant élevé (800 000 EUR — lotissement/GME à vérifier) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:714796-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations de service de tierce maintenance applicative pour la solution SIRH HR ACCESS du SDMIS",
+      "buyer_name": "SDMIS",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72250000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-15T15:00:00+00:00",
+      "deadline_date": "2026-11-26T16:00:00+00:00",
+      "estimated_amount": 700000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/714796-2026",
+      "description": "Le marché est conclu pour une durée ferme à compter de sa date de notification jusqu'au 31/12/2028. Les montants pour la durée du marché sont les suivants : MINIMUM HT 350 000 Euros MAXIMUM HT 700 000 Euros",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 73,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (maintenance applicative).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant élevé (700 000 EUR — lotissement/GME à vérifier) • Délai court (J-1)."
+      ],
+      "days_remaining": 1
+    },
+    {
+      "id": "26-112064",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Sécurisation du Système d'Information - Relance du lot n°1 : Remplacement des serveurs de virtualisation et création d'une baie redondée",
+      "buyer_name": "Commune de Petite-Ile",
+      "department": "974",
+      "cpv_codes": [
+        "30200000",
+        "48900000",
+        "48822000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-04T11:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112064",
+      "description": "La présente consultation porte sur LA RELANCE DU LOT N°1 intitulé « Remplacement des serveurs de virtualisation et création d'une baie redondée », du marché relatif à la sécurisation du système d'information, déclaré infructueux à l'issue de la précédente consultation.\nLa cybersécurité constitue aujourd'hui un enjeu majeur pour les collectivités territoriales, en raison de la multiplication des menaces informatiques et de la sensibilité des données traitées. La Directive européenne NIS 2 (Network and Information Security), entrée en vigueur en janvier 2023, impose à de nombreuses entités publi",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 73,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (cybersécurité).",
+        "France (département 974) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-9)."
+      ],
+      "days_remaining": 9
+    },
+    {
+      "id": "26-111857",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "AOO SIE",
+      "buyer_name": "Ministère de l'Intérieur",
+      "department": "75",
+      "cpv_codes": [
+        "48730000",
+        "48151000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2027-01-04T12:00:00+00:00",
+      "estimated_amount": 6791666.67,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111857",
+      "description": "Appel d'offre ouvert\n\nRéalisation et maintenance des services applicatifs relatifs à l'interopérabilité des systèmes d'information européens\n\nLes prestations pourront être exécutées dans les locaux du titulaire et dans les locaux de l'Administration en Ile-de-France et en Ille-et-Vilaine\n\nPerformance environnementale",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 72,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48730000, 48151000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Marché d'envergure (6 791 667 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-40)."
+      ],
+      "days_remaining": 40
+    },
+    {
+      "id": "26-112429",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "QUALIF_FONC_DRASI_2026",
+      "buyer_name": "Région académique d'Ile-de-France",
+      "department": "75",
+      "cpv_codes": [
+        "72267000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2027-01-04T12:00:00+00:00",
+      "estimated_amount": 3500000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112429",
+      "description": "Fourniture de prestations de qualification fonctionnelle pour des applications existantes ou à venir pour la région académique d'Ile de France\n\ncf. règlement de consultation\n\nQUALIF_FONC_DRASI_2026",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 72,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72267000).",
+        "France — Zone prioritaire (département 75, proche Ris-Orangis 91).",
+        "Marché d'envergure (3 500 000 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-40)."
+      ],
+      "days_remaining": 40
+    },
+    {
+      "id": "26-113671",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Fourniture de logiciels, d'éléments d'infrastructure et de prestations de support Oracle en complément du parc existant des bénéficiaires",
+      "buyer_name": "Union des Groupements d'Achats Publics",
+      "department": "77",
+      "cpv_codes": [
+        "48900000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-25T00:00:00+00:00",
+      "deadline_date": "2027-01-08T11:00:00+00:00",
+      "estimated_amount": 230000000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113671",
+      "description": "Fourniture de logiciels, d'éléments d'infrastructure et de prestations de support Oracle en complément du parc existant des bénéficiaires\n\nEffectifs moyens annuels du candidat et l'importance du personnel d'encadrement pour chacune des trois dernières années\n\nChiffre d'affaires global en euro Ht sur les 3 derniers exercices disponibles ou équivalent (en cas d'exercice inférieur ou supérieur à 12 mois, celui-ci est ramené à 12 mois au prorata temporis). Le montant minimum du chiffres d'affaires moyen annuel global  sur les trois derniers exercices disponibles doit être supérieur ou égal à 115 0",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 72,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48900000).",
+        "France — Zone prioritaire (département 77, proche Ris-Orangis 91).",
+        "Marché d'envergure (230 000 000 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-44)."
+      ],
+      "days_remaining": 44
+    },
+    {
+      "id": "TED:739740-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "RÉALISATION DE DISPOSITIFS NUMÉRIQUES POUR L’EXPOSITION TEMPORAIRE – PACIFIQUE, DE NANTES AU GRAND OCÉAN",
+      "buyer_name": "Société publique locale Le Voyage à Nantes",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "92111100",
+        "72212520"
+      ],
+      "procedure_type": "oth-single",
+      "publication_date": "2026-10-26T16:00:00+00:00",
+      "deadline_date": "2026-11-26T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/739740-2026",
+      "description": "L’Acheteur présente, du 26 juin 2027 au 02 janvier 2028, une exposition temporaire intitulée « Pacifique, de Nantes au Grand Océan ». L’organisation de cette exposition temporaire représente une unité fonctionnelle composée de diverses prestations. Le montant total de l’ensemble des prestations cumulées dépasse le seuil de procédure formalisée de 216 000 euros HT. Du fait de la différence de nature des prestations, nous lan-çons des procédures de mises en concurrence distinctes.La présente consultation a pour objet la réalisation de dispositifs numériques pour l’exposition temporaire « Pacifiq",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 71,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72212520).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-1)."
+      ],
+      "days_remaining": 1
+    },
+    {
+      "id": "TED:739674-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations de support de maintenance corrective et évolutive sur les produits SAP BO",
+      "buyer_name": "Conseil régional Auvergne-Rhône-Alpes",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72261000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-26T16:00:00+00:00",
+      "deadline_date": "2026-11-30T15:00:00+00:00",
+      "estimated_amount": 600000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/739674-2026",
+      "description": "Prestations de support de maintenance corrective et évolutive sur les produits SAP BO",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 71,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72261000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant élevé (600 000 EUR — lotissement/GME à vérifier) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:723235-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations d’assistance de gestion documentaire pour le compte de la MREX de l’ASNR.",
+      "buyer_name": "AUTORITE DE SURETE NUCLEAIRE ET DE RADIOPROTECTION",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72312000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-20T15:00:00+00:00",
+      "deadline_date": "2026-12-01T15:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/723235-2026",
+      "description": "Prestations d’assistance de gestion documentaire pour le compte de la MREX de l’ASNR.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 71,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72312000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-6)."
+      ],
+      "days_remaining": 6
+    },
+    {
+      "id": "26-111626",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Réalisation de prestations destinées à l'informatisation de différents domaines d'intervention du Département",
+      "buyer_name": "Conseil Départemental du Pas-de-Calais",
+      "department": "62",
+      "cpv_codes": [
+        "72500000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-19T00:00:00+00:00",
+      "deadline_date": "2027-01-29T15:00:00+00:00",
+      "estimated_amount": 3200000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111626",
+      "description": "Réalisation de prestations destinées à l'informatisation de différents domaines d'intervention du Département\n\nValeur technique\n\nValeur environnementale\n\nLe contrat est reconductible, de manière tacite, 3 fois, par période d'un an chacune, sauf si le Pouvoir Adjudicateur le dénonce par lettre recommandée avec accusé de réception, 3 mois avant la fin de la période en cours",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 69,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72500000).",
+        "France (département 62) — éligible prestation nationale.",
+        "Marché d'envergure (3 200 000 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-65)."
+      ],
+      "days_remaining": 65
+    },
+    {
+      "id": "TED:738468-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Prestations de mise à disposition de personnel intérimaire pour le compte du Centre Départemental Enfance Familles (CDEF)",
+      "buyer_name": "Conseil départemental Loire Atlantique",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "79620000",
+        "79625000",
+        "72611000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-26T16:00:00+00:00",
+      "deadline_date": "2026-11-27T16:00:00+00:00",
+      "estimated_amount": 2500000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/738468-2026",
+      "description": "L'accord-cadre sera exécuté par l'émission de bons de commande. Chaque lot fera l'objet d'une attribution séparée. Les prestations sont réglées par des prix unitaires. Le CDEF assure des missions d'accueil, d'observation et d'orientation dans le cadre du dispositif départemental d'accueil d'urgence de tout enfant en danger ou en risque de l'être, nécessitant une séparation de son environnement familial. Ses structures peuvent être confrontées à des besoins temporaires de personnels afin in d'assurer la continuité dans la prise en charge des enfants, dans le respect du cadre réglementaire, ils ",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 59,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72611000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Marché d'envergure (2 500 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "TED:720471-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "EXTERNALISATION DE LA GESTION DE LA TFPB",
+      "buyer_name": "Centrale D'achats Habitat Réuni (75)",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "48410000",
+        "66170000",
+        "66171000"
+      ],
+      "procedure_type": "neg-w-call",
+      "publication_date": "2026-10-19T15:00:00+00:00",
+      "deadline_date": "2026-11-30T16:00:00+00:00",
+      "estimated_amount": 5000000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/720471-2026",
+      "description": "La consultation a pour objet de sélectionner, pour le compte d'Habitat Réuni et des organismes associés participants, un ou plusieurs prestataires chargés de la gestion, de l'optimisation et du suivi de la taxe foncière sur les propriétés bâties (TFPB), en deux lots : o Lot 1 : mise à disposition d'une solution digitale de gestion de la fiscalité foncière bâtie (service SaaS). o Lot 2 : identification, dépôt et suivi des dégrèvements TFPB, optimisation et sécurisation des exonérations, et accompagnement des équipes vers l'autonomie, en quatre volets (A : dossiers simples, B : dossiers complexe",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 59,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48410000).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Marché d'envergure (5 000 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:723052-2026",
+      "source": "TED",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Assistance aux projets informatiques de la DSI du GIP-MDS",
+      "buyer_name": "GIP MDS",
+      "department": "FR-EU",
+      "cpv_codes": [
+        "72220000",
+        "72222300"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-20T15:00:00+00:00",
+      "deadline_date": "2026-12-04T15:00:00+00:00",
+      "estimated_amount": 7000000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/723052-2026",
+      "description": "Cette procédure a pour objet l'assistance aux projets informatiques de la DSI du GIP-MDS Elle est allotie comme suit: - Lot 1 : Assistance technique architecture. Cet accord-cadre est conclu avec 3 titulaires (sous réserve d'un nombre suffisant de candidats et d'offres). - Lot 2 : Assistance qualification de performance. Cet accord-cadre est conclu avec 3 titulaires (sous réserve d'un nombre suffisant de candidats et d'offres). Il s'agit d'un l'appel d'offres ouvert sous la forme d'un accord-cadre multi-attributaires",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 59,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72220000, 72222300).",
+        "France (département FR-EU) — éligible prestation nationale.",
+        "Marché d'envergure (7 000 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-9)."
+      ],
+      "days_remaining": 9
+    },
+    {
+      "id": "26-113147",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "CHANGEMENT DU SERVEUR D'ENREGISTREMENT DE VIDEOPROTECTION, DU LOGICIEL DE VISIONNAGE ET DU POSTE OPERATEUR",
+      "buyer_name": "MAIRIE du CHAMBON-FEUGEROLLES",
+      "department": "42",
+      "cpv_codes": [],
+      "procedure_type": "Procédure Adaptée",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-09T13:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113147",
+      "description": "Informatique (maintenance serveurs et réseaux)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 42) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-14)."
+      ],
+      "days_remaining": 14
+    },
+    {
+      "id": "26-112438",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Travaux d'installation d'une PAC sur le site de Bruges de l'Urssaf Aquitaine",
+      "buyer_name": "URSSAF AQUITAINE",
+      "department": "33",
+      "cpv_codes": [
+        "30200000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-19T00:00:00+00:00",
+      "deadline_date": "2026-12-10T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-112438",
+      "description": "Informatique (matériel)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 33) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-15)."
+      ],
+      "days_remaining": 15
+    },
+    {
+      "id": "26-113937",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Marché de service pour l'exécution de la mission de Maintenance Informatique - Fourniture de Logiciel",
+      "buyer_name": "Ametarra spl",
+      "department": "20A",
+      "cpv_codes": [],
+      "procedure_type": "Procédure Adaptée",
+      "publication_date": "2026-11-24T00:00:00+00:00",
+      "deadline_date": "2026-12-17T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113937",
+      "description": "Informatique (prestations de services)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 20A) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-22)."
+      ],
+      "days_remaining": 22
+    },
+    {
+      "id": "26-111956",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Renouvellement locatif du parc informatique et prestations de maintenance associées",
+      "buyer_name": "Mairie de Saint Laurent Médoc",
+      "department": "33",
+      "cpv_codes": [
+        "30200000",
+        "50312000",
+        "50312410",
+        "50312300"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-18T11:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-111956",
+      "description": "Fourniture en location, livraison, installation, mise en service et maintenance du parc informatique de la commune de Saint-Laurent-Médoc et du Centre Communale d'Action Sociale",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 33) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-113040",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "26F1099_PUBLIK",
+      "buyer_name": "Mairie de Cannes",
+      "department": "6",
+      "cpv_codes": [],
+      "procedure_type": "Procédure Adaptée",
+      "publication_date": "2026-11-20T00:00:00+00:00",
+      "deadline_date": "2026-12-18T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113040",
+      "description": "Logiciel, Informatique (maintenance serveurs et réseaux)",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 6) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-23)."
+      ],
+      "days_remaining": 23
+    },
+    {
+      "id": "26-113496",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Maintenance informatique du parc de la Ville de Thuir",
+      "buyer_name": "Mairie de Thuir",
+      "department": "66",
+      "cpv_codes": [
+        "50312000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-23T00:00:00+00:00",
+      "deadline_date": "2026-12-21T12:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113496",
+      "description": "Informatique (prestations de services), Maintenance",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 66) — éligible prestation nationale.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-26)."
+      ],
+      "days_remaining": 26
+    },
+    {
+      "id": "26-113764",
+      "source": "BOAMP",
+      "region": "FR",
+      "country": "FRA",
+      "title": "Acquisition et fourniture de postes informatiques, équipements associés et prestations associées",
+      "buyer_name": "Etablissement Public du Commerce et de l'Industrie de Corse",
+      "department": "20B",
+      "cpv_codes": [
+        "30200000"
+      ],
+      "procedure_type": "Procédure Ouverte",
+      "publication_date": "2026-11-25T00:00:00+00:00",
+      "deadline_date": "2026-12-28T09:00:00+00:00",
+      "estimated_amount": 800000.0,
+      "currency": "EUR",
+      "url": "https://www.boamp.fr/pages/avis/?q=idweb:26-113764",
+      "description": "L'accord-cadre sera exécuté par l'émission de bons de commande.\nLes prestations sont réglées par des prix unitaires.\nLes montants estimatifs sont indicatifs et comprennent la totalité des périodes de reconduction\n\nL'exécution des prestations débute à compter de la date de notification du contrat.\nAucune clause de garantie financière prévue.\nAucune avance prévue.\nLes prix sont révisables.\nLe paiement des prestations se fera dans le respect du délai global de paiement applicable à l'acheteur.\nLa consultation comporte des conditions d'exécution à caractère social et environnemental détaillées au ",
+      "attribution": "source: DILA - BOAMP, Licence Ouverte 2.0",
+      "suitability_score": 55,
+      "suitability_summary": [
+        "Correspondance IT générale — vérifier le périmètre technique.",
+        "France (département 20B) — éligible prestation nationale.",
+        "Montant élevé (800 000 EUR — lotissement/GME à vérifier) • Délai confortable (J-33)."
+      ],
+      "days_remaining": 33
+    },
+    {
+      "id": "TED:708362-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Doorontwikkeling en beheer Dynamics 365 en Power Platform – Grond365 & Lood365",
+      "buyer_name": "Gemeente Amsterdam",
+      "department": "NLD",
+      "cpv_codes": [
+        "72000000",
+        "72200000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-14T15:00:00+00:00",
+      "deadline_date": "2026-12-10T00:00:00+00:00",
+      "estimated_amount": 1750000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/708362-2026",
+      "description": "De applicaties Grond365 en Lood365 ondersteunen de werkprocessen binnen de afdeling Bodem van de gemeente Amsterdam. Grond365 vormt het zwaartepunt: deze applicatie zorgt voor de vastlegging van voorraadbeheer, logistieke processen en wettelijk verplichte gegevens rondom grondverzet. Amsterdam verplaatst en hergebruikt jaarlijks grote hoeveelheden grond via depots met weegbruggen; de applicatie ondersteunt dit proces van aanvraag tot facturering. Lood365 is een aparte applicatie op hetzelfde platform, gericht op het beheer en de uitwisseling van gegevens. Deze applicatie zorgt voor de vastlegg",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 83,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72000000, 72200000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant élevé (1 750 000 EUR — lotissement/GME à vérifier) • Délai confortable (J-14)."
+      ],
+      "days_remaining": 14
+    },
+    {
+      "id": "TED:717326-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Applicant Tracking Software",
+      "buyer_name": "Gemeente Helmond",
+      "department": "NLD",
+      "cpv_codes": [
+        "72000000",
+        "72200000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-10T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/717326-2026",
+      "description": "De opdracht omvat het contracteren van een leverancier voor de levering, implementatie en onderhoud van een Applicant Tracking System (Recruitmentsoftware) inclusief interne vacaturepagina. De overeenkomst wordt aangegaan voor de duur van twee jaar. Optioneel kan gemeente Helmond eenzijdig besluiten de overeenkomst met vier keer twee jaar te verlengen.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 83,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72000000, 72200000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-15)."
+      ],
+      "days_remaining": 15
+    },
+    {
+      "id": "TED:713113-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "SaaS-ICT-oplossing voor Burgerzaken, gemeente Voorst-2026",
+      "buyer_name": "Gemeente Voorst",
+      "department": "NLD",
+      "cpv_codes": [
+        "72260000",
+        "48000000",
+        "72000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-15T15:00:00+00:00",
+      "deadline_date": "2026-12-21T00:00:00+00:00",
+      "estimated_amount": 1234567.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/713113-2026",
+      "description": "Gemeente Voorst besteedt vanwege het aflopen van de huidige overeenkomst via een openbare Europese procedure nieuwe een SaaS-ICT-oplossing voor Burgerzaken aan. De opdracht omvat de levering, implementatie en het gebruik van een integrale SaaS-oplossing, inclusief conversie, koppelingen, technisch beheer, onderhoud en support. De gemeente sluit hiervoor één overeenkomst met één opdrachtnemer, die gedurende de gehele looptijd als centraal aanspreekpunt fungeert. De overeenkomst heeft een initiële looptijd van vijf jaar en kan vijfmaal met twee jaar worden verlengd, tot maximaal vijftien jaar. D",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 83,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000, 72000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant élevé (1 234 567 EUR — lotissement/GME à vérifier) • Délai confortable (J-25)."
+      ],
+      "days_remaining": 25
+    },
+    {
+      "id": "TED:706105-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "GemeentePas gemeenten Veenendaal, Rhenen en Renswoude",
+      "buyer_name": "Gemeente Veenendaal",
+      "department": "NLD",
+      "cpv_codes": [
+        "48000000",
+        "72000000",
+        "85300000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2026-11-30T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/706105-2026",
+      "description": "Sinds december 2021 bieden de gemeenten Veenendaal, Rhenen en Renswoude gezamenlijk een gemeentePas aan voor inwoners met een laag inkomen. Met de gemeentePas willen de gemeenten Veenendaal (VeenendaalPas), Rhenen (CuneraPas) en Renswoude (GrebbePas) meer mogelijkheden bieden voor inwoners met een laag inkomen. Met de gemeentePas wordt meedoen voor (financieel) kwetsbare inwoners makkelijker. In 2025 (= referentiejaar) ging het voor de drie gemeenten gezamenlijk om ongeveer 2.100 af te handelen aanvragen (a + b) en waren er einde van het pasjaar circa 4.850 pashouders. Van de pashouders wordt ",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000, 72000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:706710-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Raamovereenkomst Netwerkbeheer, SOC-dienstverlening & Projectondersteuning netwerk en -security",
+      "buyer_name": "Gemeente Pijnacker-Nootdorp",
+      "department": "NLD",
+      "cpv_codes": [
+        "72315000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2027-01-20T00:00:00+00:00",
+      "estimated_amount": 450000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/706710-2026",
+      "description": "De opdracht betreft het leveren van netwerkbeheer (kantooruren) , SOC-diensten (24x7) en ondersteuning bij projecten voor de gemeentelijke netwerk-/securityomgeving.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 77,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72315000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant cible optimal (450 000 EUR) • Délai confortable (J-55)."
+      ],
+      "days_remaining": 55
+    },
+    {
+      "id": "TED:716540-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "DEU",
+      "title": "Externe Beratung Microsoft Cloud",
+      "buyer_name": "Berufsgenossenschaft Holz und Metall",
+      "department": "DEU",
+      "cpv_codes": [
+        "72000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-11-26T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/716540-2026",
+      "description": "Die Auftraggeberin hat mit Unterstützung eines externen Beraterteams begonnen, Microsoft (MS) M365 und MS Azure zur vollumfänglichen Nutzung bei einem Sozialversicherungsträger einzuführen. Zur Fortführung der Konfiguration und den Support unserer Fachbereiche wird ein erfahrenes und leistungsfähiges externes Beratungsteam benötigt. Das kalkulatorische Gesamtvolumen für 4 Jahre beträgt 2.000.000 € (netto) und ist auf die vollständige System-Konfiguration sowie den Support unserer Fachbereiche ausgerichtet. Dies stellt den Höchstbetrag dar, der ohne Rechtsfolgen unter- und im Rahmen des rechtli",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 75,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (cloud, 72000000).",
+        "Union Européenne (DEU) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-1)."
+      ],
+      "days_remaining": 1
+    },
+    {
+      "id": "TED:717034-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "AUT",
+      "title": "Abschluss einer Rahmenvereinbarung - Testkoordination und Testdurchführung zur Qualitätssicherung digitaler Entwicklungsprojekte zur Unterstützung der Aktivitäten des Wiener Tourismusverbands (WTV)",
+      "buyer_name": "Wiener Tourismusverband",
+      "department": "AUT",
+      "cpv_codes": [
+        "72000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-11-30T15:00:00+00:00",
+      "estimated_amount": 500000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/717034-2026",
+      "description": "Abschluss einer Rahmenvereinbarung - Testkoordination und Testdurchführung zur Qualitätssicherung digitaler Entwicklungsprojekte zur Unterstützung der Aktivitäten des Wiener Tourismusverbands (WTV)",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 75,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72000000).",
+        "Union Européenne (AUT) — marché transfrontalier IT/cloud.",
+        "Montant cible optimal (500 000 EUR) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:702815-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Managed Services en Consultancy voor de ServiceNow Omgeving",
+      "buyer_name": "Luchtverkeersleiding Nederland",
+      "department": "NLD",
+      "cpv_codes": [
+        "72000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2026-11-30T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/702815-2026",
+      "description": "LVNL wenst één geschikte dienstverlener te selecteren die LVNL zelfstandig en langdurig kan ondersteunen bij het beheer, onderhoud en de doorontwikkeling van het ServiceNow-platform, inclusief de daarop gebaseerde modules, scoped applicaties en integraties. De nadruk ligt op het waarborgen van continuïteit, beschikbaarheid, kwaliteit, veiligheid en toekomstbestendigheid van het platform. De dienstverlener levert hiervoor specialistische ondersteuningsdiensten in de vorm van Managed Services voor beheer en Consultancy voor doorontwikkeling. Van de leverancier wordt verwacht dat deze optreedt al",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 75,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (managed services, 72000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:713824-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "IAM/IGA Oplossing",
+      "buyer_name": "Veiligheidsregio Utrecht",
+      "department": "NLD",
+      "cpv_codes": [
+        "48000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-15T15:00:00+00:00",
+      "deadline_date": "2026-12-14T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/713824-2026",
+      "description": "De VRU heeft de intentie om Identity and Access Management (IAM) en Identity Governance and Administration(IGA) Oplossing in te kopen conform de vereisten beschreven in dit Beschrijvend Document en de bijbehorende bijlages. nvt",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 75,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-19)."
+      ],
+      "days_remaining": 19
+    },
+    {
+      "id": "TED:705872-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "CHE",
+      "title": "ITAM - Remplacement Discovery",
+      "buyer_name": "Etat de Vaud, DGNSI - Direction générale du numérique et des systèmes d'information",
+      "department": "CHE",
+      "cpv_codes": [
+        "48000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2026-11-27T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/705872-2026",
+      "description": "Acquisition d'une solution du marché pour le remplacement de la solution Discovery permettant de mettre à jour un référentiel précis et complet des ressources IT (matériel, logiciel).",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 74,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne francophone (CHE) — forte accessibilité.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "TED:703208-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "CHE",
+      "title": "Ersatzbeschaffung von ICT-Endgeräten der Primarschule Dübendorf",
+      "buyer_name": "Primarschule Dübendorf",
+      "department": "CHE",
+      "cpv_codes": [
+        "48000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2026-12-03T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/703208-2026",
+      "description": "Die Primarschule Dübendorf beschafft im Rahmen einer Einmalbeschaffung neue ICT-Endgeräte für Schülerinnen und Schüler sowie Mitarbeitende. Die Ausschreibung ist in zwei Lose gegliedert. Der Leistungsumfang umfasst je Los die einmalige Lieferung der Geräte an einen zentralen Standort der Primarschule Dübendorf (Lieferung bis ins Zimmer), das Auspacken inkl. fachgerechter Entsorgung des Verpackungsmaterials, die Garantie- und Reparaturabwicklung über einen Service-Desk sowie die Sicherstellung der Verfügbarkeit funktionsäquivalenter Modelle während der Einsatzdauer. Die Standardgarantie von 24 ",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 74,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne francophone (CHE) — forte accessibilité.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-8)."
+      ],
+      "days_remaining": 8
+    },
+    {
+      "id": "TED:715403-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "POL",
+      "title": "DOPOSAŻENIE W RAMACH PROJEKTU „ZAWODY PRZYSZŁOŚCI” UMOWA NR FELD.08.08-IZ.00-0017/24-00",
+      "buyer_name": "Zespół Szkół Techniczno-Informatycznych im. Jana Nowaka-Jeziorańskiego w Łodzi",
+      "department": "POL",
+      "cpv_codes": [
+        "39162100",
+        "30000000",
+        "72000000",
+        "30200000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-11-26T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/715403-2026",
+      "description": "Część 1 zamówienia: Drony Drony (2 szt) Część 2 zamówienia: Oprogramowanie Adobe Oprogramowanie Adobe Creative Cloud All Apps– licencja Subskrypcja 48 miesięcy na 17 stanowisk dla jednostki edukacyjnej / instytucji publicznej Część 3 zamówienia: klawiatury Klawiatury (15 szt.) Zamawiający określa minimalne parametry techniczne. Dopuszcza sprzęt równoważny. Równoważność oznacza możliwość zaoferowania przez wykonawcę produktów o innych znakach towarowych, patentach lub pochodzeniu, natomiast o takich samych właściwościach wymaganych przez zamawiającego. Przedmiot zamówienia należy zrealizować w ",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 72,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (cloud, 72000000).",
+        "Union Européenne (POL) — vérifier exigences linguistiques.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-1)."
+      ],
+      "days_remaining": 1
+    },
+    {
+      "id": "TED:717080-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "POL",
+      "title": "Dostawa oprogramowania do zarządzania i monitorowania przełącznikami",
+      "buyer_name": "Katowickie Centrum Onkologii",
+      "department": "POL",
+      "cpv_codes": [
+        "48000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2027-01-13T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/717080-2026",
+      "description": "1. Przedmiotem zamówienia jest Dostawa oprogramowania do zarządzania i monitorowania przełącznikami, zgodnie z Załącznikiem Nr 2 do SWZ – Oferta Cenowa oraz Parametry techniczno-funkcjonalne, które określone zostały w Załączniku Nr 4 do SWZ Zadanie będzie współfinansowane w ramach Projektu współfinansowanego ze środków Programu Fundusze Europejskie dla Śląskiego 2021-2027 nr FESL.08.05-IZ.01-224/25 Priorytet VIII Fundusze Europejskie na infrastrukturę dla mieszkańca Działanie 8.5 E-zdrowie",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 72,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne (POL) — vérifier exigences linguistiques.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-49)."
+      ],
+      "days_remaining": 49
+    },
+    {
+      "id": "TED:702602-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Platform voor publicatie",
+      "buyer_name": "St. Nederlandse Lokale Publieke Omroepen",
+      "department": "NLD",
+      "cpv_codes": [
+        "72230000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2026-12-16T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/702602-2026",
+      "description": "Deze opdracht omvat – kort gezegd – het ontwerpen, ontwikkelen, implementeren en ondersteunen van één platform voor publicatie voor alle lokale publieke omroepen met player en bijbehorend CDN. Dit platform omvat een web- en appomgeving en daarnaast ook het ontwerpen en realiseren van de gebruikersinterface en inclusief frontend van de website en mobiele applicatie en CMS-interface voor redactie, die wordt aangestuurd vanuit één centraal CMS waarmee redacties hun content kunnen beheren en publiceren. Het platform moet schaalbaar, veilig en toekomstbestendig zijn en ruimte bieden voor lokale red",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 71,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72230000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-21)."
+      ],
+      "days_remaining": 21
+    },
+    {
+      "id": "TED:701477-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "DEU",
+      "title": "Vertriebspartnerschaft KI-Produkte",
+      "buyer_name": "Dataport AöR",
+      "department": "DEU",
+      "cpv_codes": [
+        "72260000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2029-10-08T15:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/701477-2026",
+      "description": "Dieser Vertrag regelt die Kooperation der Vertragsparteien im Rahmen des Vertriebes der KI-Produkte, insbesondere die dafür erforderlichen Leistungen des Auftragnehmers. Der Auftraggeber beauftragt den Auftragnehmer mit dem Vertrieb der KI-Produkte und dem Nachweis entsprechender Interessenten oder mit der Vermittlung eines Vertragsabschlusses über die KI-Produkte. Der Auftragnehmer wird für den Auftraggeber, bezogen auf die KI-Produkte und den damit zusammenhängenden Leistungen, ausschließlich als Vermittler tätig und tritt gegenüber den Zielkunden auch als solcher auf. Ein Vertrag über die K",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 71,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72260000).",
+        "Union Européenne (DEU) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-1048)."
+      ],
+      "days_remaining": 1048
+    },
+    {
+      "id": "TED:703067-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "AUT",
+      "title": "Rahmenvereinbarung über die Vermittlung / Lieferung von Software-Lizenzen (kurz: „WrWKS_Software-Lizenzen“)",
+      "buyer_name": "Stadt Wien - Wiener Wohnen Kundenservice GmbH",
+      "department": "AUT",
+      "cpv_codes": [
+        "48000000",
+        "48218000",
+        "72260000",
+        "72266000"
+      ],
+      "procedure_type": "neg-w-call",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2026-11-25T15:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/703067-2026",
+      "description": "Ziel dieses Vergabeverfahrens ist der Abschluss einer Rahmenvereinbarung (RV) mit einem Unternehmer über die Vermittlung bzw. Lieferung von Softwareprodukten und Software-Lizenzen für diverse Softwareprodukte einschließlich Beratung, Prüfung, ggf. Verhandlung und Management von Lizenzen für den AG.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 69,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne (AUT) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-0)."
+      ],
+      "days_remaining": 0
+    },
+    {
+      "id": "TED:703946-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Gegevensbroker gemeente Nijkerk",
+      "buyer_name": "Gemeente Nijkerk",
+      "department": "NLD",
+      "cpv_codes": [
+        "72000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2026-11-27T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/703946-2026",
+      "description": "De gemeente Nijkerk is voornemens een overeenkomst te sluiten met één (1) partij m.b.t. gegevensbrokerdiensten. 0",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 69,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "TED:704513-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Aanbesteding VTH zaaksysteem",
+      "buyer_name": "RegIT",
+      "department": "NLD",
+      "cpv_codes": [
+        "72260000",
+        "48000000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2026-11-30T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/704513-2026",
+      "description": "De gemeenten Oldambt en Veendam zijn voornemens om beiden een eigen Overeenkomst aan te gaan met één Opdrachtnemer voor de levering (inclusief het gebruiksrecht), de implementatie, het beheer en het onderhoud van een VTH-zaaksysteem. De gemeenten Oldambt en Veendam beogen een langdurig partnership hieromtrent aan te gaan. Bodem: 625.000 euro Plafond: 1.820.000 euro",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 69,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:715609-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "POL",
+      "title": "Zakup nowych zeroemisyjnych, elektrycznych autobusów do obsługi komunikacji publicznej",
+      "buyer_name": "Przedsiębiorstwo Wielobranżowe Transkom Sp. z o.o.",
+      "department": "POL",
+      "cpv_codes": [
+        "34144910",
+        "34121400",
+        "34121100",
+        "80500000",
+        "48813200"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-11T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/715609-2026",
+      "description": "4.1. Przedmiotem zamówienia jest dostawa fabrycznie nowych autobusów miejskich niskopodłogowych zasilanych energią elektryczną. Zamówienie podzielone jest na dwie części: 4.1.1. 1 część zamówienia dotyczy dostawy 2 szt. autobusów miejskich niskopodłogowych, klasy MIDI zasilanych energią elektryczną, o całkowitej długości w przedziale od 8,5 m do 9,5 m. Informacja o przedmiocie zamówienia została zawarta w załączniku nr 1A do SWZ – opis przedmiotu zamówienia, 4.1.2. 2 część zamówienia dotyczy dostawy 2 szt. autobusów miejskich niskopodłogowych zasilanych energią elektryczną, o całkowitej długoś",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 68,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48813200).",
+        "Union Européenne (POL) — vérifier exigences linguistiques.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-16)."
+      ],
+      "days_remaining": 16
+    },
+    {
+      "id": "TED:715186-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "POL",
+      "title": "Zakup i wdrożenie systemu finansowo-księgowego",
+      "buyer_name": "BANKOWY FUNDUSZ GWARANCYJNY",
+      "department": "POL",
+      "cpv_codes": [
+        "72416000",
+        "72268000",
+        "72263000",
+        "64227000",
+        "72253200"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-15T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/715186-2026",
+      "description": "Przedmiotem zamówienia jest zakup i wdrożenie systemu w zakresie obsługi finansowo-księgowej, zarządzania budżetem oraz sprawozdawczością finansową, płacowo-kadrowej, obsługi papierów wartościowych oraz zarządzania środkami trwałymi – SFK, obejmujące migrację danych oraz integrację z wewnętrznymi i zewnętrznymi systemami wykorzystywanymi w Bankowym Funduszu Gwarancyjnym (BFG). Szczegółowy opis przedmiotu zamówienia, warunki i zasady oraz zakres i wymagania dotyczące realizacji zamówienia zostały określone w Załączniku nr 1 do SWZ – Opis Przedmiotu Zamówienia i w Załączniku nr 3 do SWZ – Projek",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 68,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72416000, 72268000, 72263000).",
+        "Union Européenne (POL) — vérifier exigences linguistiques.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-20)."
+      ],
+      "days_remaining": 20
+    },
+    {
+      "id": "TED:715992-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "POL",
+      "title": "Rozbudowa posiadanego systemu serwera aplikacyjnego syngo.via SN 130654 o dedykowane funkcjonalności do planowania radioterapii na podstawie badań rezonansu magnetycznego",
+      "buyer_name": "Katowickie Centrum Onkologii",
+      "department": "POL",
+      "cpv_codes": [
+        "48180000",
+        "72250000",
+        "72230000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2027-01-11T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/715992-2026",
+      "description": "1. Przedmiotem zamówienia jest Rozbudowa posiadanego systemu serwera aplikacyjnego syngo.via SN 130654 o dedykowane funkcjonalności do planowania radioterapii na podstawie badań rezonansu magnetycznego, zgodnie z Załącznikiem Nr 2 do SWZ – Oferta Cenowa. 2. Parametry techniczno-funkcjonalne określone zostały w Załączniku Nr 4 do SWZ 3. Przedmiot zamówienia obejmuje rozbudowę o poniższe dodatkowe funkcjonalności: 1 – Oprogramowanie do generowania syntetycznych map gęstości. 2 – Oprogramowanie do segmentacji struktur anatomicznych na obrazach rezonansu magnetycznego (MR). Zadanie będzie współfin",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 68,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48180000, 72250000, 72230000).",
+        "Union Européenne (POL) — vérifier exigences linguistiques.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai confortable (J-47)."
+      ],
+      "days_remaining": 47
+    },
+    {
+      "id": "TED:716829-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "ESP",
+      "title": "Contrato mixto de suministro y servicios para la modernización de la infraestructura tecnológica de Zaragoza Vivienda S.L.U.",
+      "buyer_name": "Consejo de Administración de la Sociedad Municipal Zaragoza Vivienda, S.L.U. (Medio Propio)",
+      "department": "ESP",
+      "cpv_codes": [
+        "48800000",
+        "30236000",
+        "50324100",
+        "72130000",
+        "72211000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-01T16:00:00+00:00",
+      "estimated_amount": 1904700.42,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/716829-2026",
+      "description": "Suministro y servicio de implantación, configuración, puesta en funcionamiento, soporte y mantenimiento de una solución tecnológica integral destinada a la modernización de la infraestructura tecnológica de Zaragoza Vivienda, con el fin de mejorar la continuidad operativa, la disponibilidad, la seguridad y la capacidad de evolución de sus sistemas de información. La nueva infraestructura deberá facilitar la migración ordenada de los servicios existentes, minimizar las interrupciones y preservar las inversiones aprovechables, sin que la tecnología actualmente implantada determine necesariamente",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 65,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48800000, 72130000, 72211000).",
+        "Union Européenne (ESP) — marché transfrontalier IT/cloud.",
+        "Montant élevé (1 904 700 EUR — lotissement/GME à vérifier) • Délai court (J-6)."
+      ],
+      "days_remaining": 6
+    },
+    {
+      "id": "TED:717316-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "DEU",
+      "title": "HR-Plattform",
+      "buyer_name": "Zweckverband Abfallwirtschaft Region Trier",
+      "department": "DEU",
+      "cpv_codes": [
+        "48450000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-04T16:00:00+00:00",
+      "estimated_amount": null,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/717316-2026",
+      "description": "Bereitstellung einer neuen, mehrmandantenfähigen Personalsoftwarelösung",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 65,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48450000).",
+        "Union Européenne (DEU) — marché transfrontalier IT/cloud.",
+        "Montant non publié (vérifier seuil MAPA / BPU) • Délai court (J-9)."
+      ],
+      "days_remaining": 9
+    },
+    {
+      "id": "TED:702439-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "BEL",
+      "title": "FOURNITURE DE SERVEURS EN ACHAT ET LOCATION OPÉRATIONNELLE SANS OPTION D'ACHAT ET ACCESSOIRES SERVEURS EN ACHAT",
+      "buyer_name": "PROVINCE DU HAINAUT, OFFICE CENTRAL DES ACHATS",
+      "department": "BEL",
+      "cpv_codes": [
+        "48820000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2027-01-13T16:00:00+00:00",
+      "estimated_amount": 2134600.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/702439-2026",
+      "description": "FOURNITURE DE SERVEURS EN ACHAT ET LOCATION OPÉRATIONNELLE SANS OPTION D'ACHAT ET ACCESSOIRES SERVEURS EN ACHAT",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 64,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48820000).",
+        "Union Européenne francophone (BEL) — forte accessibilité.",
+        "Marché d'envergure (2 134 600 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-49)."
+      ],
+      "days_remaining": 49
+    },
+    {
+      "id": "TED:715775-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "CYP",
+      "title": "UCY-2026-036-ΥΠΥ - Μίσθωση πολυμηχανημάτων για κάλυψη των εκτυπωτικών αναγκών του Πανεπιστημίου Κύπρου",
+      "buyer_name": "Πανεπιστήμιο Κύπρου",
+      "department": "CYP",
+      "cpv_codes": [
+        "30121100",
+        "42962000",
+        "42991200",
+        "48773000",
+        "48970000",
+        "79800000",
+        "79810000",
+        "79811000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-01T14:00:00+00:00",
+      "estimated_amount": 1385000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/715775-2026",
+      "description": "Μίσθωση πολυμηχανημάτων για κάλυψη των εκτυπωτικών αναγκών του Πανεπιστημίου Κύπρου",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 62,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (48773000, 48970000).",
+        "Union Européenne (CYP) — vérifier exigences linguistiques.",
+        "Montant élevé (1 385 000 EUR — lotissement/GME à vérifier) • Délai court (J-6)."
+      ],
+      "days_remaining": 6
+    },
+    {
+      "id": "TED:716453-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "MLT",
+      "title": "CT2274/2026 - Services - Tender for the Implementation of a Fully Compliant European Digital Identity Wallet (EUDIW), Supporting Trust Ecosystem and use cases for the Malta Digital Innovation Authority (MDIA)",
+      "buyer_name": "Department of Contracts",
+      "department": "MLT",
+      "cpv_codes": [
+        "72212900",
+        "48000000",
+        "48100000",
+        "48422000",
+        "48517000",
+        "48700000",
+        "48983000",
+        "48900000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-16T15:00:00+00:00",
+      "deadline_date": "2026-12-09T15:00:00+00:00",
+      "estimated_amount": 15659714.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/716453-2026",
+      "description": "CT2274/2026 - Services - Tender for the Implementation of a Fully Compliant European Digital Identity Wallet (EUDIW), Supporting Trust Ecosystem and use cases for the Malta Digital Innovation Authority (MDIA)",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 60,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (48000000).",
+        "Union Européenne (MLT) — vérifier exigences linguistiques.",
+        "Marché d'envergure (15 659 714 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-14)."
+      ],
+      "days_remaining": 14
+    },
+    {
+      "id": "TED:700856-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "ITA",
+      "title": "Servizi di Maintenance Applicativa_Reti e Piattaforme",
+      "buyer_name": "RAI - Radiotelevisione Italiana S.p.A. - A/TEI/INT",
+      "department": "ITA",
+      "cpv_codes": [
+        "72222200"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-12T15:00:00+00:00",
+      "deadline_date": "2026-12-14T15:00:00+00:00",
+      "estimated_amount": 8333900.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/700856-2026",
+      "description": "Servizi di Maintenance Applicativa_Reti e Piattaforme",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 59,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72222200).",
+        "Union Européenne (ITA) — marché transfrontalier IT/cloud.",
+        "Marché d'envergure (8 333 900 EUR — groupement/sous-traitance recommandé) • Délai confortable (J-19)."
+      ],
+      "days_remaining": 19
+    },
+    {
+      "id": "TED:711044-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Digitale toegankelijkheid; onderzoek en ondersteuning bij verbetering en borging",
+      "buyer_name": "Ministerie van Infrastructuur en Waterstaat",
+      "department": "NLD",
+      "cpv_codes": [
+        "72800000",
+        "72000000",
+        "79212200",
+        "79212300"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-14T15:00:00+00:00",
+      "deadline_date": "2026-11-30T16:00:00+00:00",
+      "estimated_amount": 2250000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/711044-2026",
+      "description": "De onderhavige Aanbesteding betreft het uitvoeren van digitale toegankelijkheidsonderzoeken van websites en applicaties, en het begeleiden van de Opdrachtgever bij het structureel verbeteren en borgen van de digitale toegankelijkheid binnen het Ministerie. De geraamde omvang van de opdracht bedraagt tussen € 1.500.000,00 en € 2.250.000,00 exclusief btw.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 57,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72000000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Marché d'envergure (2 250 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:712627-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "ITA",
+      "title": "Gara europea a procedura aperta indetta ai sensi del D.Lgs.36/2023 per l’affidamento del servizio di realizzazione, gestione ed evoluzione del nuovo Ecosistema Digitale del Turismo Regionale",
+      "buyer_name": "Liguria Digitale S.p.A.",
+      "department": "ITA",
+      "cpv_codes": [
+        "72500000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-15T15:00:00+00:00",
+      "deadline_date": "2026-11-30T16:00:00+00:00",
+      "estimated_amount": 3005000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/712627-2026",
+      "description": "Gara europea a procedura aperta indetta ai sensi del D.Lgs.36/2023 per l’affidamento del servizio di realizzazione, gestione ed evoluzione del nuovo Ecosistema Digitale del Turismo Regionale",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 57,
+      "suitability_summary": [
+        "Forte adéquation métier IT/MSP (72500000).",
+        "Union Européenne (ITA) — marché transfrontalier IT/cloud.",
+        "Marché d'envergure (3 005 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-5)."
+      ],
+      "days_remaining": 5
+    },
+    {
+      "id": "TED:706725-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "ITA",
+      "title": "Sviluppo dei sistemi informativi per la sala operativa unica di FERROVIENORD (SOU)",
+      "buyer_name": "FERROVIENORD SOCIETA' PER AZIONI",
+      "department": "ITA",
+      "cpv_codes": [
+        "72230000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2026-11-27T15:00:00+00:00",
+      "estimated_amount": 15000000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/706725-2026",
+      "description": "Sviluppo dei sistemi informativi per la sala operativa unica di FERROVIENORD (SOU)",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 53,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72230000).",
+        "Union Européenne (ITA) — marché transfrontalier IT/cloud.",
+        "Marché d'envergure (15 000 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    },
+    {
+      "id": "TED:706551-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "NLD",
+      "title": "Pilot Doelsturing Landbouw Groningen",
+      "buyer_name": "Provincie Groningen",
+      "department": "NLD",
+      "cpv_codes": [
+        "72224000",
+        "77100000",
+        "79400000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2026-12-04T00:00:00+00:00",
+      "estimated_amount": 2500000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/706551-2026",
+      "description": "De provincie Groningen wil Groningse boeren laten experimenteren met doelsturing via de verschillende KPI’s en wil daarvoor zeven pilots in de provincie Groningen starten. In elke pilot gaat een groep van boeren met de KPI-set aan de slag, waarbij: 1. voor elk bedrijf waarden voor de KPI’s worden berekend; 2. studiebijeenkomsten voor de groep boeren worden gehouden om de KPI-waarden onderling te vergelijken en van elkaar te leren.",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 53,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72224000).",
+        "Union Européenne (NLD) — marché transfrontalier IT/cloud.",
+        "Marché d'envergure (2 500 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-8)."
+      ],
+      "days_remaining": 8
+    },
+    {
+      "id": "TED:714619-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "CZE",
+      "title": "Rozšíření a podpora DWDM",
+      "buyer_name": "Česká národní banka",
+      "department": "CZE",
+      "cpv_codes": [
+        "32420000",
+        "32424000",
+        "72261000",
+        "72611000"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-15T15:00:00+00:00",
+      "deadline_date": "2026-11-25T16:00:00+00:00",
+      "estimated_amount": 38550413.0,
+      "currency": "CZK",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/714619-2026",
+      "description": "Předmětem veřejné zakázky je povinnost dodavatele dodat a následně implementovat technické a programové prostředky pro rozšíření stávajících DWDM zařízení a poskytovat k nim a ke stávajícím technickým a programovým prostředkům služby podpory. Bližší specifikace předmětu veřejné zakázky je uvedena v návrhu smlouvy, který tvoří přílohu č. 1 zadávací dokumentace. Vzhledem ke skutečnosti, že zadavatel má plně integrovány stávající HW a SW prostředky DWDM ve své IS struktuře a rozšíření přenosové kapacity mezi lokalitami o 100 Gb nelze z důvodu kompatibility provést jinak než za užití prostředků, k",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 50,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72261000, 72611000).",
+        "Union Européenne (CZE) — vérifier exigences linguistiques.",
+        "Marché d'envergure (38 550 413 CZK — groupement/sous-traitance recommandé) • Délai court (J-0)."
+      ],
+      "days_remaining": 0
+    },
+    {
+      "id": "TED:706184-2026",
+      "source": "TED",
+      "region": "EU",
+      "country": "EST",
+      "title": "Eesti.ai „Kõige AI-targem rahvas“ tehisaru õpitegevuste vahendusteenus (Riigikantselei)",
+      "buyer_name": "Riigi Tugiteenuste Keskus",
+      "department": "EST",
+      "cpv_codes": [
+        "80420000",
+        "80500000",
+        "72212190"
+      ],
+      "procedure_type": "open",
+      "publication_date": "2026-10-13T15:00:00+00:00",
+      "deadline_date": "2026-11-27T15:00:00+00:00",
+      "estimated_amount": 10000000.0,
+      "currency": "EUR",
+      "url": "https://ted.europa.eu/fr/notice/-/detail/706184-2026",
+      "description": "Riigihanke ese on Eesti.ai töötubade, veebikoolituste, eriürituste, õpiampsude ja litsentsisoodustuste vahendusteenus, mille eesmärgiks on tagada seeläbi kvaliteetsete Eesti.ai töötubade ja teiste tehisaru-alaste õppeformaatide kättesaadavus vähemalt 100 000 tööealisele Eesti elanikule ning toetada algatuse „Kõige AI-targem rahvas“ eesmärgi saavutamist. Hankelepingu alguskuupäev on eeldatav st hankelepingu täitmine algab alates lepingu sõlmimisest arvestusega, et lepingu täitmise tähtaeg on riigihanke alusdokumentides sätestatud lõpptähtaeg. / Kõrvaldamise alused ja kvalifitseerimistingimused:",
+      "attribution": "source: Publications Office of the European Union — TED",
+      "suitability_score": 50,
+      "suitability_summary": [
+        "Adéquation CPV sectorielle (72212190).",
+        "Union Européenne (EST) — vérifier exigences linguistiques.",
+        "Marché d'envergure (10 000 000 EUR — groupement/sous-traitance recommandé) • Délai court (J-2)."
+      ],
+      "days_remaining": 2
+    }
+  ]
+}

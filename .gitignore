@@ -6,6 +6,8 @@
 # Persistent Data, Uploaded Documents, & Generated Exports (NEVER commit)
 /data/
 data/
+!docs/data/
+!docs/data/tenders.json
 uploads/
 exports/
 *.pdf

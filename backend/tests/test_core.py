@@ -1,3 +1,4 @@
+from datetime import datetime, timedelta, timezone
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -5,9 +6,10 @@ from app.services.boamp_client import BoampClient, DILA_ATTRIBUTION
 from app.services.dce_parser import chunk_text, classify_dce_role
 from app.services.docx_builder import build_memoire_docx
 from app.services.llm_analyzer import LlmAnalyzer
+from app.services.ted_client import TED_ATTRIBUTION, TedClient
 
 
-def test_boamp_record_normalization_includes_dila_attribution() -> None:
+def test_boamp_record_normalization_includes_dila_attribution_and_amount() -> None:
     client = BoampClient()
     rec = client.normalize_record(
         {
@@ -15,15 +17,60 @@ def test_boamp_record_normalization_includes_dila_attribution() -> None:
             "objet": "Tierce maintenance applicative et hébergement cloud",
             "nomacheteur": "Ville de Paris",
             "code_departement": ["75"],
-            "dc": ["72267000"],
+            "dc": ["160"],
             "type_procedure": "Procédure adaptée",
             "dateparution": "2026-11-20",
             "datelimitereponse": "2026-12-20T12:00:00Z",
+            "donnees": (
+                '{"EFORMS": {"ContractNotice": {"cac:ProcurementProject": {'
+                '"cac:MainCommodityClassification": {"cbc:ItemClassificationCode": {"@listName": "cpv", "#text": "72267000"}},'
+                '"cac:RequestedTenderTotal": {"cbc:EstimatedOverallContractAmount": {"@currencyID": "EUR", "#text": "240000"}}'
+                "}}}}"
+            ),
         }
     )
     assert rec["boamp_id"] == "26-12345"
+    assert rec["source"] == "BOAMP"
+    assert rec["region"] == "FR"
     assert rec["department"] == "75"
+    assert "72267000" in rec["cpv_codes"]
+    assert rec["estimated_amount"] == 240000.0
+    assert rec["currency"] == "EUR"
     assert rec["attribution"] == DILA_ATTRIBUTION
+
+    where = client.build_where_clause(
+        cpv_codes=["72000000"],
+        keywords=["systèmes d'information", "infogérance"],
+        only_open=True,
+        include_all_france=True,
+    )
+    assert "d''information" not in where
+    assert "d information" in where
+
+
+def test_ted_record_normalization_extracts_eu_metadata() -> None:
+    client = TedClient()
+    rec = client.normalize_record(
+        {
+            "publication-number": "800169-2026",
+            "title-proc": {"eng": "Managed Endpoint Protection & Cloud Security Services"},
+            "buyer-name": {"eng": ["University College Dublin"]},
+            "place-of-performance-country-proc": ["IRL"],
+            "deadline-receipt-tender-date-lot": ["2026-12-22Z"],
+            "estimated-value-proc": "480000",
+            "estimated-value-cur-proc": "EUR",
+            "classification-cpv": ["72500000", "72222300"],
+            "procedure-type": "open",
+            "publication-date": "2026-11-20+01:00",
+        }
+    )
+    assert rec["boamp_id"] == "TED:800169-2026"
+    assert rec["source"] == "TED"
+    assert rec["region"] == "EU"
+    assert rec["country"] == "IRL"
+    assert rec["estimated_amount"] == 480000.0
+    assert rec["currency"] == "EUR"
+    assert rec["attribution"] == TED_ATTRIBUTION
 
 
 def test_dce_classification_and_chunking() -> None:
@@ -36,29 +83,67 @@ def test_dce_classification_and_chunking() -> None:
     assert all(len(c) <= 300 for c in chunks)
 
 
-def test_heuristic_go_no_go_and_docx_export(tmp_path: Path) -> None:
+def test_heuristic_go_no_go_relevance_and_docx_export(tmp_path: Path) -> None:
     analyzer = LlmAnalyzer()
     profile = SimpleNamespace(
-        name="Alpha Cloud SAS",
-        siret="12345678900012",
-        description="Cloud et infogérance",
-        capabilities=["Infogérance"],
-        certifications=["ISO 27001"],
-        target_cpv_codes=["72000000"],
-        target_departments=["75"],
-        target_keywords=["cloud"],
+        name="TRADISTER SASU",
+        siret="98831894500017",
+        naf_code="62.02A",
+        description="Infogérance, cloud, cybersécurité, conseil logiciel",
+        capabilities=["Infogérance MSP", "Cybersécurité"],
+        certifications=["NAF 62.02A"],
+        target_cpv_codes=["72000000", "72500000"],
+        target_departments=["91", "75"],
+        target_keywords=["cloud", "infogérance"],
+        min_target_amount=10000.0,
+        max_target_amount=500000.0,
     )
-    score, summary = analyzer._heuristic_go_no_go(
-        profile,
-        {
-            "title": "Infogérance cloud secteur public",
-            "description": "Prestation cloud souverain",
-            "department": "75",
-            "cpv_codes": ["72267000"],
-        },
-    )
-    assert 0 <= score <= 100
-    assert len(summary) == 3
+
+    future_dl = datetime.now(timezone.utc) + timedelta(days=20)
+    fr_tender = {
+        "source": "BOAMP",
+        "region": "FR",
+        "country": "FRA",
+        "title": "Infogérance cloud secteur public",
+        "description": "Prestation cloud souverain et support N1/N2",
+        "department": "91",
+        "cpv_codes": ["72500000"],
+        "estimated_amount": 180000.0,
+        "currency": "EUR",
+        "deadline_date": future_dl,
+    }
+    eu_tender = {
+        "source": "TED",
+        "region": "EU",
+        "country": "IRL",
+        "title": "Cloud Managed Services",
+        "description": "ITSM and cloud support",
+        "department": "IRL",
+        "cpv_codes": ["72500000"],
+        "estimated_amount": 480000.0,
+        "currency": "EUR",
+        "deadline_date": future_dl,
+    }
+    unrelated_tender = {
+        "source": "BOAMP",
+        "region": "FR",
+        "country": "FRA",
+        "title": "Travaux de réfection de voirie communale",
+        "description": "Enrobés bitumineux et terrassement",
+        "department": "91",
+        "cpv_codes": ["45233140"],
+    }
+
+    assert analyzer.is_relevant_to_profile(profile, fr_tender) is True
+    assert analyzer.is_relevant_to_profile(profile, unrelated_tender) is False
+
+    fr_score, fr_summary = analyzer._heuristic_go_no_go(profile, fr_tender)
+    eu_score, eu_summary = analyzer._heuristic_go_no_go(profile, eu_tender)
+    assert 0 <= fr_score <= 100
+    assert 0 <= eu_score <= 100
+    assert fr_score > eu_score
+    assert len(fr_summary) == 3
+    assert len(eu_summary) == 3
 
     ws = SimpleNamespace(
         id=1,

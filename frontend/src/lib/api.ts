@@ -1,7 +1,12 @@
 export interface CompanyProfile {
   id?: number;
   name: string;
+  president?: string | null;
+  siren?: string | null;
   siret?: string | null;
+  tva_number?: string | null;
+  naf_code?: string | null;
+  address?: string | null;
   description: string;
   capabilities: string[];
   certifications: string[];
@@ -10,11 +15,19 @@ export interface CompanyProfile {
   target_keywords: string[];
   procedure_types: string[];
   min_days_remaining: number;
+  min_target_amount?: number | null;
+  max_target_amount?: number | null;
+  include_all_france: boolean;
+  include_eu: boolean;
+  min_suitability_score: number;
 }
 
 export interface TenderNotice {
   id: number;
   boamp_id: string;
+  source: string;
+  region: string;
+  country: string;
   title: string;
   buyer_name?: string | null;
   department?: string | null;
@@ -22,6 +35,9 @@ export interface TenderNotice {
   procedure_type?: string | null;
   publication_date?: string | null;
   deadline_date?: string | null;
+  days_remaining?: number | null;
+  estimated_amount?: number | null;
+  currency: string;
   boamp_url?: string | null;
   description?: string | null;
   attribution: string;

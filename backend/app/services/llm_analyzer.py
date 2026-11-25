@@ -82,11 +82,12 @@ class LlmAnalyzer:
         self,
         profile: CompanyProfile | None,
         tender: dict[str, Any],
+        use_llm: bool = False,
     ) -> tuple[int, list[str]]:
-        """Score a BOAMP tender 0-100 against the company profile and return a 3-bullet Go/No-Go summary."""
-        if self._has_active_llm() and profile is not None:
+        """Score a FR/EU tender 0-100 against the company profile and return a 3-bullet suitability summary."""
+        if use_llm and self._has_active_llm() and profile is not None:
             system_prompt = (
-                "Tu es un directeur avant-vente expert en marchés publics français. "
+                "Tu es un directeur avant-vente expert en marchés publics français et européens. "
                 "Réponds uniquement en JSON valide avec les clés: "
                 "'score' (entier 0-100) et 'summary' (liste exacte de 3 puces concises en français)."
             )
@@ -94,18 +95,26 @@ class LlmAnalyzer:
                 {
                     "company_profile": {
                         "name": profile.name,
+                        "naf_code": getattr(profile, "naf_code", None),
                         "description": profile.description,
                         "capabilities": profile.capabilities,
                         "certifications": profile.certifications,
                         "target_cpv_codes": profile.target_cpv_codes,
                         "target_departments": profile.target_departments,
                         "target_keywords": profile.target_keywords,
+                        "min_target_amount": getattr(profile, "min_target_amount", None),
+                        "max_target_amount": getattr(profile, "max_target_amount", None),
                     },
                     "tender": {
+                        "source": tender.get("source"),
+                        "region": tender.get("region"),
+                        "country": tender.get("country"),
                         "title": tender.get("title"),
                         "buyer_name": tender.get("buyer_name"),
                         "department": tender.get("department"),
                         "cpv_codes": tender.get("cpv_codes"),
+                        "estimated_amount": tender.get("estimated_amount"),
+                        "currency": tender.get("currency"),
                         "procedure_type": tender.get("procedure_type"),
                         "deadline_date": str(tender.get("deadline_date") or ""),
                         "description": (tender.get("description") or "")[:1800],
@@ -125,52 +134,152 @@ class LlmAnalyzer:
 
         return self._heuristic_go_no_go(profile, tender)
 
+    def is_relevant_to_profile(
+        self,
+        profile: CompanyProfile | None,
+        tender: dict[str, Any],
+    ) -> bool:
+        """Check whether a tender matches the company's CPV codes or sector keywords."""
+        if profile is None:
+            return True
+
+        text_blob = f"{tender.get('title', '')} {tender.get('description', '')}".lower()
+        cpvs = [re.sub(r"\D", "", str(c)) for c in (tender.get("cpv_codes") or [])]
+
+        # Reject obvious non-IT construction/medical/catering false positives when no IT CPV is present
+        target_cpvs = [re.sub(r"\D", "", str(c)) for c in (profile.target_cpv_codes or []) if c]
+        cpv_prefixes = {c[:2] for c in target_cpvs if len(c) >= 2}
+        has_cpv_match = any(
+            c[:2] in cpv_prefixes or any(c.startswith(tc[:4]) for tc in target_cpvs if len(tc) >= 4)
+            for c in cpvs
+            if len(c) >= 2
+        )
+
+        matched_kws = [kw for kw in (profile.target_keywords or []) if kw.lower() in text_blob]
+        it_fallback_terms = (
+            "informatique",
+            "logiciel",
+            "cloud",
+            "infogérance",
+            "cybersécurité",
+            "cybersecurity",
+            "software",
+            "managed service",
+            "helpdesk",
+            "support it",
+            "système d'information",
+            "application",
+            "hébergement",
+            "saas",
+            "tma",
+            "mco",
+            "itsm",
+        )
+        has_it_term = any(t in text_blob for t in it_fallback_terms)
+
+        return has_cpv_match or bool(matched_kws) or has_it_term
+
     def _heuristic_go_no_go(
         self,
         profile: CompanyProfile | None,
         tender: dict[str, Any],
     ) -> tuple[int, list[str]]:
-        score = 45
+        score = 30
         reasons: list[str] = []
 
         text_blob = f"{tender.get('title', '')} {tender.get('description', '')}".lower()
-        dept = str(tender.get("department") or "")
-        cpvs = [str(c) for c in (tender.get("cpv_codes") or [])]
+        dept = str(tender.get("department") or "").strip()
+        region = str(tender.get("region") or ("EU" if tender.get("source") == "TED" else "FR")).upper()
+        country = str(tender.get("country") or "FRA").upper()
+        cpvs = [re.sub(r"\D", "", str(c)) for c in (tender.get("cpv_codes") or [])]
 
+        # 1. Domain / CPV / Keyword Suitability (up to +40)
         if profile:
-            if dept and dept in (profile.target_departments or []):
-                score += 20
-                reasons.append(f"Zone géographique cible correspondante (département {dept}).")
-            else:
-                reasons.append(f"Département ({dept or 'non précisé'}) hors zone prioritaire configurée.")
-
+            target_cpvs = [re.sub(r"\D", "", str(c)) for c in (profile.target_cpv_codes or []) if c]
             matched_kws = [kw for kw in (profile.target_keywords or []) if kw.lower() in text_blob]
-            matched_cpvs = [
-                c for c in cpvs if any(c.startswith(tc[:4]) for tc in (profile.target_cpv_codes or []) if len(tc) >= 4)
+            matched_cpvs_exact4 = [
+                c for c in cpvs if any(len(tc) >= 4 and c.startswith(tc[:4]) for tc in target_cpvs)
             ]
-            if matched_kws or matched_cpvs:
-                score += min(25, 10 + 5 * len(matched_kws) + 8 * len(matched_cpvs))
-                reasons.append(
-                    f"Alignement métier détecté ({', '.join((matched_kws + matched_cpvs)[:4])})."
-                )
+            matched_cpvs_div2 = [
+                c for c in cpvs if any(len(tc) >= 2 and c[:2] == tc[:2] for tc in target_cpvs)
+            ]
+
+            if matched_cpvs_exact4 or matched_kws:
+                domain_pts = min(40, 18 + 6 * len(matched_kws) + 8 * len(matched_cpvs_exact4))
+                score += domain_pts
+                tags = list(dict.fromkeys(matched_kws[:3] + matched_cpvs_exact4[:2]))
+                reasons.append(f"Forte adéquation métier IT/MSP ({', '.join(tags)}).")
+            elif matched_cpvs_div2:
+                score += 22
+                reasons.append(f"Adéquation CPV sectorielle ({', '.join(matched_cpvs_div2[:3])}).")
             else:
-                reasons.append("Correspondance CPV/mots-clés faible — vérifier le périmètre technique du DCE.")
+                reasons.append("Correspondance CPV/mots-clés limitée — vérifier le périmètre technique.")
+
+            # 2. Geographic & Language Suitability (up to +20)
+            target_depts = set(profile.target_departments or [])
+            if region == "FR":
+                if dept and dept in target_depts:
+                    score += 20
+                    reasons.append(f"France — Zone prioritaire (département {dept}, proche Ris-Orangis 91).")
+                else:
+                    score += 13
+                    reasons.append(f"France (département {dept or 'national'}) — éligible prestation nationale / à distance.")
+            else:
+                if country in {"BEL", "LUX", "CHE", "MCO"}:
+                    score += 12
+                    reasons.append(f"Union Européenne francophone ({country}) — forte accessibilité.")
+                elif country in {"IRL", "NLD", "DEU", "ESP", "ITA", "PRT", "AUT", "DNK", "SWE", "FIN"}:
+                    score += 7
+                    reasons.append(f"Union Européenne ({country}) — marché transfrontalier IT/cloud.")
+                else:
+                    score += 4
+                    reasons.append(f"Union Européenne ({country}) — vérifier les exigences linguistiques locales.")
         else:
-            reasons.append("Profil entreprise par défaut — affinez vos critères CPV et départements.")
+            reasons.append("Profil entreprise par défaut — affinez vos critères CPV et géographiques.")
+
+        # 3. Target Amount & Deadline Fit (up to +15 / penalties for expired or oversized)
+        amount = tender.get("estimated_amount")
+        currency = str(tender.get("currency") or "EUR")
+        min_amt = getattr(profile, "min_target_amount", None) if profile else None
+        max_amt = getattr(profile, "max_target_amount", None) if profile else None
+
+        amount_note = ""
+        if isinstance(amount, (int, float)) and amount > 0:
+            formatted_amt = f"{amount:,.0f} {currency}".replace(",", " ")
+            if min_amt is not None and max_amt is not None:
+                if min_amt <= amount <= max_amt:
+                    score += 10
+                    amount_note = f"Montant cible optimal ({formatted_amt})"
+                elif amount < min_amt:
+                    score += 3
+                    amount_note = f"Petit marché ({formatted_amt})"
+                elif amount <= max_amt * 4:
+                    score += 4
+                    amount_note = f"Montant élevé ({formatted_amt} — lotissement/GME à vérifier)"
+                else:
+                    score -= 8
+                    amount_note = f"Marché d'envergure ({formatted_amt} — groupement/sous-traitance recommandé)"
+            else:
+                score += 5
+                amount_note = f"Montant estimé : {formatted_amt}"
+        else:
+            score += 4
+            amount_note = "Montant non publié (vérifier seuil MAPA / BPU)"
 
         deadline = tender.get("deadline_date")
         if isinstance(deadline, datetime):
             days_left = (deadline - datetime.now(timezone.utc)).days
             if days_left >= 10:
-                score += 10
-                reasons.append(f"Délai confortable avant remise ({days_left} jour(s) restants).")
+                score += 8
+                reasons.append(f"{amount_note} • Délai confortable ({days_left} j restants).")
             elif days_left >= 0:
-                reasons.append(f"Délai serré ({days_left} jour(s) restants) — mobilisation rapide requise.")
+                score += 2
+                reasons.append(f"{amount_note} • Délai court ({days_left} j restants).")
             else:
-                score = max(10, score - 25)
-                reasons.append("Date limite dépassée ou imminente — vérifier la recevabilité.")
+                score = max(5, score - 35)
+                reasons.append(f"{amount_note} • Date limite dépassée ({days_left} j).")
         else:
-            reasons.append("Date limite non structurée dans l'avis — contrôler le Règlement de Consultation.")
+            reasons.append(f"{amount_note} • Date limite à confirmer dans le dossier.")
 
         return max(0, min(100, score)), reasons[:3]
 
