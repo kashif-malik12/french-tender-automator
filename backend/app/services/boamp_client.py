@@ -206,7 +206,7 @@ class BoampClient:
                             )
 
         if keywords:
-            for k in keywords[:10]:
+            for k in keywords[:12]:
                 if k.strip():
                     relevance_parts.append(f"search(objet, '{_sanitize_odsql(k)}')")
 
@@ -215,7 +215,7 @@ class BoampClient:
 
         if procedure_types:
             proc_parts = [
-                f"search(type_procedure, '{_sanitize_odsql(p)}')"
+                f"(type_procedure='{_sanitize_odsql(p)}' OR search(procedure_libelle, '{_sanitize_odsql(p)}'))"
                 for p in procedure_types
                 if p.strip()
             ]
@@ -224,25 +224,7 @@ class BoampClient:
 
         return " AND ".join(clauses)
 
-    def fetch_tenders(
-        self,
-        departments: list[str] | None = None,
-        cpv_codes: list[str] | None = None,
-        keywords: list[str] | None = None,
-        procedure_types: list[str] | None = None,
-        limit: int = 30,
-        include_all_france: bool = True,
-    ) -> list[dict[str, Any]]:
-        """Query BOAMP Open Data v2.1 and return normalized tender dictionaries."""
-        where_clause = self.build_where_clause(
-            departments=departments,
-            cpv_codes=cpv_codes,
-            keywords=keywords,
-            procedure_types=procedure_types,
-            only_open=True,
-            include_all_france=include_all_france,
-        )
-
+    def _query_boamp(self, where_clause: str, limit: int, fallback_where: str = "") -> list[dict[str, Any]]:
         params: dict[str, Any] = {
             "limit": max(1, min(limit, 100)),
             "order_by": "dateparution desc",
@@ -253,28 +235,101 @@ class BoampClient:
         logger.info("Fetching BOAMP tenders (where=%s, limit=%s)", where_clause, params["limit"])
         with httpx.Client(timeout=20.0) as client:
             response = client.get(self.settings.boamp_api_url, params=params)
-            if response.status_code == 400 and where_clause:
-                logger.warning("BOAMP strict filter failed (%s); retrying with keyword/date fallback", response.text)
-                fallback_where = self.build_where_clause(
-                    departments=departments,
-                    cpv_codes=cpv_codes,
-                    only_open=True,
-                    include_all_france=include_all_france,
-                )
-                fallback_params = {"limit": params["limit"], "order_by": "dateparution desc"}
-                if fallback_where:
-                    fallback_params["where"] = fallback_where
-                response = client.get(self.settings.boamp_api_url, params=fallback_params)
+            if response.status_code == 400 and fallback_where:
+                logger.warning("BOAMP strict filter failed (%s); retrying with fallback", response.text)
+                fb_params = {"limit": params["limit"], "order_by": "dateparution desc", "where": fallback_where}
+                response = client.get(self.settings.boamp_api_url, params=fb_params)
             response.raise_for_status()
             payload = response.json()
+        return payload.get("results", [])
 
-        results = payload.get("results", [])
-        return [self.normalize_record(rec) for rec in results if rec.get("idweb")]
+    def fetch_tenders(
+        self,
+        departments: list[str] | None = None,
+        cpv_codes: list[str] | None = None,
+        keywords: list[str] | None = None,
+        procedure_types: list[str] | None = None,
+        limit: int = 30,
+        include_all_france: bool = True,
+    ) -> list[dict[str, Any]]:
+        """Query BOAMP Open Data v2.1 prioritizing local IDF MAPA (<90k) tenders plus broader IT pool."""
+        merged_by_id: dict[str, dict[str, Any]] = {}
+
+        # Pass 1: Local Essonne/IDF MAPA (Procédure Adaptée) & IDF local IT lots first
+        if departments:
+            mapa_where = self.build_where_clause(
+                departments=departments,
+                cpv_codes=cpv_codes,
+                keywords=keywords,
+                procedure_types=procedure_types or ["PROCEDURE_ADAPTE", "Adaptée"],
+                only_open=True,
+                include_all_france=False,
+            )
+            mapa_fb = self.build_where_clause(
+                departments=departments,
+                cpv_codes=cpv_codes,
+                only_open=True,
+                include_all_france=False,
+            )
+            for rec in self._query_boamp(mapa_where, limit=min(50, max(limit, 30)), fallback_where=mapa_fb):
+                idweb = str(rec.get("idweb") or "").strip()
+                if idweb:
+                    merged_by_id[idweb] = rec
+
+            # Also pull all open IDF IT lots (including >90k for sous-traitance / co-traitance)
+            idf_where = self.build_where_clause(
+                departments=departments,
+                cpv_codes=cpv_codes,
+                keywords=keywords,
+                procedure_types=procedure_types,
+                only_open=True,
+                include_all_france=False,
+            )
+            idf_fb = self.build_where_clause(
+                departments=departments,
+                cpv_codes=cpv_codes,
+                only_open=True,
+                include_all_france=False,
+            )
+            for rec in self._query_boamp(idf_where, limit=min(50, max(limit, 30)), fallback_where=idf_fb):
+                idweb = str(rec.get("idweb") or "").strip()
+                if idweb and idweb not in merged_by_id:
+                    merged_by_id[idweb] = rec
+
+        # Pass 2: Broader France pool if include_all_france is enabled
+        if include_all_france:
+            where_clause = self.build_where_clause(
+                departments=departments,
+                cpv_codes=cpv_codes,
+                keywords=keywords,
+                procedure_types=procedure_types,
+                only_open=True,
+                include_all_france=True,
+            )
+            fallback_where = self.build_where_clause(
+                departments=departments,
+                cpv_codes=cpv_codes,
+                only_open=True,
+                include_all_france=True,
+            )
+            for rec in self._query_boamp(where_clause, limit=limit, fallback_where=fallback_where):
+                idweb = str(rec.get("idweb") or "").strip()
+                if idweb and idweb not in merged_by_id:
+                    merged_by_id[idweb] = rec
+
+        return [self.normalize_record(rec) for rec in merged_by_id.values()]
 
     def normalize_record(self, rec: dict[str, Any]) -> dict[str, Any]:
         boamp_id = str(rec.get("idweb") or "").strip()
         depts = _as_list(rec.get("code_departement"))
-        department = depts[0] if depts else None
+        # Prefer Essonne (91) or priority IDF department when notice spans multiple departments
+        department = None
+        for prio_dept in ("91", "94", "77", "92", "75", "78", "93", "95"):
+            if prio_dept in depts:
+                department = prio_dept
+                break
+        if department is None:
+            department = depts[0] if depts else None
         title = str(rec.get("objet") or f"Avis BOAMP {boamp_id}").strip()
         buyer_name = str(rec.get("nomacheteur") or "").strip() or None
         procedure_type = str(rec.get("procedure_libelle") or rec.get("type_procedure") or "").strip() or None

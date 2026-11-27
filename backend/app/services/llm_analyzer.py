@@ -143,57 +143,147 @@ class LlmAnalyzer:
         if profile is None:
             return True
 
-        text_blob = f"{tender.get('title', '')} {tender.get('description', '')}".lower()
+        title_lower = str(tender.get('title', '') or '').lower()
+        text_blob = f"{title_lower} {tender.get('description', '')}".lower()
         cpvs = [re.sub(r"\D", "", str(c)) for c in (tender.get("cpv_codes") or [])]
 
-        # Reject obvious non-IT construction/medical/catering false positives when no IT CPV is present
-        target_cpvs = [re.sub(r"\D", "", str(c)) for c in (profile.target_cpv_codes or []) if c]
-        cpv_prefixes = {c[:2] for c in target_cpvs if len(c) >= 2}
-        has_cpv_match = any(
-            c[:2] in cpv_prefixes or any(c.startswith(tc[:4]) for tc in target_cpvs if len(tc) >= 4)
+        # Strict CPV filter for IT software/services/support (72*, 48*, 50312* computer repair, 64215*)
+        it_cpv_match = any(
+            c.startswith(("72", "48", "302", "50312"))
             for c in cpvs
             if len(c) >= 2
         )
-
+        hard_non_it_titles = (
+            "ascenseur",
+            "élévateur",
+            "elevateur",
+            "copieur",
+            "photocopieur",
+            "multifonction",
+            "reprographie",
+            "solutions d'impression",
+            "systèmes d'impression",
+            "materiel d'impression",
+            "matériel d'impression",
+            "informations légales",
+            "annonces légales",
+            "veille juridique",
+            "abonnement revues",
+            "pmsi",
+            "codage médical",
+            "codage de l'information",
+            "information médicale",
+            "codage des séjours",
+            "cuisine",
+            "restauration collective",
+            "denrées alimentaires",
+            "laverie",
+            "espaces verts",
+            "nettoyage de locaux",
+            "nettoyage des locaux",
+            "propreté des locaux",
+            "assurances dommages",
+            "gros oeuvre",
+            "travaux de voirie",
+            "réseaux humides",
+            "éclairage public",
+            "plomberie",
+            "menuiserie",
+            "toiture",
+            "fourniture de mobilier",
+        )
+        strong_it_title = any(
+            w in title_lower
+            for w in (
+                "infogérance",
+                "infogerance",
+                "informatique",
+                "helpdesk",
+                "help desk",
+                "support utilisateur",
+                "support it",
+                "assistance informatique",
+                "microsoft 365",
+                "m365",
+                "cloud",
+                "cybersécurité",
+                "cybersecurite",
+                "logiciel",
+                "poste de travail",
+                "postes de travail",
+                "téléphonie",
+                "visioconférence",
+                "système d'information",
+                "systeme d'information",
+            )
+        )
+        if any(noise in text_blob for noise in hard_non_it_titles) and not (it_cpv_match and strong_it_title):
+            return False
         matched_kws = [kw for kw in (profile.target_keywords or []) if kw.lower() in text_blob]
         it_fallback_terms = (
             "informatique",
             "logiciel",
+            "microsoft 365",
+            "m365",
+            "entra",
+            "intune",
             "cloud",
             "infogérance",
+            "infogerance",
             "cybersécurité",
             "cybersecurity",
             "software",
             "managed service",
             "helpdesk",
             "support it",
+            "support utilisateur",
+            "assistance utilisateur",
+            "poste de travail",
+            "postes de travail",
             "système d'information",
-            "application",
-            "hébergement",
+            "systèmes d'information",
+            "active directory",
             "saas",
             "tma",
             "mco",
             "itsm",
         )
-        has_it_term = any(t in text_blob for t in it_fallback_terms)
+        has_strong_it = any(t in text_blob for t in it_fallback_terms)
 
-        return has_cpv_match or bool(matched_kws) or has_it_term
+        target_cpvs = [re.sub(r"\D", "", str(c)) for c in (profile.target_cpv_codes or []) if c]
+        cpv_prefixes = {c[:2] for c in target_cpvs if len(c) >= 2}
+        has_cpv_match = it_cpv_match or any(
+            c[:2] in cpv_prefixes or any(c.startswith(tc[:4]) for tc in target_cpvs if len(tc) >= 4)
+            for c in cpvs
+            if len(c) >= 2
+        )
+
+        return has_cpv_match or bool(matched_kws) or has_strong_it
 
     def _heuristic_go_no_go(
         self,
         profile: CompanyProfile | None,
         tender: dict[str, Any],
     ) -> tuple[int, list[str]]:
-        score = 30
+        if not self.is_relevant_to_profile(profile, tender):
+            return 8, ["Hors périmètre IT / FinOps / Support N1 (filtré automatiquement)."]
+
+        score = 26
         reasons: list[str] = []
 
         text_blob = f"{tender.get('title', '')} {tender.get('description', '')}".lower()
         dept = str(tender.get("department") or "").strip()
+        proc = str(tender.get("procedure_type") or "").lower()
+        is_mapa = "adapt" in proc or "mapa" in text_blob or "procédure adaptée" in text_blob
+        is_cotraitance_fit = any(
+            kw in text_blob
+            for kw in ("sous-traitance", "co-traitance", "alloti", "lot ", "proximité", "technicien", "déploiement", "support n1", "helpdesk")
+        )
         region = str(tender.get("region") or ("EU" if tender.get("source") == "TED" else "FR")).upper()
         country = str(tender.get("country") or "FRA").upper()
         cpvs = [re.sub(r"\D", "", str(c)) for c in (tender.get("cpv_codes") or [])]
 
-        # 1. Domain / CPV / Keyword Suitability (up to +40)
+        # 1. Domain / CPV / Keyword Suitability (up to +36)
         if profile:
             target_cpvs = [re.sub(r"\D", "", str(c)) for c in (profile.target_cpv_codes or []) if c]
             matched_kws = [kw for kw in (profile.target_keywords or []) if kw.lower() in text_blob]
@@ -205,72 +295,82 @@ class LlmAnalyzer:
             ]
 
             if matched_cpvs_exact4 or matched_kws:
-                domain_pts = min(40, 18 + 6 * len(matched_kws) + 8 * len(matched_cpvs_exact4))
+                domain_pts = min(36, 16 + 5 * len(matched_kws) + 7 * len(matched_cpvs_exact4))
                 score += domain_pts
                 tags = list(dict.fromkeys(matched_kws[:3] + matched_cpvs_exact4[:2]))
-                reasons.append(f"Forte adéquation métier IT/MSP ({', '.join(tags)}).")
+                reasons.append(f"Adéquation IT/MSP ({', '.join(tags)}).")
             elif matched_cpvs_div2:
-                score += 22
+                score += 20
                 reasons.append(f"Adéquation CPV sectorielle ({', '.join(matched_cpvs_div2[:3])}).")
             else:
                 reasons.append("Correspondance CPV/mots-clés limitée — vérifier le périmètre technique.")
 
-            # 2. Geographic & Language Suitability (up to +20)
+            # 2. Local Essonne (91) & South-IDF Proximity Priority (up to +24)
             target_depts = set(profile.target_departments or [])
             if region == "FR":
-                if dept and dept in target_depts:
-                    score += 20
-                    reasons.append(f"France — Zone prioritaire (département {dept}, proche Ris-Orangis 91).")
+                if dept == "91":
+                    score += 24
+                    reasons.append("Essonne (91) — Intervention terrain <30 min depuis Ris-Orangis.")
+                elif dept in {"94", "77", "92", "78"}:
+                    score += 19
+                    reasons.append(f"Proche Essonne (dept {dept}) — Zone prioritaire Sud Île-de-France.")
+                elif dept in target_depts:
+                    score += 16
+                    reasons.append(f"Île-de-France (dept {dept}) — Couverture locale/remote Tradister.")
                 else:
-                    score += 13
-                    reasons.append(f"France (département {dept or 'national'}) — éligible prestation nationale / à distance.")
+                    score += 10
+                    reasons.append(f"France (dept {dept or 'national'}) — Éligible prestation à distance.")
             else:
                 if country in {"BEL", "LUX", "CHE", "MCO"}:
-                    score += 12
-                    reasons.append(f"Union Européenne francophone ({country}) — forte accessibilité.")
+                    score += 10
+                    reasons.append(f"UE francophone ({country}) — Éligible M365/Support à distance.")
                 elif country in {"IRL", "NLD", "DEU", "ESP", "ITA", "PRT", "AUT", "DNK", "SWE", "FIN"}:
-                    score += 7
-                    reasons.append(f"Union Européenne ({country}) — marché transfrontalier IT/cloud.")
+                    score += 5
+                    reasons.append(f"UE ({country}) — Marché transfrontalier EN/FR.")
                 else:
-                    score += 4
-                    reasons.append(f"Union Européenne ({country}) — vérifier les exigences linguistiques locales.")
+                    score += 2
+                    reasons.append(f"UE ({country}) — Vérifier langues et références exigées.")
         else:
             reasons.append("Profil entreprise par défaut — affinez vos critères CPV et géographiques.")
 
-        # 3. Target Amount & Deadline Fit (up to +15 / penalties for expired or oversized)
+        # 3. MAPA (<90k) Fit & Co-traitance Tagging
         amount = tender.get("estimated_amount")
         currency = str(tender.get("currency") or "EUR")
-        min_amt = getattr(profile, "min_target_amount", None) if profile else None
-        max_amt = getattr(profile, "max_target_amount", None) if profile else None
+        min_amt = getattr(profile, "min_target_amount", None) if profile else 5000
+        max_amt = getattr(profile, "max_target_amount", None) if profile else 90000
+        mapa_cap = max_amt if (max_amt and max_amt <= 120000) else 90000
 
         amount_note = ""
         if isinstance(amount, (int, float)) and amount > 0:
             formatted_amt = f"{amount:,.0f} {currency}".replace(",", " ")
-            if min_amt is not None and max_amt is not None:
-                if min_amt <= amount <= max_amt:
-                    score += 10
-                    amount_note = f"Montant cible optimal ({formatted_amt})"
-                elif amount < min_amt:
-                    score += 3
-                    amount_note = f"Petit marché ({formatted_amt})"
-                elif amount <= max_amt * 4:
-                    score += 4
-                    amount_note = f"Montant élevé ({formatted_amt} — lotissement/GME à vérifier)"
-                else:
-                    score -= 8
-                    amount_note = f"Marché d'envergure ({formatted_amt} — groupement/sous-traitance recommandé)"
-            else:
+            if (min_amt or 0) <= amount <= mapa_cap:
+                score += 14
+                amount_note = f"Cible MAPA idéale ({formatted_amt} <= 90k€ — accessible SASU solo)"
+            elif amount < (min_amt or 0):
+                score += 8
+                amount_note = f"Petit marché direct ({formatted_amt})"
+            elif amount <= mapa_cap * 2:
                 score += 5
-                amount_note = f"Montant estimé : {formatted_amt}"
+                amount_note = f"Lot intermédiaire ({formatted_amt} — vérifier allotissement / CA mini)"
+            else:
+                score -= 10
+                if is_cotraitance_fit or dept in {"91", "94", "77", "92", "75"}:
+                    score += 4
+                    amount_note = f"Gros marché ({formatted_amt}) — Viser sous-traitance / co-traitance terrain 91/IDF"
+                else:
+                    amount_note = f"Marché d'envergure ({formatted_amt} — sous-traitance / GME uniquement)"
+        elif is_mapa:
+            score += 12
+            amount_note = "Procédure Adaptée (MAPA) — Accessible jeune SASU sans gros seuils CA"
         else:
-            score += 4
-            amount_note = "Montant non publié (vérifier seuil MAPA / BPU)"
+            score += 3
+            amount_note = "Procédure ouverte / montant non publié (vérifier RC & références)"
 
         deadline = tender.get("deadline_date")
         if isinstance(deadline, datetime):
             days_left = (deadline - datetime.now(timezone.utc)).days
             if days_left >= 10:
-                score += 8
+                score += 6
                 reasons.append(f"{amount_note} • Délai confortable ({days_left} j restants).")
             elif days_left >= 0:
                 score += 2
@@ -279,7 +379,7 @@ class LlmAnalyzer:
                 score = max(5, score - 35)
                 reasons.append(f"{amount_note} • Date limite dépassée ({days_left} j).")
         else:
-            reasons.append(f"{amount_note} • Date limite à confirmer dans le dossier.")
+            reasons.append(f"{amount_note} • Date limite à confirmer dans le DCE.")
 
         return max(0, min(100, score)), reasons[:3]
 

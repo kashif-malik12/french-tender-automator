@@ -32,6 +32,7 @@ class Settings(BaseSettings):
     # Authentication
     app_basic_auth_user: str = "admin"
     app_basic_auth_pass: str = "change_me_strong_app_password"
+    tradister_auth_hash: str = ""
     jwt_secret_key: str = "change_me_to_a_random_64_char_secret_key_for_jwt_signing"
     jwt_expire_minutes: int = 720
 
@@ -51,11 +52,11 @@ class Settings(BaseSettings):
     default_company_tva: str = "FR42988318945"
     default_company_naf: str = "62.02A"
     default_company_address: str = "11 Rue du Château d'Eau, App 132, 91130 Ris-Orangis, France"
-    default_departments: str = "91,75,92,93,94,77,78,95"
-    default_cpv_codes: str = "72000000,72200000,72300000,72500000,72600000,48000000"
-    default_keywords: str = "infogérance,cloud,cybersécurité,support informatique,helpdesk,maintenance applicative,TMA,MCO,développement logiciel,systèmes d'information,ITSM,managed services"
-    default_min_target_amount: int = 10000
-    default_max_target_amount: int = 500000
+    default_departments: str = "91,94,77,92,75,78,93,95"
+    default_cpv_codes: str = "72000000,72200000,72300000,72500000,72600000,48000000,30200000,50312000"
+    default_keywords: str = "infogérance,cloud,Microsoft 365,M365,Entra,Intune,cybersécurité,support informatique,helpdesk,assistance utilisateur,poste de travail,postes de travail,déploiement informatique,maintenance informatique,TMA,MCO,ITSM,managed services,MAPA,sous-traitance"
+    default_min_target_amount: int = 5000
+    default_max_target_amount: int = 90000
 
     # Persistent Data Storage
     data_dir: Path = Path("/app/data")

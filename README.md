@@ -68,6 +68,17 @@ french-tender-automator/
 
 ---
 
+## Déploiement en Production (`tenders.tradister.com`)
+
+L'application est déployée en production et accessible publiquement sur :
+- **URL Publique :** `https://tenders.tradister.com`
+- **Reverse Proxy & TLS :** Cloudflare Edge SSL (`tenders.tradister.com` CNAME `tradister.com`, Proxied) + Caddy hôte VPS (`127.0.0.1:8098`)
+- **Port Interne :** `127.0.0.1:8098` (Caddy conteneurisé isolant les conteneurs `frontend:3000` et `backend:8000`)
+- **Protection d'Accès :** Écran d'authentification protégé par mot de passe avec sessions chiffrées JWT (HS256). Identifiant : `admin`, mot de passe : mot de passe maître TRADISTER ou clé dédiée `.env`.
+- **API Guard :** 100% des endpoints `/api/*` (sauf `/api/health` et `/api/auth/login`) exigent le token JWT Bearer ou Basic Auth.
+
+---
+
 ## Déploiement sur un VPS Ubuntu dédié
 
 1. Installer Docker Engine + Docker Compose plugin sur Ubuntu.
