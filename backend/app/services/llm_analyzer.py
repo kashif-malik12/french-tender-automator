@@ -147,9 +147,9 @@ class LlmAnalyzer:
         text_blob = f"{title_lower} {tender.get('description', '')}".lower()
         cpvs = [re.sub(r"\D", "", str(c)) for c in (tender.get("cpv_codes") or [])]
 
-        # Strict CPV filter for IT software/services/support (72*, 48*, 50312* computer repair, 64215*)
+        # Strict CPV filter for IT software/services/support (72*, 48*, 50312* computer repair)
         it_cpv_match = any(
-            c.startswith(("72", "48", "302", "50312"))
+            c.startswith(("72", "48", "50312"))
             for c in cpvs
             if len(c) >= 2
         )
@@ -191,12 +191,40 @@ class LlmAnalyzer:
             "menuiserie",
             "toiture",
             "fourniture de mobilier",
+            "matériels informatiques",
+            "materiels informatiques",
+            "matériel informatique",
+            "materiel informatique",
+            "équipements informatiques",
+            "equipements informatiques",
+            "renouvellement locatif du parc",
+            "consommables informatiques",
+            "cartouches",
+            "vidéoprojecteur",
+            "audiovisuel",
+            "téléphonie mobile",
+            "forfaits mobiles",
+            "câblage",
+            "gestion des cimetières",
+            "médiathèque",
+            "bibliothèque",
+            "bibliothèques",
+            "prépresse",
+            "chaîne graphique",
+            "accompagnement social",
+            "offre aérienne",
         )
         strong_it_title = any(
             w in title_lower
             for w in (
                 "infogérance",
                 "infogerance",
+                "service desk",
+                "support n1",
+                "finops",
+                "intelligence artificielle",
+                "chatbot",
+                "llm",
                 "informatique",
                 "helpdesk",
                 "help desk",
@@ -219,13 +247,16 @@ class LlmAnalyzer:
         )
         if any(noise in text_blob for noise in hard_non_it_titles) and not (it_cpv_match and strong_it_title):
             return False
-        matched_kws = [kw for kw in (profile.target_keywords or []) if kw.lower() in text_blob]
+        matched_kws = [
+            kw for kw in (profile.target_keywords or [])
+            if (re.search(rf"\b{re.escape(kw.lower())}\b", text_blob) if len(kw.strip()) <= 5 else kw.lower() in text_blob)
+        ]
         it_fallback_terms = (
             "informatique",
             "logiciel",
             "microsoft 365",
             "m365",
-            "entra",
+            "entra id",
             "intune",
             "cloud",
             "infogérance",
@@ -286,7 +317,10 @@ class LlmAnalyzer:
         # 1. Domain / CPV / Keyword Suitability (up to +36)
         if profile:
             target_cpvs = [re.sub(r"\D", "", str(c)) for c in (profile.target_cpv_codes or []) if c]
-            matched_kws = [kw for kw in (profile.target_keywords or []) if kw.lower() in text_blob]
+            matched_kws = [
+                kw for kw in (profile.target_keywords or [])
+                if (re.search(rf"\b{re.escape(kw.lower())}\b", text_blob) if len(kw.strip()) <= 5 else kw.lower() in text_blob)
+            ]
             matched_cpvs_exact4 = [
                 c for c in cpvs if any(len(tc) >= 4 and c.startswith(tc[:4]) for tc in target_cpvs)
             ]
