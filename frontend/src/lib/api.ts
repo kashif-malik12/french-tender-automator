@@ -20,6 +20,7 @@ export interface CompanyProfile {
   include_all_france: boolean;
   include_eu: boolean;
   min_suitability_score: number;
+  excluded_criteria?: string[];
 }
 
 export interface TenderNotice {

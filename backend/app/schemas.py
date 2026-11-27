@@ -39,6 +39,7 @@ class CompanyProfileSchema(BaseModel):
     include_all_france: bool = True
     include_eu: bool = True
     min_suitability_score: int = 50
+    excluded_criteria: list[str] = Field(default_factory=list)
 
 
 class TenderNoticeOut(BaseModel):

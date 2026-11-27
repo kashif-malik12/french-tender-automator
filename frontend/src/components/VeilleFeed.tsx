@@ -431,6 +431,23 @@ export function VeilleFeed({ lang, onOpenWorkspaceForTender }: Props) {
               </div>
             </div>
 
+            {profile.excluded_criteria && profile.excluded_criteria.length > 0 && (
+              <div className="mt-4 rounded-xl border border-amber-200 bg-amber-50/70 p-3">
+                <div className="text-xs font-semibold text-amber-900">{t.excludedHeading}</div>
+                <p className="mt-0.5 text-[11px] text-amber-800">{t.excludedHint}</p>
+                <div className="mt-2 flex flex-wrap gap-1.5">
+                  {profile.excluded_criteria.map((item) => (
+                    <span
+                      key={item}
+                      className="rounded-md border border-amber-200 bg-white px-2 py-0.5 text-[11px] text-slate-700"
+                    >
+                      {item}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            )}
+
             <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
               <div className="flex flex-wrap items-center gap-4 text-xs text-slate-700">
                 <label className="inline-flex items-center gap-1.5">

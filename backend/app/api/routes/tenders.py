@@ -16,6 +16,7 @@ from app.schemas import (
     TenderNoticeOut,
     TenderStatusUpdate,
 )
+from app.services.llm_analyzer import EXCLUDED_CRITERIA_TRACKING
 from app.worker import (
     get_or_create_company_profile,
     poll_boamp_tenders,
@@ -51,6 +52,7 @@ def _profile_to_schema(profile: CompanyProfile) -> CompanyProfileSchema:
         include_all_france=profile.include_all_france,
         include_eu=profile.include_eu,
         min_suitability_score=profile.min_suitability_score,
+        excluded_criteria=list(EXCLUDED_CRITERIA_TRACKING),
     )
 
 

@@ -12,6 +12,15 @@ from app.services.dce_parser import ParsedDocument
 
 logger = logging.getLogger(__name__)
 
+EXCLUDED_CRITERIA_TRACKING: tuple[str, ...] = (
+    "CPV 30200000 (matériel informatique / fourniture sans infogérance)",
+    "Mots-clés retirés : Entra (remplacé par Entra ID), MAPA (trop générique)",
+    "Exclus sauf service IT/MSP fort : matériel informatique, matériels informatiques, équipements informatiques",
+    "Exclus : renouvellement locatif du parc, consommables informatiques, cartouches, vidéoprojecteur, audiovisuel",
+    "Exclus : téléphonie mobile, forfaits mobiles, câblage, copieur / reprographie",
+    "Exclus métier hors IT : bibliothèque(s), médiathèque, prépresse, chaîne graphique, accompagnement social, offre aérienne, gestion des cimetières, PMSI / codage médical",
+)
+
 
 def _extract_json_block(raw_text: str) -> dict[str, Any]:
     cleaned = raw_text.strip()
