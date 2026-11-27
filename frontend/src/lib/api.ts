@@ -151,6 +151,9 @@ export async function apiFetch<T>(
 
   if (res.status === 401) {
     setStoredToken(null);
+    if (typeof window !== "undefined") {
+      window.dispatchEvent(new Event("fta:unauthorized"));
+    }
     throw new Error("UNAUTHORIZED");
   }
   if (!res.ok) {

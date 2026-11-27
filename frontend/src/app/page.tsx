@@ -81,6 +81,12 @@ export default function HomePage() {
     if (saved === "en" || saved === "fr") {
       setLang(saved);
     }
+    const onUnauth = () => {
+      setStoredToken(null);
+      setAuthenticated(false);
+    };
+    window.addEventListener("fta:unauthorized", onUnauth);
+    return () => window.removeEventListener("fta:unauthorized", onUnauth);
   }, []);
 
   function handleChangeLang(next: Lang) {
